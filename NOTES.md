@@ -1,0 +1,32 @@
+## Accounts
+
+### Types
+- student checking account
+  - comes with a debit card
+  - no monthly fee
+  - no overcharge fee
+  - account must be linked to a standard or senior checking account
+  - accountholder must be a student or under 18
+- standard checking account
+  - comes with a debit card
+  - comes with paper checks
+  - transfer to other bank accounts
+  - minimum balance requirement to avoid monthly fee
+  - $35 overcharge fee
+  - rewards system
+- savings account
+  - interest revenue
+    - APY (annual percentage yield)
+  - minimum balance requirement
+  - monthly maintenance fees?
+  - 6 withdrawals per month
+    - excess withdrawal fee
+- High yield savings account
+  - same as above, but requires higher monthly maintenance fees, higher minimum account balance, and less withdrawals per month
+- CD Account
+  - deposit money to be locked away for a set period
+    - this is called a maturity term
+    - higher maturity term results in more APY
+  - gain more interest on this money
+  - when CD ends, get money or roll into a new CD
+  - early withdrawal penalty
