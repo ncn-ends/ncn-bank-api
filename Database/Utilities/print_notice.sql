@@ -1,0 +1,10 @@
+CREATE OR REPLACE FUNCTION print_notice(msg text)
+  RETURNS integer AS
+$$
+DECLARE
+BEGIN
+    RAISE NOTICE USING MESSAGE = msg;
+    RETURN null;
+END;
+$$
+LANGUAGE 'plpgsql' IMMUTABLE;

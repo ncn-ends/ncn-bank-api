@@ -197,7 +197,6 @@
   - middlename
   - lastname
   - phone_number
-  - address_id
 - account_types
   - account_type_id
   - name_internal

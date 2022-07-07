@@ -1,0 +1,1 @@
+CREATE TYPE address_type AS ENUM ('House', 'Condo/Apartment', 'Business');
