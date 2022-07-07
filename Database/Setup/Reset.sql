@@ -1,5 +1,6 @@
 
 -- TABLES --
+DROP TABLE IF EXISTS account_types CASCADE;
 DROP TABLE IF EXISTS account_holders CASCADE;
 DROP TABLE IF EXISTS addresses CASCADE;
 
