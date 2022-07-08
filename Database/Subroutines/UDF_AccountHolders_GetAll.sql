@@ -15,8 +15,7 @@ RETURNS TABLE (
     address_type address_type
 )
 LANGUAGE plpgsql AS
-$$
-BEGIN
+$$BEGIN
     RETURN QUERY
     SELECT
         account_holders.account_holder_id,
