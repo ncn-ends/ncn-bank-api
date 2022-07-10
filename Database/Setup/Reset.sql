@@ -16,5 +16,4 @@ DROP FUNCTION IF EXISTS sr_accountholders_getall();
 DROP FUNCTION IF EXISTS sr_accounts_getall();
 
 -- UTILITIES --
-DROP FUNCTION IF EXISTS generate_card_number();
-DROP FUNCTION IF EXISTS generate_csv_number();
+DROP FUNCTION IF EXISTS gen_random_number(_digits integer) CASCADE;
