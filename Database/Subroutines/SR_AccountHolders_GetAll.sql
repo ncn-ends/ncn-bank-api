@@ -1,4 +1,4 @@
-create or replace function UDF_AccountHolders_GetAll()
+create or replace function SR_AccountHolders_GetAll()
 RETURNS TABLE (
     account_holder_id UUID,
     firstname TEXT,

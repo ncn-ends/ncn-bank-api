@@ -1,0 +1,1 @@
+SELECT * FROM sr_accounts_getall();

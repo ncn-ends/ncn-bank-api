@@ -249,7 +249,7 @@
 - cards
   - card_id
   - account_id
-  - (research info on cards and add later)
+  - pin_number'
 - addresses
   - address_id
   - account_id

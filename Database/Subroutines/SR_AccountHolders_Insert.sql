@@ -1,7 +1,7 @@
 -- insert into account_holder
 -- then use the primary key of account_holder as the foreign key for address insertion
 
-CREATE OR REPLACE PROCEDURE SP_AccountHolders_Insert(
+CREATE OR REPLACE PROCEDURE SR_AccountHolders_Insert(
     sp_birthdate TEXT,
     sp_firstname TEXT,
     sp_middlename TEXT,

@@ -1,4 +1,4 @@
-CALL sp_accountholders_insert(
+CALL sr_accountholders_insert(
     '2016-04-02',
     'peter',
     'p',

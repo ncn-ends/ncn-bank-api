@@ -1,0 +1,1 @@
+SELECT generate_card_number();

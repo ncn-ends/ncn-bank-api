@@ -1,4 +1,4 @@
-CREATE OR REPLACE FUNCTION UDF_Accounts_GetAll()
+CREATE OR REPLACE FUNCTION SR_Accounts_GetAll()
 RETURNS TABLE (
         account_id UUID,
         account_holder_id UUID,

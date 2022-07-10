@@ -1,4 +1,4 @@
-CREATE OR REPLACE PROCEDURE sp_account_insert(
+CREATE OR REPLACE PROCEDURE SR_accounts_insert(
     sp_account_holder_id UUID,
     sp_account_type_id INT
 )
