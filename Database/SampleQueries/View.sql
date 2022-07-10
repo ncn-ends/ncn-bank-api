@@ -1,1 +1,0 @@
-CREATE TEMP VIEW view_name AS

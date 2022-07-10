@@ -289,6 +289,4 @@
   - Account_Create()
   - Account_ReassignAccountHolder()
     - good example of naming scheme: If wanting to name `ReassignAccountHolder` wouldnt work as well
-  - Account_Delete()
-
-  - 
+  - Account_Deactivate()
