@@ -8,4 +8,3 @@ BEGIN
     max := 999999999999999;
     RETURN floor(random() * (max - min + 1) + min);
 END;$$ language plpgsql STRICT;
-

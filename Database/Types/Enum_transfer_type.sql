@@ -1,0 +1,1 @@
+CREATE TYPE transfer_type AS ENUM ('Bank', 'Debit', 'Cash');

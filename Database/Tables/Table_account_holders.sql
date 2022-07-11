@@ -4,5 +4,7 @@ CREATE TABLE account_holders (
       firstname text not null,
       middlename text,
       lastname text not null,
-      phone_number VARCHAR(15) not null
+      phone_number VARCHAR(15) not null,
+      job_title VARCHAR(64) NOT NULL,
+      expected_salary MONEY NOT NULL
 )
