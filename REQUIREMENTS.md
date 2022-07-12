@@ -100,7 +100,6 @@
   - apy: 0.01
   - maturity_term_days: null
 
-
 - high-yield savings account
   - debit_card_access: false
   - paper_check_access: false
