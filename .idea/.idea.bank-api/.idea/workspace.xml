@@ -6,10 +6,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="da88e022-a72c-429b-b2d2-ab358463d5d5" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.bank-api/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.bank-api/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Api/Api.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Api/Api.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/startdb.sh" beforeDir="false" afterPath="$PROJECT_DIR$/start-local-db.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/azure-deploy.sh" beforeDir="false" afterPath="$PROJECT_DIR$/azure-deploy.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/example.azure-setup.sh" beforeDir="false" afterPath="$PROJECT_DIR$/example.azure-setup.sh" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -80,7 +79,7 @@
       <option name="presentableId" value="Default" />
       <updated>1657694906953</updated>
       <workItem from="1657694918604" duration="739000" />
-      <workItem from="1657695758208" duration="3190000" />
+      <workItem from="1657695758208" duration="4534000" />
     </task>
     <servers />
   </component>
