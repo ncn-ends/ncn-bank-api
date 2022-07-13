@@ -1,4 +1,6 @@
 .azure/
+azure-setup.sh
+
 # Created by https://www.toptal.com/developers/gitignore/api/dotnetcore,aspnetcore,linux,jetbrains+all
 # Edit at https://www.toptal.com/developers/gitignore?templates=dotnetcore,aspnetcore,linux,jetbrains+all
 
