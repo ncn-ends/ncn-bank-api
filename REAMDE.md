@@ -4,7 +4,16 @@
 
 ### Development
 1) Run `docker-compose -d docker-compose.yml` to start the Postgres database
-2) `dotnet run` in the `/Api` directory
+2) Set the User Secrets for the `Api` Project like so:
+```
+{
+  "ConnectionStrings": {
+    "Default": "User ID=postgres;Password=postgres;Host=localhost;Port=5432;Database=postgres;"
+  }
+}
+```
+- This should reflect the connection string for the local Docker Postgres database
+3) `dotnet run` in the `/Api` directory
 
 ### Deployment
 1) Edit `azure-deploy.sh` to replace the bash variables with the correct values
