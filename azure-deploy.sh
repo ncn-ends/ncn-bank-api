@@ -6,10 +6,4 @@ APP_PLAN=ncn-bank-api-plan
 APP_REGION=eastus2
 APP_OS=linux
 
-az webapp up -n $APP_NAME \
--l $APP_REGION \ 
---os-type $APP_OS \
--p $APP_PLAN \
--g $APP_RG 
---sku F1 \ 
---verbose;
+az webapp up -n $APP_NAME -l $APP_REGION --os-type $APP_OS -p $APP_PLAN -g $APP_RG --sku F1 --verbose;

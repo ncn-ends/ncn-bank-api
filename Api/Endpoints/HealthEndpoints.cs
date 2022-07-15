@@ -2,12 +2,13 @@ namespace Api.Endpoints;
 
 public static class HealthEndpoints
 {
-    public static void ConfigureHealthEndpoints(this WebApplication app)
+    public static void MapHealthEndpoints(this WebApplication app)
     {
-        app.MapGet("/ping", Ping);
+        app.MapGet("/health/ping", HealthPing);
+        app.MapGet("/health/problem", HealthProblem);
     }
 
-    private static IResult Ping()
+    private static IResult HealthPing()
     {
         try
         {
@@ -18,5 +19,10 @@ public static class HealthEndpoints
             Console.WriteLine(e.ToString());
             return Results.Problem(e.Message);
         }
+    }
+
+    private static IResult HealthProblem()
+    {
+        throw new ArgumentException();
     }
 }

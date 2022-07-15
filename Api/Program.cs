@@ -1,4 +1,5 @@
 using Api.Endpoints;
+using Api.Helpers;
 using DataAccess;
 using DataAccess.Placeholder;
 
@@ -10,6 +11,8 @@ builder.Services.AddSingleton<ISqlDataAccess, SqlDataAccess>();
 builder.Services.AddSingleton<IPersonsAccess, PersonsAccess>();
 var app = builder.Build();
 
+app.UseCustomExceptionHandler();
+
 /* Middleware Pipeline */
 if (app.Environment.IsDevelopment())
 {
@@ -20,8 +23,8 @@ if (app.Environment.IsDevelopment())
 // MappingRules.SetRules();
 app.UseHttpsRedirection();
 
-app.ConfigureHealthEndpoints();
-app.ConfigurePersonsEndpoints();
+app.MapHealthEndpoints();
+app.MapPersonsEndpoints();
 // app.ConfigureBuildsEndpoints();
 
 app.Run();

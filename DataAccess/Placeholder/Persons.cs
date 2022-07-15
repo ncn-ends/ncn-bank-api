@@ -4,7 +4,7 @@ namespace DataAccess.Placeholder;
 
 public interface IPersonsAccess
 {
-    Task<IEnumerable<Person>> GetPersons();
+    Task<IEnumerable<PersonBO>> GetPersons();
 }
 
 public class PersonsAccess : IPersonsAccess
@@ -16,6 +16,6 @@ public class PersonsAccess : IPersonsAccess
         _db = db;
     }
 
-    public Task<IEnumerable<Person>> GetPersons() =>
-        _db.LoadData<Person, dynamic>("Persons_GetAll", new { });
+    public Task<IEnumerable<PersonBO>> GetPersons() =>
+        _db.LoadData<PersonBO, dynamic>("Persons_GetAll", new { });
 }
