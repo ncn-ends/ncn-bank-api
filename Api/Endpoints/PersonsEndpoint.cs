@@ -11,7 +11,7 @@ public static class PersonsEndpoint
     public static void MapPersonsEndpoints(this WebApplication app)
     {
         app.MapGet("/api/persons", GetPersons);
-        // app.MapPost("/api/person", CreatePerson);
+        app.MapPost("/api/person", CreatePerson);
     }
 
     private static async Task<IResult> GetPersons(IPersonsAccess personsAccess)
@@ -27,8 +27,9 @@ public static class PersonsEndpoint
         }
     }
 
-    // private static async Task<IResult> CreatePerson(PersonDTO personBo)
-    // {
-    //     // if (ModelState)
-    // }
+    private static async Task<IResult> CreatePerson(PersonBO person, IPersonManager personManager)
+    {
+        await personManager.Manage(person);
+        return Results.Ok(person);
+    }
 }

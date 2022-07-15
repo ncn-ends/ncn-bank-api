@@ -6,16 +6,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="da88e022-a72c-429b-b2d2-ab358463d5d5" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/DataAccess/Models/PersonModels.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.bank-api/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.bank-api/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Api/Api.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Api/Api.csproj" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Api/Endpoints/HealthEndpoints.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Api/Endpoints/HealthEndpoints.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Api/Endpoints/PersonsEndpoint.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Api/Endpoints/PersonsEndpoint.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Api/Helpers/CustomErrorHandlerHelper.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Api/Helpers/CustomErrorHandlerHelper.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Api/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Api/Program.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Api/Properties/launchSettings.json" beforeDir="false" afterPath="$PROJECT_DIR$/Api/Properties/launchSettings.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DataAccess/Models/Person.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/DataAccess/Placeholder/Persons.cs" beforeDir="false" afterPath="$PROJECT_DIR$/DataAccess/Placeholder/Persons.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/azure-deploy.sh" beforeDir="false" afterPath="$PROJECT_DIR$/azure-deploy.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DataAccess/DataAccess.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/DataAccess/DataAccess.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DataAccess/Models/PersonModels.cs" beforeDir="false" afterPath="$PROJECT_DIR$/DataAccess/Models/PersonModels.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Tests/Tests.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/Tests.csproj" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -89,7 +88,7 @@
       <option name="presentableId" value="Default" />
       <updated>1657694906953</updated>
       <workItem from="1657694918604" duration="739000" />
-      <workItem from="1657695758208" duration="21408000" />
+      <workItem from="1657695758208" duration="27066000" />
     </task>
     <servers />
   </component>

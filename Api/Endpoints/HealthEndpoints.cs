@@ -8,7 +8,7 @@ public static class HealthEndpoints
         app.MapGet("/health/problem", HealthProblem);
     }
 
-    private static IResult HealthPing()
+    public static IResult HealthPing()
     {
         try
         {
@@ -21,7 +21,7 @@ public static class HealthEndpoints
         }
     }
 
-    private static IResult HealthProblem()
+    public static IResult HealthProblem()
     {
         throw new ArgumentException();
     }

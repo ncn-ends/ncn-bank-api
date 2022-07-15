@@ -4,6 +4,7 @@ using System.Net.Mime;
 using System.Security;
 using System.Security.Authentication;
 using System.Text.Json;
+using FluentValidation;
 using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 
@@ -35,6 +36,7 @@ public static class CustomErrorHandlerHelper
         var details = includeDetails ? err.ToString() : null;
         var status = err switch
         {
+            ValidationException => 400,
             ArgumentException => 404,
             _ => 500
         };

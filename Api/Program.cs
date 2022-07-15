@@ -1,7 +1,10 @@
 using Api.Endpoints;
 using Api.Helpers;
 using DataAccess;
+using DataAccess.Models;
 using DataAccess.Placeholder;
+using FluentValidation;
+using Microsoft.AspNetCore.Identity;
 
 var builder = WebApplication.CreateBuilder();
 
@@ -9,6 +12,9 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddSingleton<ISqlDataAccess, SqlDataAccess>();
 builder.Services.AddSingleton<IPersonsAccess, PersonsAccess>();
+
+builder.Services.AddScoped<IValidator<PersonBO>, PersonValidator>();
+builder.Services.AddScoped<IPersonManager, PersonManager>();
 var app = builder.Build();
 
 app.UseCustomExceptionHandler();
@@ -28,3 +34,5 @@ app.MapPersonsEndpoints();
 // app.ConfigureBuildsEndpoints();
 
 app.Run();
+
+public partial class Program { }
