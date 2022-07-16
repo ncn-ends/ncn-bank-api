@@ -1,8 +1,8 @@
 using Api.Endpoints;
 using Api.Helpers;
 using DataAccess;
+using DataAccess.Access;
 using DataAccess.Models;
-using DataAccess.Placeholder;
 using FluentValidation;
 using Microsoft.AspNetCore.Identity;
 
@@ -15,6 +15,7 @@ builder.Services.AddSingleton<IPersonsAccess, PersonsAccess>();
 
 builder.Services.AddScoped<IValidator<PersonBO>, PersonValidator>();
 builder.Services.AddScoped<IPersonManager, PersonManager>();
+
 var app = builder.Build();
 
 app.UseCustomExceptionHandler();
@@ -31,8 +32,6 @@ app.UseHttpsRedirection();
 
 app.MapHealthEndpoints();
 app.MapPersonsEndpoints();
-// app.ConfigureBuildsEndpoints();
+app.MapAddressEndpoints();
 
 app.Run();
-
-public partial class Program { }

@@ -1,6 +1,6 @@
 using DataAccess.Models;
 
-namespace DataAccess.Placeholder;
+namespace DataAccess.Access;
 
 public interface IPersonsAccess
 {
