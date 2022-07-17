@@ -20,11 +20,7 @@ public class AddressEndpointTests
     [Fact]
     public async Task Post_AddAddress_Anonymous()
     {
-        await using var app = new WebApplicationFactory<Program>();
-        using var client = app.CreateClient();
-        client.DefaultRequestHeaders.Accept.Add(
-            new MediaTypeWithQualityHeaderValue("application/json"));
-
+        var client = new HttpClientBroker("/api/address");
         var entry = new AddressDTO
         {
             street = "123 Pierce St",
@@ -35,19 +31,13 @@ public class AddressEndpointTests
             unit_number = 123,
             address_type = "Condo/Apartment"
         };
-        var serializedEntry = JsonConvert.SerializeObject(entry);
-        var body = new StringContent(serializedEntry, Encoding.UTF8, "application/json");
-        var endpoint = "/api/address";
-        
-        var response = await client.PostAsync(endpoint, body);
-        
+        var response = await client.SendPost<AddressDTO>(entry);
         response.EnsureSuccessStatusCode();
 
-        var resultString = await response.Content.ReadAsStringAsync();
-        var result = JsonConvert.DeserializeObject<AddressDTO>(resultString);
-        result.Should().NotBeNull();
+        var resBody = await JsonMapper.MapHttpContentAs<AddressDTO>(response);
+        resBody.Should().NotBeNull();
 
-        var areEqual = Comparisons.AreEqual<AddressDTO>(result, entry);
+        var areEqual = Comparisons.AreEqual<AddressDTO>(resBody, entry);
         areEqual.Should().BeTrue();
 
     }

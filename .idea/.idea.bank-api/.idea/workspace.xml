@@ -7,12 +7,7 @@
   <component name="ChangeListManager">
     <list default="true" id="da88e022-a72c-429b-b2d2-ab358463d5d5" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.bank-api/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.bank-api/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Api/Endpoints/PersonsEndpoint.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Api/Endpoints/PersonsEndpoint.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Api/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Api/Program.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Api/appsettings.Development.json" beforeDir="false" afterPath="$PROJECT_DIR$/Api/appsettings.Development.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DataAccess/DataAccess.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/DataAccess/DataAccess.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DataAccess/Placeholder/Persons.cs" beforeDir="false" afterPath="$PROJECT_DIR$/DataAccess/Access/Persons.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Tests/Tests.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/Tests.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Tests/IntegrationTesting/AddressEndpointTests.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/IntegrationTesting/AddressEndpointTests.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -94,7 +89,7 @@
       <updated>1657694906953</updated>
       <workItem from="1657694918604" duration="739000" />
       <workItem from="1657695758208" duration="34822000" />
-      <workItem from="1658006955078" duration="4024000" />
+      <workItem from="1658006955078" duration="5841000" />
     </task>
     <servers />
   </component>
