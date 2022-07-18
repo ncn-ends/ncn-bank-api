@@ -19,9 +19,6 @@ public interface ISqlDataAccess
     Task SaveDataSP<T>(
         string storedProcedure,
         T parameters);
-    //
-    // Task<IEnumerable<dynamic>> SaveDataWithReturn<T, U>(string storedProc,
-    //     T parameters);
 }
 
 public class SqlDataAccess : ISqlDataAccess
@@ -64,22 +61,6 @@ public class SqlDataAccess : ISqlDataAccess
         
     }
 
-    // public async Task<IEnumerable<U>> SaveDataWithReturn<T, U>(string storedProc,
-    //     T parameters)
-    // {
-    //     using IDbConnection connection = new NpgsqlConnection(_connectionString);
-    //
-    //     var result = await connection.QueryAsync<U>(
-    //         sql: storedProc,
-    //         param: parameters,
-    //         commandType: CommandType.StoredProcedure);
-    //
-    //     // var asd = result.FirstOrDefault();
-    //
-    //     return result;
-    // }
-    
-    
     public async Task SaveDataSP<T>(
         string sql,
         T parameters)

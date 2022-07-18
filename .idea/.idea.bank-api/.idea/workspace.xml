@@ -6,7 +6,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="da88e022-a72c-429b-b2d2-ab358463d5d5" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/Tests/Fixtures/AddressTestData.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.bank-api/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.bank-api/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DataAccess/SqlDataAccess.cs" beforeDir="false" afterPath="$PROJECT_DIR$/DataAccess/SqlDataAccess.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Tests/Fixtures/AddressData.cs" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Tests/IntegrationTesting/AddressEndpointTests.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/IntegrationTesting/AddressEndpointTests.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Tests/Tests.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/Tests.csproj" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -89,7 +94,7 @@
       <workItem from="1657694918604" duration="739000" />
       <workItem from="1657695758208" duration="34822000" />
       <workItem from="1658006955078" duration="11476000" />
-      <workItem from="1658072447113" duration="7967000" />
+      <workItem from="1658072447113" duration="12156000" />
     </task>
     <servers />
   </component>
@@ -109,37 +114,5 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/DataAccess/SqlDataAccess.cs</url>
-          <line>78</line>
-          <properties documentPath="$PROJECT_DIR$/DataAccess/SqlDataAccess.cs" initialLine="75" containingFunctionPresentation="method 'SaveDataWithReturn'">
-            <startOffsets>
-              <option value="2137" />
-            </startOffsets>
-            <endOffsets>
-              <option value="2138" />
-            </endOffsets>
-          </properties>
-          <option name="timeStamp" value="15" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/Tests/IntegrationTesting/AddressEndpointTests.cs</url>
-          <line>38</line>
-          <properties documentPath="$PROJECT_DIR$/Tests/IntegrationTesting/AddressEndpointTests.cs" initialLine="38" containingFunctionPresentation="method 'Post_AddAddress_Anonymous'">
-            <startOffsets>
-              <option value="1117" />
-            </startOffsets>
-            <endOffsets>
-              <option value="1161" />
-            </endOffsets>
-          </properties>
-          <option name="timeStamp" value="18" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
 </project>
