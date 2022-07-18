@@ -9,9 +9,9 @@ namespace Tests.Helpers;
 
 public class HttpClientBroker
 {
-    private WebApplicationFactory<Program> _waf = new();
-    private HttpClient _client;
-    private string _endpoint = "ENDPOINT NOT SET";
+    private readonly WebApplicationFactory<Program> _waf = new();
+    private readonly HttpClient _client;
+    private readonly string _endpoint;
     
     public HttpClientBroker(string endpoint)
     {

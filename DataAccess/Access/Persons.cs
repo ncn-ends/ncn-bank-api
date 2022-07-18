@@ -17,5 +17,5 @@ public class PersonsAccess : IPersonsAccess
     }
 
     public Task<IEnumerable<PersonBO>> GetPersons() =>
-        _db.LoadData<PersonBO, dynamic>("Persons_GetAll", new { });
+        _db.CallUdf<PersonBO, dynamic>("Persons_GetAll", new { });
 }

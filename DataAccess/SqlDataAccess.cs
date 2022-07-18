@@ -1,5 +1,6 @@
 ﻿using System.Data;
 using Dapper;
+using DataAccess.Models;
 using Microsoft.Extensions.Configuration;
 using Npgsql;
 
@@ -7,7 +8,7 @@ namespace DataAccess;
 
 public interface ISqlDataAccess
 {
-    Task<IEnumerable<T>> LoadData<T, U>(
+    Task<IEnumerable<T>> CallUdf<T, U>(
         string storedProcedure,
         U parameters);
 
@@ -18,6 +19,9 @@ public interface ISqlDataAccess
     Task SaveDataSP<T>(
         string storedProcedure,
         T parameters);
+    //
+    // Task<IEnumerable<dynamic>> SaveDataWithReturn<T, U>(string storedProc,
+    //     T parameters);
 }
 
 public class SqlDataAccess : ISqlDataAccess
@@ -35,7 +39,7 @@ public class SqlDataAccess : ISqlDataAccess
                             ?? _config.GetConnectionString("Default");
     }
 
-    public async Task<IEnumerable<T>> LoadData<T, U>(
+    public async Task<IEnumerable<T>> CallUdf<T, U>(
         string storedProcedure,
         U parameters)
     {
@@ -57,7 +61,23 @@ public class SqlDataAccess : ISqlDataAccess
             storedProcedure, 
             parameters, 
             commandType: CommandType.StoredProcedure);
+        
     }
+
+    // public async Task<IEnumerable<U>> SaveDataWithReturn<T, U>(string storedProc,
+    //     T parameters)
+    // {
+    //     using IDbConnection connection = new NpgsqlConnection(_connectionString);
+    //
+    //     var result = await connection.QueryAsync<U>(
+    //         sql: storedProc,
+    //         param: parameters,
+    //         commandType: CommandType.StoredProcedure);
+    //
+    //     // var asd = result.FirstOrDefault();
+    //
+    //     return result;
+    // }
     
     
     public async Task SaveDataSP<T>(

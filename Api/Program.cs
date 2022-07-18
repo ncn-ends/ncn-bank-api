@@ -12,6 +12,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddSingleton<ISqlDataAccess, SqlDataAccess>();
 builder.Services.AddSingleton<IPersonsAccess, PersonsAccess>();
+builder.Services.AddSingleton<IAddressAccess, AddressAccess>();
 
 builder.Services.AddScoped<IValidator<PersonBO>, PersonValidator>();
 builder.Services.AddScoped<IPersonManager, PersonManager>();
