@@ -6,16 +6,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="da88e022-a72c-429b-b2d2-ab358463d5d5" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.bank-api/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.bank-api/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Api/Endpoints/AddressEndpoints.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Api/Endpoints/AddressEndpoints.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Api/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Api/Program.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Api/appsettings.Development.json" beforeDir="false" afterPath="$PROJECT_DIR$/Api/appsettings.Development.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DataAccess/Access/Persons.cs" beforeDir="false" afterPath="$PROJECT_DIR$/DataAccess/Access/Persons.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DataAccess/Models/AddressModels.cs" beforeDir="false" afterPath="$PROJECT_DIR$/DataAccess/Models/AddressModels.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DataAccess/SqlDataAccess.cs" beforeDir="false" afterPath="$PROJECT_DIR$/DataAccess/SqlDataAccess.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Database/SampleQueries/Examples/View.sql" beforeDir="false" afterPath="$PROJECT_DIR$/Database/SampleQueries/Examples/View.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Database/Setup/Reset.sql" beforeDir="false" afterPath="$PROJECT_DIR$/Database/Setup/Reset.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Tests/Helpers/HttpClientBroker.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/Helpers/HttpClientBroker.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Tests/IntegrationTesting/AddressEndpointTests.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/IntegrationTesting/AddressEndpointTests.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -98,7 +89,7 @@
       <workItem from="1657694918604" duration="739000" />
       <workItem from="1657695758208" duration="34822000" />
       <workItem from="1658006955078" duration="11476000" />
-      <workItem from="1658072447113" duration="7606000" />
+      <workItem from="1658072447113" duration="7967000" />
     </task>
     <servers />
   </component>
@@ -123,19 +114,6 @@
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/Api/Endpoints/AddressEndpoints.cs</url>
-          <line>18</line>
-          <properties documentPath="$PROJECT_DIR$/Api/Endpoints/AddressEndpoints.cs" initialLine="18" containingFunctionPresentation="method 'AddAddress'">
-            <startOffsets>
-              <option value="575" />
-            </startOffsets>
-            <endOffsets>
-              <option value="578" />
-            </endOffsets>
-          </properties>
-          <option name="timeStamp" value="11" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="DotNet Breakpoints">
           <url>file://$PROJECT_DIR$/DataAccess/SqlDataAccess.cs</url>
           <line>78</line>
           <properties documentPath="$PROJECT_DIR$/DataAccess/SqlDataAccess.cs" initialLine="75" containingFunctionPresentation="method 'SaveDataWithReturn'">
@@ -147,6 +125,19 @@
             </endOffsets>
           </properties>
           <option name="timeStamp" value="15" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Tests/IntegrationTesting/AddressEndpointTests.cs</url>
+          <line>38</line>
+          <properties documentPath="$PROJECT_DIR$/Tests/IntegrationTesting/AddressEndpointTests.cs" initialLine="38" containingFunctionPresentation="method 'Post_AddAddress_Anonymous'">
+            <startOffsets>
+              <option value="1117" />
+            </startOffsets>
+            <endOffsets>
+              <option value="1161" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="18" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

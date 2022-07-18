@@ -34,11 +34,8 @@ public class AddressEndpointTests
         var response = await client.SendPost<AddressDTO>(entry);
         response.EnsureSuccessStatusCode();
 
-        var resBody = await JsonMapper.MapHttpContentAs<AddressDTO>(response);
+        var resBody = await JsonMapper.MapHttpContentAs<AddressInsertionReturnType>(response);
         resBody.Should().NotBeNull();
-
-        var areEqual = Comparisons.AreEqual<AddressDTO>(resBody, entry);
-        areEqual.Should().BeTrue();
-
+        resBody.address_id.Should().BeGreaterThan(0);
     }
 }

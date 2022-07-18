@@ -5,7 +5,7 @@ namespace DataAccess.Access;
 
 public interface IAddressAccess
 {
-    Task<string> AddAddress(AddressDTO addressDetails);
+    Task<int> AddAddress(AddressDTO addressDetails);
 }
 
 public class AddressAccess : IAddressAccess
@@ -17,7 +17,7 @@ public class AddressAccess : IAddressAccess
         _db = db;
     }
 
-    public async Task<string> AddAddress(AddressDTO addressDetails)
+    public async Task<int> AddAddress(AddressDTO addressDetails)
     {
         var queryResult = await _db.CallUdf<AddressInsertionReturnType, dynamic>("SR_Address_Insert", new
         {

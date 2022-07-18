@@ -18,5 +18,5 @@ public class AddressDTO
 
 public class AddressInsertionReturnType
 {
-    public string address_id { get; set; } = "UNSET ADDRESS ID";
+    public int address_id { get; set; } = -1;
 }
