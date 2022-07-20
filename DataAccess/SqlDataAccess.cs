@@ -12,13 +12,8 @@ public interface ISqlDataAccess
         string storedProcedure,
         U parameters);
 
-    Task SaveDataUDF<T>(
-        string storedProcedure,
-        T parameters);
-
-    Task SaveDataSP<T>(
-        string storedProcedure,
-        T parameters);
+    Task<IEnumerable<T>> ExecRawSql<T>(string query);
+    Task<IEnumerable<T>> ExecRawSql<T, U>(string query, U parameters);
 }
 
 public class SqlDataAccess : ISqlDataAccess
@@ -47,30 +42,46 @@ public class SqlDataAccess : ISqlDataAccess
             parameters,
             commandType: CommandType.StoredProcedure);
     }
+    
+    
 
-    public async Task SaveDataUDF<T>(
-        string storedProcedure,
-        T parameters)
+    public async Task<IEnumerable<T>> ExecRawSql<T>(string query)
     {
         using IDbConnection connection = new NpgsqlConnection(_connectionString);
 
-        await connection.ExecuteAsync(
-            storedProcedure, 
-            parameters, 
-            commandType: CommandType.StoredProcedure);
-        
+        return await connection.QueryAsync<T>(query);
     }
-
-    public async Task SaveDataSP<T>(
-        string sql,
-        T parameters)
+    
+    public async Task<IEnumerable<T>> ExecRawSql<T, U>(string query, U parameters)
     {
         using IDbConnection connection = new NpgsqlConnection(_connectionString);
-        
-        connection.Open();
 
-        var p = new DynamicParameters();
-        p.AddDynamicParams(parameters);
-        await connection.ExecuteAsync(sql, p);
+        return await connection.QueryAsync<T>(query, param: parameters);
     }
+
+    // public async Task SaveDataUDF<T>(
+    //     string storedProcedure,
+    //     T parameters)
+    // {
+    //     using IDbConnection connection = new NpgsqlConnection(_connectionString);
+    //
+    //     await connection.ExecuteAsync(
+    //         storedProcedure, 
+    //         parameters, 
+    //         commandType: CommandType.StoredProcedure);
+    //     
+    // }
+    //
+    // public async Task SaveDataSP<T>(
+    //     string sql,
+    //     T parameters)
+    // {
+    //     using IDbConnection connection = new NpgsqlConnection(_connectionString);
+    //     
+    //     connection.Open();
+    //
+    //     var p = new DynamicParameters();
+    //     p.AddDynamicParams(parameters);
+    //     await connection.ExecuteAsync(sql, p);
+    // }
 }
