@@ -4,6 +4,7 @@ using DataAccess;
 using FluentAssertions;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.Extensions.Configuration;
+using Tests.Helpers;
 using Xunit;
 using Xunit.Abstractions;
 
@@ -22,16 +23,12 @@ public class SqlDataAccessTests
 
     public SqlDataAccessTests(ITestOutputHelper output)
     {
-        IConfiguration config = new ConfigurationBuilder()
-            .AddUserSecrets(Assembly.GetExecutingAssembly())
-            .AddEnvironmentVariables()
-            .Build();
+        _sqlDataAccess = new SqlDataAccess(TestingConfig.GetConfig());
         _output = output;
-        _sqlDataAccess = new SqlDataAccess(config);
     }
     
     [Fact]
-    public async void ExecRawSqlTests_NoParameters()
+    public async void ExecRawSql_NoParameters()
     {
         var res = await _sqlDataAccess.ExecRawSql<ExampleMappedObject>("SELECT 'Peter' AS Name, 24 AS Age;");
         res.FirstOrDefault().Should().NotBeNull();
@@ -42,19 +39,18 @@ public class SqlDataAccessTests
     
     
     [Fact]
-    public async void ExecRawSqlTests_WithParameters()
+    public async void ExecRawSql_WithParameters()
     {
-        var age = 94;
-        var name = "Euclid";
         var query = "SELECT @Name AS Name, @Age AS Age;";
         var queryParams = new {
-            Age = age,
-            Name = name
+            Age = 94,
+            Name = "Euclid"
         };
         var res = await _sqlDataAccess.ExecRawSql<ExampleMappedObject, dynamic>(query, queryParams);
-        res.FirstOrDefault().Should().NotBeNull();
-        res.FirstOrDefault().Should().BeOfType<ExampleMappedObject>();
-        res.FirstOrDefault().Age.Should().Be(age);
-        res.FirstOrDefault().Name.Should().Be(name);
+        var actual = res.FirstOrDefault();
+        actual.Should().NotBeNull();
+        actual.Should().BeOfType<ExampleMappedObject>();
+        actual.Age.Should().Be(queryParams.Age);
+        actual.Name.Should().Be(queryParams.Name);
     }
 }

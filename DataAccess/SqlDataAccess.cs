@@ -14,6 +14,7 @@ public interface ISqlDataAccess
 
     Task<IEnumerable<T>> ExecRawSql<T>(string query);
     Task<IEnumerable<T>> ExecRawSql<T, U>(string query, U parameters);
+    Task ExecRawSql(string query);
 }
 
 public class SqlDataAccess : ISqlDataAccess
@@ -57,6 +58,13 @@ public class SqlDataAccess : ISqlDataAccess
         using IDbConnection connection = new NpgsqlConnection(_connectionString);
 
         return await connection.QueryAsync<T>(query, param: parameters);
+    }
+    
+    public async Task ExecRawSql(string query)
+    {
+        using IDbConnection connection = new NpgsqlConnection(_connectionString);
+
+        await connection.QueryAsync(query);
     }
 
     // public async Task SaveDataUDF<T>(

@@ -11,6 +11,7 @@ var builder = WebApplication.CreateBuilder();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddSingleton<ISqlDataAccess, SqlDataAccess>();
+builder.Services.AddSingleton<ISetupAccess, SetupAccess>();
 builder.Services.AddSingleton<IPersonsAccess, PersonsAccess>();
 builder.Services.AddSingleton<IAddressAccess, AddressAccess>();
 
@@ -19,9 +20,18 @@ builder.Services.AddScoped<IPersonManager, PersonManager>();
 
 var app = builder.Build();
 
-app.UseCustomExceptionHandler();
+using (var scope = app.Services.CreateScope())
+{
+    var services = scope.ServiceProvider;
+    var setupAccess = services.GetRequiredService<ISetupAccess>();
+    await setupAccess.EnsureDatabaseSetup();
+    // await dataAccess.ExecRawSql("CALL SR_CreateArbitraryTable();");
+}
+
 
 /* Middleware Pipeline */
+app.UseCustomExceptionHandler();
+
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
