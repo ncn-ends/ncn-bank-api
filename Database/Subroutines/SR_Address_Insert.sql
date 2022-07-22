@@ -1,4 +1,7 @@
-DROP TYPE SR_Address_Insert_ValueType CASCADE;
+-- BEGIN;
+--
+-- SELECT pg_try_advisory_xact_lock(1);
+
 create type SR_Address_Insert_ValueType as (address_id int);
 
 DROP FUNCTION IF EXISTS SR_Address_Insert(_street TEXT, _zipcode TEXT, _city TEXT, _state TEXT, _country TEXT, _unit_number INT, _address_type TEXT) CASCADE;
@@ -28,3 +31,5 @@ begin
     RETURNING addresses.address_id AS address_id;
 end ;
 $$ LANGUAGE plpgsql;
+
+-- COMMIT;

@@ -7,14 +7,37 @@
   <component name="ChangeListManager">
     <list default="true" id="da88e022-a72c-429b-b2d2-ab358463d5d5" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.bank-api/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.bank-api/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Api/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Api/Program.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DataAccess/SqlDataAccess.cs" beforeDir="false" afterPath="$PROJECT_DIR$/DataAccess/SqlDataAccess.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DataAccess/Access/SetupAccess.cs" beforeDir="false" afterPath="$PROJECT_DIR$/DataAccess/Access/SetupAccess.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DataAccess/DataAccess.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/DataAccess/DataAccess.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Database/Setup/Reset.sql" beforeDir="false" afterPath="$PROJECT_DIR$/Database/Setup/Reset.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Database/Subroutines/SR_AccountHolders_GetAll.sql" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Database/Subroutines/SR_AccountHolders_Insert.sql" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Database/Subroutines/SR_AccountTypes_GetAll.sql" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Database/Subroutines/SR_Accounts_GetAll.sql" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Database/Subroutines/SR_Accounts_Insert.sql" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Database/Subroutines/SR_Address_Insert.sql" beforeDir="false" afterPath="$PROJECT_DIR$/Database/Subroutines/SR_Address_Insert.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Database/Subroutines/SR_Cards_Insert.sql" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Database/Subroutines/SR_Checks_Insert.sql" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Database/Subroutines/SR_CreateArbitraryTable.sql" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Database/Tables/Table_account_holders.sql" beforeDir="false" afterPath="$PROJECT_DIR$/Database/Tables/Table_account_holders.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Database/Tables/Table_account_links.sql" beforeDir="false" afterPath="$PROJECT_DIR$/Database/Tables/Table_account_links.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Database/Tables/Table_account_types.sql" beforeDir="false" afterPath="$PROJECT_DIR$/Database/Tables/Table_account_types.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Database/Tables/Table_accounts.sql" beforeDir="false" afterPath="$PROJECT_DIR$/Database/Tables/Table_accounts.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Database/Tables/Table_addresses.sql" beforeDir="false" afterPath="$PROJECT_DIR$/Database/Tables/Table_addresses.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Database/Tables/Table_branches.sql" beforeDir="false" afterPath="$PROJECT_DIR$/Database/Tables/Table_branches.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Database/Tables/Table_cards.sql" beforeDir="false" afterPath="$PROJECT_DIR$/Database/Tables/Table_cards.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Database/Tables/Table_checks.sql" beforeDir="false" afterPath="$PROJECT_DIR$/Database/Tables/Table_checks.sql" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Database/Tables/Table_monthly_fees.sql" beforeDir="false" afterPath="$PROJECT_DIR$/Database/Tables/Table_monthly_fees.sql" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Database/Tables/Table_transfer_limits.sql" beforeDir="false" afterPath="$PROJECT_DIR$/Database/Tables/Table_transfer_limits.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Tests/Tests.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/Tests.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Tests/UnitTesting/DataAccess/SqlDataAccessTests.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/UnitTesting/DataAccess/SqlDataAccessTests.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bank-api.sln" beforeDir="false" afterPath="$PROJECT_DIR$/bank-api.sln" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Database/Tables/Table_transfers.sql" beforeDir="false" afterPath="$PROJECT_DIR$/Database/Tables/Table_transfers.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Database/Types/Enum_address_type.sql" beforeDir="false" afterPath="$PROJECT_DIR$/Database/Types/Enum_address_type.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Database/Types/Enum_transfer_type.sql" beforeDir="false" afterPath="$PROJECT_DIR$/Database/Types/Enum_transfer_type.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FileReader/File.cs" beforeDir="false" afterPath="$PROJECT_DIR$/FileReader/FileData.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FileReader/FileReader.cs" beforeDir="false" afterPath="$PROJECT_DIR$/FileReader/FileReader.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Tests/Helpers/HttpClientBroker.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/Helpers/HttpClientBroker.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Tests/IntegrationTesting/HealthEndpointTests.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/IntegrationTesting/HealthEndpointTests.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Tests/IntegrationTesting/PersonEndpointTests.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/IntegrationTesting/PersonEndpointTests.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Tests/UnitTesting/FileReader/FileReaderTests.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/UnitTesting/FileReader/FileReaderTests.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -23,8 +46,10 @@
   </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/038c1c69b9af41b7a0326e4e024508146e200/b3/ee982846/Enumerable.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/2a925edfe5584632978e98fd8509cdf4d7a8/42/9715ab2e/CollectionAttribute.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/34097e45bb354c36a678d3bc66df67d494dc00/8a/8f4300aa/PropertyInfo.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/34097e45bb354c36a678d3bc66df67d494dc00/a0/fcd219e8/Interop.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/34097e45bb354c36a678d3bc66df67d494dc00/cf/e32ed25e/ExceptionDispatchInfo.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/34097e45bb354c36a678d3bc66df67d494dc00/ee/5489963b/String.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/b643966c808a41d1a192437cc081a17f1fb800/89/993cf6bf/BodyControl.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/137081ba02cc6db44ee2fbc1b73c2b61c15198e5aec96c8ae97f992a175/WebApplicationFactoryClientOptions.cs" root0="SKIP_HIGHLIGHTING" />
@@ -101,7 +126,7 @@
       <workItem from="1658072447113" duration="19940000" />
       <workItem from="1658221779186" duration="4474000" />
       <workItem from="1658320525133" duration="6301000" />
-      <workItem from="1658352300865" duration="11628000" />
+      <workItem from="1658352300865" duration="21412000" />
     </task>
     <servers />
   </component>
@@ -140,19 +165,12 @@
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
-        <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/Tests/IntegrationTesting/AddressEndpointTests.cs</url>
-          <line>91</line>
-          <properties documentPath="$PROJECT_DIR$/Tests/IntegrationTesting/AddressEndpointTests.cs" initialLine="91" containingFunctionPresentation="method 'Post_AddAddress_Anonymous'">
-            <startOffsets>
-              <option value="3063" />
-            </startOffsets>
-            <endOffsets>
-              <option value="3119" />
-            </endOffsets>
+        <breakpoint enabled="true" type="DotNet Exception Breakpoints">
+          <properties exception="Npgsql.PostgresException" isInternal="false" displayValue="PostgresException" namespaceName="Npgsql">
+            <option name="internal" value="false" />
           </properties>
-          <option name="timeStamp" value="2" />
-        </line-breakpoint>
+          <option name="timeStamp" value="6" />
+        </breakpoint>
       </breakpoints>
     </breakpoint-manager>
   </component>

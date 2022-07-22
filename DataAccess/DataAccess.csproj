@@ -18,4 +18,8 @@
     <Folder Include="Utilities" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\FileReader\FileReader.csproj" />
+  </ItemGroup>
+
 </Project>

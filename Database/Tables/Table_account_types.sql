@@ -1,4 +1,4 @@
-CREATE TABLE account_types (
+CREATE TABLE IF NOT EXISTS account_types (
     account_type_id SERIAL PRIMARY KEY,
     name_internal VARCHAR(10) NOT NULL,
     name_display VARCHAR(64) NOT NULL,

@@ -1,3 +1,7 @@
+BEGIN;
+
+SELECT pg_advisory_xact_lock(2142616474639426746);
+
 create or replace function SR_AccountHolders_GetAll()
 RETURNS TABLE (
     account_holder_id UUID,
@@ -13,8 +17,7 @@ RETURNS TABLE (
     country TEXT,
     unit_number TEXT,
     address_type address_type
-)
-LANGUAGE plpgsql AS
+) AS
 $$BEGIN
     RETURN QUERY
     SELECT
@@ -33,4 +36,6 @@ $$BEGIN
         a.address_type
     FROM account_holders
     JOIN addresses a ON account_holders.account_holder_id = a.fk_account_holder_id;
-END;$$
+END;$$ LANGUAGE plpgsql;
+
+COMMIT;

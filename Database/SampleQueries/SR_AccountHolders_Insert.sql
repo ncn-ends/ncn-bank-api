@@ -1,6 +1,10 @@
 -- insert into account_holder
 -- then use the primary key of account_holder as the foreign key for address insertion
 
+BEGIN;
+
+SELECT pg_advisory_xact_lock(2142616474639426747);
+
 CREATE OR REPLACE PROCEDURE SR_AccountHolders_Insert(
     sp_birthdate TEXT,
     sp_firstname TEXT,
@@ -15,7 +19,6 @@ CREATE OR REPLACE PROCEDURE SR_AccountHolders_Insert(
     sp_unit_number TEXT,
     sp_address_type address_type
 )
-language plpgsql
 AS $$
     BEGIN
         WITH account_holder_insertion AS (
@@ -54,4 +57,6 @@ AS $$
               sp_unit_number,
               sp_address_type::address_type
         FROM account_holder_insertion;
-    END;$$
+    END;$$ LANGUAGE plpgsql;
+
+COMMIT;

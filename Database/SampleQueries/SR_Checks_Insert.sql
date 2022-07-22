@@ -13,5 +13,3 @@ $$
         );
     END;
 $$ LANGUAGE plpgsql;
-
-CALL SR_Checks_Insert()

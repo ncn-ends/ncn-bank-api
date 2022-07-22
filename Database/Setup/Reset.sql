@@ -14,6 +14,7 @@ DROP TABLE IF EXISTS account_links CASCADE;
 -- TYPES --
 DROP TYPE IF EXISTS address_type CASCADE;
 DROP TYPE IF EXISTS transfer_type CASCADE;
+DROP TYPE IF EXISTS sr_address_insert_valuetype CASCADE;
 
 -- ROUTINES --
 DROP PROCEDURE IF EXISTS sr_accountholders_insert(sp_birthdate text, sp_firstname text, sp_middlename text, sp_lastname text, sp_phone_number varchar, sp_street text, sp_zipcode varchar, sp_city text, sp_state text, sp_country text, sp_unit_number text, sp_address_type address_type);

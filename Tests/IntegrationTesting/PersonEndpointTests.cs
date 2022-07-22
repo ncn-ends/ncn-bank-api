@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using DataAccess.Models;
 using FluentAssertions;
 using Microsoft.AspNetCore.Mvc.Testing;
+using Tests.Helpers;
 using Xunit;
 
 namespace Tests.IntegrationTesting;
@@ -16,14 +17,11 @@ public class PersonEndpointTests
     [Fact]
     public async Task TestPersonEndpoint()
     {
-        await using var app = new WebApplicationFactory<Program>();
-        using var client = app.CreateClient();
-
-        var response = await client.GetAsync("/api/persons");
+        var client = new HttpClientBroker("/api/persons");
+        var response = await client.SendGet<string>();
         response.EnsureSuccessStatusCode();
-        var contentString = await response.Content.ReadAsStringAsync();
-
-        var persons = JsonSerializer.Deserialize<List<PersonBO>>(contentString);
-        persons.Should().HaveCount(3);
+        
+        var content = await JsonMapper.MapHttpContentAs<List<PersonBO>>(response);
+        content.Should().HaveCount(3);
     }
 }

@@ -1,4 +1,4 @@
-CREATE TABLE cards (
+CREATE TABLE IF NOT EXISTS cards (
     card_id UUID PRIMARY KEY NOT NULL DEFAULT gen_random_uuid(),
     account_id UUID NOT NULL REFERENCES accounts(account_id),
     card_number NUMERIC(16, 0) NOT NULL DEFAULT gen_random_number(16),

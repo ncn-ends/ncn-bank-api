@@ -1,4 +1,4 @@
-CREATE TABLE transfers (
+CREATE TABLE IF NOT EXISTS transfers (
     transaction_id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     amount MONEY NOT NULL CHECK (amount > 0.00::MONEY),
     memo VARCHAR(250) NOT NULL DEFAULT '',

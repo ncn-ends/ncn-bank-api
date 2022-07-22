@@ -1,4 +1,3 @@
-using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
@@ -6,7 +5,7 @@ using DataAccess;
 using FluentAssertions;
 using Tests.Helpers;
 using Xunit;
-using static FileReader.FileReader;
+using static FileReaderLib.FileReader;
 
 namespace Tests.UnitTesting;
 
@@ -29,8 +28,11 @@ public class FileReaderTests
         foreach (var file in files)
         {
             var fileContents = File.ReadAllText(file.FilePath);
+            
             fileContents.Should().Contain("SELECT");
+            
             var res = await _dataAccess.ExecRawSql<TestSqlDto>(fileContents);
+            
             res.Should().HaveCount(1);
             res.FirstOrDefault().Should().NotBeNull();
             res.FirstOrDefault().msg.Should().BeOneOf(new[] {"hello", "world"});

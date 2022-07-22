@@ -1,4 +1,4 @@
-CREATE TABLE addresses (
+CREATE TABLE IF NOT EXISTS addresses (
     address_id SERIAL PRIMARY KEY NOT NULL,
     fk_account_holder_id UUID REFERENCES account_holders(account_holder_id),
     street TEXT NOT NULL,
