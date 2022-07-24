@@ -1,4 +1,3 @@
-using System.Diagnostics;
 using System.Threading.Tasks;
 using DataAccess;
 using DataAccess.Access;
@@ -6,7 +5,7 @@ using FluentAssertions;
 using Tests.Helpers;
 using Xunit;
 
-namespace Tests.UnitTesting;
+namespace Tests.UnitTesting.DataAccess;
 
 public class AccountTypeDataAccessTests
 {

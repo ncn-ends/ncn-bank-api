@@ -7,10 +7,16 @@
   <component name="ChangeListManager">
     <list default="true" id="da88e022-a72c-429b-b2d2-ab358463d5d5" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.bank-api/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.bank-api/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Api/Endpoints/AccountTypeEndpoints.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Api/Endpoints/AccountTypeEndpoints.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Tests/IntegrationTesting/AccountTypeEndpointTests.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/IntegrationTesting/AccountTypeEndpointTests.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Tests/IntegrationTesting/RandomizerTests.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/SampleTesting/RandomizerTests.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Tests/IntegrationTesting/RandomizerTestsOrdered.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/SampleTesting/RandomizerTestsOrdered.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Api/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Api/Program.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Database/Setup/Reset.sql" beforeDir="false" afterPath="$PROJECT_DIR$/Database/Setup/Reset.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Database/Subroutines/SR_Address_Insert.sql" beforeDir="false" afterPath="$PROJECT_DIR$/Database/Subroutines/SR_Address_Insert.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Tests/IntegrationTesting/AccountTypeEndpointTests.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/IntegrationTesting/Endpoints/AccountTypeEndpointTests.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Tests/IntegrationTesting/AddressEndpointTests.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/IntegrationTesting/Endpoints/AddressEndpointTests.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Tests/IntegrationTesting/HealthEndpointTests.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/IntegrationTesting/Endpoints/HealthEndpointTests.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Tests/IntegrationTesting/PersonEndpointTests.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/IntegrationTesting/Endpoints/PersonEndpointTests.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Tests/UnitTesting/DataAccess/AccountTypeDataAccessTests.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/UnitTesting/DataAccess/AccountTypeDataAccessTests.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Tests/UnitTesting/DataAccess/SetupAccessTests.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/UnitTesting/DataAccess/SetupAccessTests.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Tests/UnitTesting/DataAccess/SqlDataAccessTests.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/UnitTesting/DataAccess/SqlDataAccessTests.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -18,9 +24,6 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/038c1c69b9af41b7a0326e4e024508146e200/b3/ee982846/Enumerable.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/2a925edfe5584632978e98fd8509cdf4d7a8/42/9715ab2e/CollectionAttribute.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/34097e45bb354c36a678d3bc66df67d494dc00/8a/8f4300aa/PropertyInfo.cs" root0="SKIP_HIGHLIGHTING" />
@@ -33,7 +36,7 @@
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/ebb231c117958ac4656c73e1c1cc053d3e993dea5e30287e7c868be37642/XUnit2TestFramework.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/f5f6c4c45aa9784d53fe3f28bfc882a8e68bc2921f1e0ca59c4b72702afeb4/SqlMapper.Async.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/DataAccess/Access/Persons.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Tests/IntegrationTesting/PersonEndpointTests.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Tests/IntegrationTesting/Endpoints/PersonEndpointTests.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -48,16 +51,16 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "preferences.keymap",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.keymap&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RunManager" selected=".NET Launch Settings Profile.Api">
     <configuration name="Api" type="LaunchSettings" factoryName=".NET Launch Settings Profile">
       <option name="LAUNCH_PROFILE_PROJECT_FILE_PATH" value="$PROJECT_DIR$/Api/Api.csproj" />
@@ -104,7 +107,8 @@
       <workItem from="1658072447113" duration="19940000" />
       <workItem from="1658221779186" duration="4474000" />
       <workItem from="1658320525133" duration="6301000" />
-      <workItem from="1658352300865" duration="38754000" />
+      <workItem from="1658352300865" duration="40381000" />
+      <workItem from="1658692587153" duration="5480000" />
     </task>
     <servers />
   </component>

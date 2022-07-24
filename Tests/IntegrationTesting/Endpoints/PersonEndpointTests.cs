@@ -1,16 +1,11 @@
-using System;
 using System.Collections.Generic;
-using System.Net;
-using System.Net.Http.Json;
-using System.Text.Json;
 using System.Threading.Tasks;
 using DataAccess.Models;
 using FluentAssertions;
-using Microsoft.AspNetCore.Mvc.Testing;
 using Tests.Helpers;
 using Xunit;
 
-namespace Tests.IntegrationTesting;
+namespace Tests.IntegrationTesting.Endpoints;
 
 public class PersonEndpointTests
 {

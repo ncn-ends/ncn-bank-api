@@ -18,17 +18,13 @@ DROP TYPE IF EXISTS transfer_type CASCADE;
 -- RETURN TYPES --
 DROP TYPE IF EXISTS sr_address_insert_valuetype CASCADE;
 DROP TYPE IF EXISTS ReturnType_AccountTypes_GetAll CASCADE;
+DROP TYPE IF EXISTS returntype_accountholders_createone cascADE;
 -- ROUTINES --
 
-DROP FUNCTION IF EXISTS sr_address_insert(_street text, _zipcode text, _city text, _state text, _country text, _unit_number integer, _address_type text);
-DROP PROCEDURE IF EXISTS sr_initialdata_accounttypes();
 DROP FUNCTION IF EXISTS SR_AccountTypes_GetAll();
--- DROP PROCEDURE IF EXISTS sr_accountholders_insert(sp_birthdate text, sp_firstname text, sp_middlename text, sp_lastname text, sp_phone_number varchar, sp_street text, sp_zipcode varchar, sp_city text, sp_state text, sp_country text, sp_unit_number text, sp_address_type address_type);
--- DROP PROCEDURE IF EXISTS sr_accounts_insert(sp_account_holder_id uuid, sp_account_type_id integer);
--- DROP PROCEDURE IF EXISTS sr_cards_insert(_account_id uuid, _pin_number numeric);
--- DROP FUNCTION IF EXISTS sr_accountholders_getall();
--- DROP FUNCTION IF EXISTS sr_accounts_getall();
--- DROP FUNCTION IF EXISTS sr_address_insert(_street text, _zipcode text, _city text, _state text, _country text, _unit_number integer, _address_type text);
+DROP PROCEDURE IF EXISTS sr_initialdata_accounttypes();
+DROP FUNCTION IF EXISTS sr_address_insert(_street text, _zipcode text, _city text, _state text, _country text, _unit_number integer, _address_type text);
+DROP FUNCTION IF EXISTS sr_accountholders_createone(_birthdate text, _firstname text, _middlename text, _lastname text, _phone_number text, _job_title text, _expected_salary numeric);
 
 -- UTILITIES --
 DROP FUNCTION IF EXISTS gen_random_number(_digits integer) CASCADE;

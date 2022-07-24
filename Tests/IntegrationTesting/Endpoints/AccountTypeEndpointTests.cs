@@ -1,12 +1,11 @@
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Threading.Tasks;
 using DataAccess.Models;
 using FluentAssertions;
 using Tests.Helpers;
 using Xunit;
 
-namespace Tests.IntegrationTesting;
+namespace Tests.IntegrationTesting.Endpoints;
 
 public class AccountTypeEndpointTests
 {

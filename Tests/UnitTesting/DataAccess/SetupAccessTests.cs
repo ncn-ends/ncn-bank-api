@@ -3,7 +3,7 @@ using Tests.Helpers;
 using Xunit;
 using Xunit.Abstractions;
 
-namespace Tests.UnitTesting;
+namespace Tests.UnitTesting.DataAccess;
 
 
 public class SetupAccessTests

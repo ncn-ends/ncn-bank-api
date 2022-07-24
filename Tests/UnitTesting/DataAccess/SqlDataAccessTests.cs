@@ -1,14 +1,11 @@
 using System.Linq;
-using System.Reflection;
 using DataAccess;
 using FluentAssertions;
-using Microsoft.AspNetCore.Mvc.Testing;
-using Microsoft.Extensions.Configuration;
 using Tests.Helpers;
 using Xunit;
 using Xunit.Abstractions;
 
-namespace Tests.UnitTesting;
+namespace Tests.UnitTesting.DataAccess;
 
 class ExampleMappedObject
 {
