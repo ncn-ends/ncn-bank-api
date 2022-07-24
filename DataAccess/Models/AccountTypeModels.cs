@@ -26,7 +26,7 @@ public class AccountTypeBO
     public MonthlyFeeBO monthly_fee { get; set; } = new ();
     public decimal? overcharge_fee_amount { get; set; }
     public int holder_minimum_age { get; set; } = -1;
-    public TransferLimitBO transfer_limit { get; set; } = new ();
+    public TransferLimitBO? transfer_limit { get; set; }
     public decimal minimum_balance { get; set; } = -1;
     public decimal minimum_initial_deposit { get; set; } = -1;
     public decimal withdrawal_penalty_flat { get; set; } = -1;

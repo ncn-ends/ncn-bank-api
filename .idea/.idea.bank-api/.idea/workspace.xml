@@ -7,13 +7,10 @@
   <component name="ChangeListManager">
     <list default="true" id="da88e022-a72c-429b-b2d2-ab358463d5d5" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.bank-api/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.bank-api/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Api/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Api/Program.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DataAccess/Access/SetupAccess.cs" beforeDir="false" afterPath="$PROJECT_DIR$/DataAccess/Access/SetupAccess.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DataAccess/SqlDataAccess.cs" beforeDir="false" afterPath="$PROJECT_DIR$/DataAccess/SqlDataAccess.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Database/SampleQueries/SR_AccountTypes_GetAll.sql" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Database/Setup/InitialData_AccountTypes.sql" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Database/Setup/Reset.sql" beforeDir="false" afterPath="$PROJECT_DIR$/Database/Setup/Reset.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Tests/UnitTesting/DataAccess/SetupAccessTests.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/UnitTesting/DataAccess/SetupAccessTests.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Api/Endpoints/AccountTypeEndpoints.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Api/Endpoints/AccountTypeEndpoints.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Tests/IntegrationTesting/AccountTypeEndpointTests.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/IntegrationTesting/AccountTypeEndpointTests.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Tests/IntegrationTesting/RandomizerTests.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/SampleTesting/RandomizerTests.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Tests/IntegrationTesting/RandomizerTestsOrdered.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/SampleTesting/RandomizerTestsOrdered.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -107,7 +104,7 @@
       <workItem from="1658072447113" duration="19940000" />
       <workItem from="1658221779186" duration="4474000" />
       <workItem from="1658320525133" duration="6301000" />
-      <workItem from="1658352300865" duration="37800000" />
+      <workItem from="1658352300865" duration="38754000" />
     </task>
     <servers />
   </component>

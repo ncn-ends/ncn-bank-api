@@ -1,3 +1,4 @@
+using System.Diagnostics;
 using DataAccess.Access;
 
 namespace Api.Endpoints;

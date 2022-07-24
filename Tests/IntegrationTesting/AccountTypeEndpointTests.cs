@@ -1,6 +1,8 @@
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Threading.Tasks;
 using DataAccess.Models;
+using FluentAssertions;
 using Tests.Helpers;
 using Xunit;
 
@@ -14,6 +16,7 @@ public class AccountTypeEndpointTests
         var client = new HttpClientBroker("/api/accounttypes");
         var response = await client.SendGet<AccountTypeBO>();
         response.EnsureSuccessStatusCode();
-        Debugger.Break();
+        var content = await JsonMapper.MapHttpContentAs<List<AccountTypeBO>>(response);
+        content.Should().HaveCount(7);
     }
 }
