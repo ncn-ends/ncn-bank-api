@@ -14,6 +14,7 @@ builder.Services.AddSingleton<ISqlDataAccess, SqlDataAccess>();
 builder.Services.AddSingleton<ISetupAccess, SetupAccess>();
 builder.Services.AddSingleton<IPersonsAccess, PersonsAccess>();
 builder.Services.AddSingleton<IAddressAccess, AddressAccess>();
+builder.Services.AddSingleton<IAccountTypeAccess, AccountTypeAccess>();
 
 builder.Services.AddScoped<IValidator<PersonBO>, PersonValidator>();
 builder.Services.AddScoped<IPersonManager, PersonManager>();
@@ -25,7 +26,6 @@ using (var scope = app.Services.CreateScope())
     var services = scope.ServiceProvider;
     var setupAccess = services.GetRequiredService<ISetupAccess>();
     await setupAccess.EnsureDatabaseSetup();
-    // await dataAccess.ExecRawSql("CALL SR_CreateArbitraryTable();");
 }
 
 
@@ -44,5 +44,6 @@ app.UseHttpsRedirection();
 app.MapHealthEndpoints();
 app.MapPersonsEndpoints();
 app.MapAddressEndpoints();
+app.MapAccountTypeEndpoints();
 
 app.Run();

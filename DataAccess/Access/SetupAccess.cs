@@ -28,9 +28,9 @@ public class SetupAccess: ISetupAccess
         await SetupUtilities();
         await SetupTables();
         await SetupSubroutines();
-
+        await SetupInitialData();
     }
-
+    
     private async Task DatabaseDropAll()
     {
         var dbResetScriptPath = "Database/Setup/Reset.sql";
@@ -81,6 +81,14 @@ public class SetupAccess: ISetupAccess
         
         await ExecuteFiles(files, executionOrder);
     }
+    
+    private async Task SetupInitialData()
+    {
+        var dbInitialDataPath = "Database/Setup/CreateInitialData.sql";
+        var resetScriptFileContents = FileReader.ReadFile(dbInitialDataPath);
+        await ExecuteFile(resetScriptFileContents);
+    }
+
 
     private async Task ExecuteFiles(IEnumerable<FileData> files)
     {

@@ -7,37 +7,13 @@
   <component name="ChangeListManager">
     <list default="true" id="da88e022-a72c-429b-b2d2-ab358463d5d5" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.bank-api/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.bank-api/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Api/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Api/Program.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/DataAccess/Access/SetupAccess.cs" beforeDir="false" afterPath="$PROJECT_DIR$/DataAccess/Access/SetupAccess.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DataAccess/DataAccess.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/DataAccess/DataAccess.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DataAccess/SqlDataAccess.cs" beforeDir="false" afterPath="$PROJECT_DIR$/DataAccess/SqlDataAccess.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Database/SampleQueries/SR_AccountTypes_GetAll.sql" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Database/Setup/InitialData_AccountTypes.sql" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Database/Setup/Reset.sql" beforeDir="false" afterPath="$PROJECT_DIR$/Database/Setup/Reset.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Database/Subroutines/SR_AccountHolders_GetAll.sql" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Database/Subroutines/SR_AccountHolders_Insert.sql" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Database/Subroutines/SR_AccountTypes_GetAll.sql" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Database/Subroutines/SR_Accounts_GetAll.sql" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Database/Subroutines/SR_Accounts_Insert.sql" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Database/Subroutines/SR_Address_Insert.sql" beforeDir="false" afterPath="$PROJECT_DIR$/Database/Subroutines/SR_Address_Insert.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Database/Subroutines/SR_Cards_Insert.sql" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Database/Subroutines/SR_Checks_Insert.sql" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Database/Subroutines/SR_CreateArbitraryTable.sql" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Database/Tables/Table_account_holders.sql" beforeDir="false" afterPath="$PROJECT_DIR$/Database/Tables/Table_account_holders.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Database/Tables/Table_account_links.sql" beforeDir="false" afterPath="$PROJECT_DIR$/Database/Tables/Table_account_links.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Database/Tables/Table_account_types.sql" beforeDir="false" afterPath="$PROJECT_DIR$/Database/Tables/Table_account_types.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Database/Tables/Table_accounts.sql" beforeDir="false" afterPath="$PROJECT_DIR$/Database/Tables/Table_accounts.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Database/Tables/Table_addresses.sql" beforeDir="false" afterPath="$PROJECT_DIR$/Database/Tables/Table_addresses.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Database/Tables/Table_branches.sql" beforeDir="false" afterPath="$PROJECT_DIR$/Database/Tables/Table_branches.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Database/Tables/Table_cards.sql" beforeDir="false" afterPath="$PROJECT_DIR$/Database/Tables/Table_cards.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Database/Tables/Table_checks.sql" beforeDir="false" afterPath="$PROJECT_DIR$/Database/Tables/Table_checks.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Database/Tables/Table_monthly_fees.sql" beforeDir="false" afterPath="$PROJECT_DIR$/Database/Tables/Table_monthly_fees.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Database/Tables/Table_transfer_limits.sql" beforeDir="false" afterPath="$PROJECT_DIR$/Database/Tables/Table_transfer_limits.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Database/Tables/Table_transfers.sql" beforeDir="false" afterPath="$PROJECT_DIR$/Database/Tables/Table_transfers.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Database/Types/Enum_address_type.sql" beforeDir="false" afterPath="$PROJECT_DIR$/Database/Types/Enum_address_type.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Database/Types/Enum_transfer_type.sql" beforeDir="false" afterPath="$PROJECT_DIR$/Database/Types/Enum_transfer_type.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FileReader/File.cs" beforeDir="false" afterPath="$PROJECT_DIR$/FileReader/FileData.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FileReader/FileReader.cs" beforeDir="false" afterPath="$PROJECT_DIR$/FileReader/FileReader.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Tests/Helpers/HttpClientBroker.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/Helpers/HttpClientBroker.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Tests/IntegrationTesting/HealthEndpointTests.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/IntegrationTesting/HealthEndpointTests.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Tests/IntegrationTesting/PersonEndpointTests.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/IntegrationTesting/PersonEndpointTests.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Tests/UnitTesting/FileReader/FileReaderTests.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/UnitTesting/FileReader/FileReaderTests.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Tests/UnitTesting/DataAccess/SetupAccessTests.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/UnitTesting/DataAccess/SetupAccessTests.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -45,6 +21,9 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="HighlightingSettingsPerFile">
+    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///Dummy.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/038c1c69b9af41b7a0326e4e024508146e200/b3/ee982846/Enumerable.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/2a925edfe5584632978e98fd8509cdf4d7a8/42/9715ab2e/CollectionAttribute.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/34097e45bb354c36a678d3bc66df67d494dc00/8a/8f4300aa/PropertyInfo.cs" root0="SKIP_HIGHLIGHTING" />
@@ -54,6 +33,8 @@
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/b643966c808a41d1a192437cc081a17f1fb800/89/993cf6bf/BodyControl.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/137081ba02cc6db44ee2fbc1b73c2b61c15198e5aec96c8ae97f992a175/WebApplicationFactoryClientOptions.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/d290c8ecd1bd4a4859611fd1708df621d343e5335564e1fbd405610a3a5b342/WebApplicationFactory.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/ebb231c117958ac4656c73e1c1cc053d3e993dea5e30287e7c868be37642/XUnit2TestFramework.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/f5f6c4c45aa9784d53fe3f28bfc882a8e68bc2921f1e0ca59c4b72702afeb4/SqlMapper.Async.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/DataAccess/Access/Persons.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Tests/IntegrationTesting/PersonEndpointTests.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
@@ -126,7 +107,7 @@
       <workItem from="1658072447113" duration="19940000" />
       <workItem from="1658221779186" duration="4474000" />
       <workItem from="1658320525133" duration="6301000" />
-      <workItem from="1658352300865" duration="21412000" />
+      <workItem from="1658352300865" duration="37800000" />
     </task>
     <servers />
   </component>

@@ -1,4 +1,5 @@
 ﻿using System.Data;
+using System.Diagnostics;
 using Dapper;
 using DataAccess.Models;
 using Microsoft.Extensions.Configuration;
@@ -15,20 +16,23 @@ public interface ISqlDataAccess
     Task<IEnumerable<T>> ExecRawSql<T>(string query);
     Task<IEnumerable<T>> ExecRawSql<T, U>(string query, U parameters);
     Task ExecRawSql(string query);
+
+    Task<IEnumerable<T>> CallUdf<T>(
+        string storedProcedure);
 }
 
 public class SqlDataAccess : ISqlDataAccess
 {
     private readonly IConfiguration _config;
     private readonly string? _connectionString;
-    
+
 
     public SqlDataAccess(IConfiguration config)
     {
         _config = config;
-        
+
         /* azure ?? development */
-        _connectionString = _config["POSTGRESQLCONNSTR_Default"] 
+        _connectionString = _config["POSTGRESQLCONNSTR_Default"]
                             ?? _config.GetConnectionString("Default");
     }
 
@@ -43,8 +47,16 @@ public class SqlDataAccess : ISqlDataAccess
             parameters,
             commandType: CommandType.StoredProcedure);
     }
-    
-    
+
+    public async Task<IEnumerable<T>> CallUdf<T>(
+        string storedProcedure)
+    {
+        using IDbConnection connection = new NpgsqlConnection(_connectionString);
+
+        return await connection.QueryAsync<T>(
+            storedProcedure,
+            commandType: CommandType.StoredProcedure);
+    }
 
     public async Task<IEnumerable<T>> ExecRawSql<T>(string query)
     {
@@ -52,14 +64,14 @@ public class SqlDataAccess : ISqlDataAccess
 
         return await connection.QueryAsync<T>(query);
     }
-    
+
     public async Task<IEnumerable<T>> ExecRawSql<T, U>(string query, U parameters)
     {
         using IDbConnection connection = new NpgsqlConnection(_connectionString);
 
         return await connection.QueryAsync<T>(query, param: parameters);
     }
-    
+
     public async Task ExecRawSql(string query)
     {
         using IDbConnection connection = new NpgsqlConnection(_connectionString);
