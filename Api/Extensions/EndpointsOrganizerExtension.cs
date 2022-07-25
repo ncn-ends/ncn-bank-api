@@ -11,5 +11,6 @@ public static class EndpointsOrganizerExtension
         app.MapAddressEndpoints();
         app.MapAccountTypeEndpoints();
         app.MapHolderEndpoints();
+        app.MapAccountEndpoints();
     }
 }
