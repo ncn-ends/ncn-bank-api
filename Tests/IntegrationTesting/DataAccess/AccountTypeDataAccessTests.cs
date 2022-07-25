@@ -7,6 +7,7 @@ using Xunit;
 
 namespace Tests.UnitTesting.DataAccess;
 
+[Collection("SequentialTesting")]
 public class AccountTypeDataAccessTests
 {
     private readonly IAccountTypeAccess _accountTypeAccess;

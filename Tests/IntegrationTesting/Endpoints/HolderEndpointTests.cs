@@ -8,6 +8,7 @@ using Xunit;
 
 namespace Tests.IntegrationTesting.Endpoints;
 
+[Collection("SequentialTesting")]
 public class HolderEndpointTests
 {
     [Fact]

@@ -9,7 +9,7 @@ namespace Tests.Helpers;
 
 public class HttpClientBroker
 {
-    private readonly WebApplicationFactory<Program> _waf = new();
+    private readonly CustomWAF<Program> _waf = new();
     private readonly HttpClient _client;
     private readonly string _endpoint;
     

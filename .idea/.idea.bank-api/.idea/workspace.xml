@@ -7,15 +7,8 @@
   <component name="ChangeListManager">
     <list default="true" id="da88e022-a72c-429b-b2d2-ab358463d5d5" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.bank-api/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.bank-api/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Api/Endpoints/HolderEndpoints.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Api/Endpoints/HolderEndpoints.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DataAccess/Access/AccountHolderAccess.cs" beforeDir="false" afterPath="$PROJECT_DIR$/DataAccess/Access/AccountHolderAccess.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Database/Setup/Reset.sql" beforeDir="false" afterPath="$PROJECT_DIR$/Database/Setup/Reset.sql" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Tests/Helpers/HttpClientBroker.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/Helpers/HttpClientBroker.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Tests/IntegrationTesting/Endpoints/HolderEndpointTests.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/IntegrationTesting/Endpoints/HolderEndpointTests.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Tests/UnitTesting/DataAccess/AccountHolderDataAccessTests.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/IntegrationTesting/DataAccess/AccountHolderDataAccessTests.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Tests/UnitTesting/DataAccess/AccountTypeDataAccessTests.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/IntegrationTesting/DataAccess/AccountTypeDataAccessTests.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Tests/UnitTesting/DataAccess/SetupAccessTests.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/IntegrationTesting/DataAccess/SetupAccessTests.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Tests/UnitTesting/DataAccess/SqlDataAccessTests.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/IntegrationTesting/DataAccess/SqlDataAccessTests.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Tests/SampleTesting/RandomizerTestsOrdered.cs" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -107,7 +100,7 @@
       <workItem from="1658221779186" duration="4474000" />
       <workItem from="1658320525133" duration="6301000" />
       <workItem from="1658352300865" duration="40381000" />
-      <workItem from="1658692587153" duration="9676000" />
+      <workItem from="1658692587153" duration="12775000" />
     </task>
     <servers />
   </component>

@@ -11,6 +11,7 @@ using Xunit.Abstractions;
 
 namespace Tests.UnitTesting.DataAccess;
 
+[Collection("SequentialTesting")]
 public class AccountHolderDataAccessTests
 {
     private readonly IAccountHolderAccess _accountHolderAccess;
