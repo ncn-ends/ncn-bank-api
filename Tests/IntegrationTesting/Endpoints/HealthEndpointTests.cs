@@ -11,7 +11,7 @@ public class HealthEndpointTests
     public async Task TestPingEndpoint()
     {
         var client = new HttpClientBroker("/health/ping");
-        var response = await client.SendGet<string>();
+        var response = await client.SendGet();
         response.EnsureSuccessStatusCode();
 
         var content = await JsonMapper.MapHttpContentAs<string>(response);

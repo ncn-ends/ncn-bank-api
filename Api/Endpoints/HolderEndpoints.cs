@@ -1,4 +1,5 @@
 using System.Diagnostics;
+using DataAccess.Access;
 using DataAccess.Models;
 using Microsoft.AspNetCore.Mvc;
 
@@ -13,15 +14,28 @@ public static class HolderEndpoints
     }
 
     private static async Task<IResult> CreateAccountHolder(
+        IAccountHolderAccess holderAccess,
         HttpRequest req, 
-        [FromBody] AccountHolderDTO holderInfo
-    ) {
-        Debugger.Break();
-        return Results.Ok();
+        [FromBody] AccountHolderDTO holderDto
+    )
+    {
+        var insertedId = await holderAccess.CreateOne(holderDto);
+        
+        if (insertedId is null) Results.BadRequest();
+        
+        return Results.Ok(new
+        {
+            account_holder_id = insertedId    
+        });
     }
 
-    private static async Task<IResult> GetAccountHolderById(string holderId)
+    private static async Task<IResult> GetAccountHolderById(
+        IAccountHolderAccess holderAccess,
+        string holderId
+    )
     {
-        return Results.Ok();
+        var holder = await holderAccess.GetOne((Guid.Parse((ReadOnlySpan<char>) holderId)));
+        if (holder is null) return Results.BadRequest();
+        return Results.Ok(holder);
     }
 }

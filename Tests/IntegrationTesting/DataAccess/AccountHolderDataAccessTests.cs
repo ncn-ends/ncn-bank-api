@@ -1,4 +1,5 @@
 using System;
+using System.Diagnostics;
 using System.Threading.Tasks;
 using DataAccess;
 using DataAccess.Access;
@@ -6,12 +7,14 @@ using DataAccess.Models;
 using FluentAssertions;
 using Tests.Helpers;
 using Xunit;
+using Xunit.Abstractions;
 
 namespace Tests.UnitTesting.DataAccess;
 
 public class AccountHolderDataAccessTests
 {
     private readonly IAccountHolderAccess _accountHolderAccess;
+    
     public AccountHolderDataAccessTests()
     {
         var dataAccess = new SqlDataAccess(TestingConfig.GetConfig());
@@ -19,8 +22,9 @@ public class AccountHolderDataAccessTests
     }
 
     [Fact]
-    public async Task AccountHolderInsertion()
+    public async Task AccountHolderCRUD()
     {
+        
         var sampleAccountHolderData = new AccountHolderDTO
         {
             birthdate = new DateTime(),
@@ -34,5 +38,15 @@ public class AccountHolderDataAccessTests
         var holderInsertionGuid = await _accountHolderAccess.CreateOne(sampleAccountHolderData);
         holderInsertionGuid.Should().NotBeNull();
         holderInsertionGuid.Should().NotBeEmpty();
-    } 
+
+        var holder = await _accountHolderAccess.GetOne(holderInsertionGuid.Value);
+        holder.Should().NotBeNull();
+        holder.birthdate.Should().Be(sampleAccountHolderData.birthdate);
+        holder.firstname.Should().Be(sampleAccountHolderData.firstname);
+        holder.middlename.Should().Be(sampleAccountHolderData.middlename);
+        holder.lastname.Should().Be(sampleAccountHolderData.lastname);
+        holder.phone_number.Should().Be(sampleAccountHolderData.phone_number);
+        holder.job_title.Should().Be(sampleAccountHolderData.job_title);
+        holder.expected_salary.Should().Be(sampleAccountHolderData.expected_salary);
+    }
 }

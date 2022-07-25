@@ -32,8 +32,8 @@ public class HttpClientBroker
         return await _client.PostAsync(_endpoint, body);
     }
     
-    public async Task<HttpResponseMessage> SendGet<T>()
+    public async Task<HttpResponseMessage> SendGet(string route = "")
     {
-        return await _client.GetAsync(_endpoint);
+        return await _client.GetAsync(_endpoint + route);
     }
 }

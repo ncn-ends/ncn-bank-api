@@ -13,7 +13,7 @@ public class PersonEndpointTests
     public async Task TestPersonEndpoint()
     {
         var client = new HttpClientBroker("/api/persons");
-        var response = await client.SendGet<string>();
+        var response = await client.SendGet();
         response.EnsureSuccessStatusCode();
         
         var content = await JsonMapper.MapHttpContentAs<List<PersonBO>>(response);

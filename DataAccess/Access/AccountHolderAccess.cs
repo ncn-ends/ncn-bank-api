@@ -5,7 +5,7 @@ namespace DataAccess.Access;
 
 public interface IAccountHolderAccess
 {
-    Task<AccountHolderBO> GetOne();
+    Task<AccountHolderBO?> GetOne(Guid holderId);
     Task<Guid?> CreateOne(AccountHolderDTO holderDto);
 }
 
@@ -18,9 +18,13 @@ public class AccountHolderAccess : IAccountHolderAccess
         _dataAccess = dataAccess;
     }
 
-    public async Task<AccountHolderBO> GetOne()
+    public async Task<AccountHolderBO?> GetOne(Guid holderId)
     {
-        return new AccountHolderBO();
+        var holder = await _dataAccess.CallUdf<AccountHolderBO, dynamic>("sr_accountholders_getone", new
+        {
+            _account_holder_id = holderId
+        });
+        return holder.FirstOrDefault();
     }
 
     public async Task<Guid?> CreateOne(AccountHolderDTO holderDto)

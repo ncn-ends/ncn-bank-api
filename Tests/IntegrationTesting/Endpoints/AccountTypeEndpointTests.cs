@@ -13,7 +13,7 @@ public class AccountTypeEndpointTests
     public async Task  Get_GetAll()
     {
         var client = new HttpClientBroker("/api/accounttypes");
-        var response = await client.SendGet<AccountTypeBO>();
+        var response = await client.SendGet();
         response.EnsureSuccessStatusCode();
         var content = await JsonMapper.MapHttpContentAs<List<AccountTypeBO>>(response);
         content.Should().HaveCount(7);
