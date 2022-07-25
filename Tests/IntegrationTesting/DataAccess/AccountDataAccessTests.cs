@@ -56,14 +56,11 @@ public class AccountDataAccessTests
         accountInfo.account_number.ToString().Length.Should().Be(9);
         accountInfo.routing_number.ToString().Length.Should().Be(9);
         //
-        // var holder = await _accountAccess.GetOne(holderInsertionGuid.Value);
-        // holder.Should().NotBeNull();
-        // holder.birthdate.Should().Be(sampleAccountHolderData.birthdate);
-        // holder.firstname.Should().Be(sampleAccountHolderData.firstname);
-        // holder.middlename.Should().Be(sampleAccountHolderData.middlename);
-        // holder.lastname.Should().Be(sampleAccountHolderData.lastname);
-        // holder.phone_number.Should().Be(sampleAccountHolderData.phone_number);
-        // holder.job_title.Should().Be(sampleAccountHolderData.job_title);
-        // holder.expected_salary.Should().Be(sampleAccountHolderData.expected_salary);
+        var holder = await _accountAccess.GetOne(accountInfo.account_id);
+        holder.Should().NotBeNull();
+        holder.account_holder_id.Should().NotBeEmpty();
+        holder.account_id.Should().NotBeEmpty();
+        holder.account_number.Should().NotBe(-1);
+        holder.routing_number.Should().NotBe(-1);
     }
 }

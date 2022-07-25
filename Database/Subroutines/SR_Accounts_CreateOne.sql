@@ -17,13 +17,12 @@ BEGIN
         FROM account_types
         WHERE account_types.name_internal = _account_type_key
     )
-    INSERT INTO accounts (account_holder_id, account_type_id, routing_number, account_number, balance)
+    INSERT INTO accounts (account_holder_id, account_type_id, routing_number, account_number)
     VALUES (
         _account_holder_id,
         (SELECT account_type.account_type_id from ACCOUNT_TYPE),
         gen_random_number(9)::numeric(9, 0),
-        gen_random_number(9)::numeric(9, 0),
-        _initial_deposit::MONEY
+        gen_random_number(9)::numeric(9, 0)
     )
     RETURNING
         accounts.account_id,

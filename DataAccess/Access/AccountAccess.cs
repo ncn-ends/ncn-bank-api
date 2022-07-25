@@ -6,6 +6,7 @@ namespace DataAccess.Access;
 public interface IAccountAccess
 {
     Task<AccountInsertionReturn?> CreateOne(AccountFormDTO accountForm);
+    Task<AccountBO?> GetOne(Guid accountId);
 }
 
 public class AccountAccess : IAccountAccess
@@ -19,6 +20,7 @@ public class AccountAccess : IAccountAccess
 
     public async Task<AccountInsertionReturn?> CreateOne(AccountFormDTO accountForm)
     {
+        // toDO: IMPLEMENT database code for initial deposit once creating transfer table
         var createdAccount = await _dataAccess.CallUdf<AccountInsertionReturn, dynamic>("SR_Accounts_CreateOne", new
         {
             _account_holder_id = accountForm.account_holder_id,
@@ -26,5 +28,15 @@ public class AccountAccess : IAccountAccess
             _initial_deposit = accountForm.initial_deposit
         });
         return createdAccount.FirstOrDefault();
+    }
+
+    public async Task<AccountBO?> GetOne(Guid accountId)
+    {
+        var fetchedAccount = await _dataAccess.CallUdf<AccountBO, dynamic>("SR_Accounts_GetOne", new
+        {
+            _account_id = accountId
+        });
+
+        return fetchedAccount.FirstOrDefault();
     }
 }
