@@ -4,6 +4,7 @@ using Api.Helpers;
 using DataAccess;
 using DataAccess.Access;
 using DataAccess.Models;
+using DataAccess.Setup;
 using FluentValidation;
 using Microsoft.AspNetCore.Identity;
 

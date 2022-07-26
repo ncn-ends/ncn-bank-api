@@ -13,11 +13,13 @@ public static class AccountEndpoints
     }
 
     private static async Task<IResult> CreateNewAccount(
-        IAccountTypeAccess access,
+        IAccountAccess access,
         [FromBody] AccountFormDTO accountInfoForm
     )
     {
-        // TODO: validate that accountInfoForm has no null fields
-        return Results.Ok();
+        Debugger.Break();
+        var createdAccount = await access.CreateOne(accountInfoForm);
+        if (createdAccount is null) return Results.BadRequest();
+        return Results.Ok(createdAccount);
     }
 }

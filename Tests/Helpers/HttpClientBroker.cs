@@ -1,3 +1,4 @@
+using System;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
@@ -9,13 +10,20 @@ namespace Tests.Helpers;
 
 public class HttpClientBroker
 {
-    private readonly CustomWAF<Program> _waf = new();
     private readonly HttpClient _client;
     private readonly string _endpoint;
     
-    public HttpClientBroker(string endpoint)
+    public HttpClientBroker(string endpoint, HttpClient? injectedClient = null)
     {
-        _client = _waf.CreateClient();
+        if (injectedClient is null)
+        {
+            var waf = new CustomWAF<Program>();
+            _client = waf.CreateClient();
+        }
+        else
+        {
+            _client = injectedClient;
+        }
         
         _endpoint = endpoint;
         

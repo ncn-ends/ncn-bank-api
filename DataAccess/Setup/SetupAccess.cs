@@ -1,8 +1,7 @@
-using System.Diagnostics;
+using DataAccess.Access;
 using FileReaderLib;
-using System.IO;
 
-namespace DataAccess.Access;
+namespace DataAccess.Setup;
 
 public interface ISetupAccess
 {
@@ -12,15 +11,18 @@ public interface ISetupAccess
 public class SetupAccess: ISetupAccess
 {
     private readonly ISqlDataAccess _dataAccess;
+    private readonly IAccountHolderAccess _accountHolderAccess;
 
-    public SetupAccess(ISqlDataAccess dataAccess)
+    public SetupAccess(ISqlDataAccess dataAccess, IAccountHolderAccess accountHolderAccess)
     {
         _dataAccess = dataAccess;
+        _accountHolderAccess = accountHolderAccess;
     }
 
     public async Task EnsureDatabaseSetup()
     {
-        if (Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") == "Development")
+        var isDevEnv = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") == "Development";
+        if (isDevEnv)
         {
             await DatabaseDropAll();
         }
@@ -28,7 +30,12 @@ public class SetupAccess: ISetupAccess
         await SetupUtilities();
         await SetupTables();
         await SetupSubroutines();
-        await SetupInitialData();
+        await SetupRequiredInitialData();
+
+        if (isDevEnv)
+        {
+            await SetupFakeInitialData();
+        }
     }
     
     private async Task DatabaseDropAll()
@@ -82,11 +89,16 @@ public class SetupAccess: ISetupAccess
         await ExecuteFiles(files, executionOrder);
     }
     
-    private async Task SetupInitialData()
+    private async Task SetupRequiredInitialData()
     {
         var dbInitialDataPath = "Database/Setup/CreateInitialData.sql";
         var resetScriptFileContents = FileReader.ReadFile(dbInitialDataPath);
         await ExecuteFile(resetScriptFileContents);
+    }
+    
+    private async Task SetupFakeInitialData()
+    {
+        await _accountHolderAccess.CreateOne(FakeInitialData.SampleAccountHolder1);
     }
 
 

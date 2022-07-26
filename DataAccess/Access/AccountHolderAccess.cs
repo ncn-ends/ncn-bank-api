@@ -7,6 +7,7 @@ public interface IAccountHolderAccess
 {
     Task<AccountHolderBO?> GetOne(Guid holderId);
     Task<Guid?> CreateOne(AccountHolderDTO holderDto);
+    Task<AccountHolderBO?> GetRandomOne();
 }
 
 public class AccountHolderAccess : IAccountHolderAccess
@@ -45,5 +46,12 @@ public class AccountHolderAccess : IAccountHolderAccess
         var first = holderCreateUdfRes.FirstOrDefault();
         if (first is null) return null;
         return first.account_holder_id;
+    }
+
+    // TODO: untested
+    public async Task<AccountHolderBO?> GetRandomOne()
+    {
+        var randomHolder = await _dataAccess.CallUdf<AccountHolderBO>("sr_accountholders_getrandomone");
+        return randomHolder.FirstOrDefault();
     }
 }

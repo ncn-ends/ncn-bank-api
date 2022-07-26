@@ -1,5 +1,6 @@
 using DataAccess;
 using DataAccess.Access;
+using DataAccess.Setup;
 
 namespace Api.Extensions;
 
