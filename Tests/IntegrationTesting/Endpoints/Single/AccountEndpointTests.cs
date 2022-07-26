@@ -40,12 +40,23 @@ public class AccountEndpointTests
         postResponse.EnsureSuccessStatusCode();
 
         var postContent = await JsonMapper.MapHttpContentAs<AccountInsertionReturn>(postResponse);
-        Debugger.Break();
 
-        //
-        // postContent.Should().NotBeNull();
-        // postContent.account_holder_id.Should().NotBeEmpty();
-        // postContent.account_holder_id.ToString().Should().Contain("-", Exactly.Times(4));
+        postContent.Should().NotBeNull();
+        postContent.account_id.Should().NotBeEmpty();
+        postContent.routing_number.ToString().Length.Should().Be(9);
+        postContent.account_number.ToString().Length.Should().Be(9);
+
+        var getResponse = await client.SendGet(route: $"/{postContent.account_id.ToString()}");
+        getResponse.EnsureSuccessStatusCode();
+        var getContent = await JsonMapper.MapHttpContentAs<AccountBO>(getResponse);
+
+        getContent.Should().NotBeNull();
+        getContent.account_holder_id.Should().NotBeEmpty();
+        getContent.account_id.Should().NotBeEmpty();
+        getContent.account_number.ToString().Length.Should().Be(9);
+        getContent.routing_number.ToString().Length.Should().Be(9);
+        getContent.account_type_id.Should().BeInRange(1, 7);
+
 
         // var holderResponse = await client.SendGet(route: $"/{postContent.account_holder_id}");
         // var getContent = await JsonMapper.MapHttpContentAs<AccountHolderBO>(holderResponse);

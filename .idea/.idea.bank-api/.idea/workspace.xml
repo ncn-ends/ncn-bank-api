@@ -8,18 +8,7 @@
     <list default="true" id="da88e022-a72c-429b-b2d2-ab358463d5d5" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.bank-api/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.bank-api/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Api/Endpoints/AccountEndpoints.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Api/Endpoints/AccountEndpoints.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Api/Extensions/DataAccessOrganizerExtension.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Api/Extensions/DataAccessOrganizerExtension.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Api/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Api/Program.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DataAccess/Access/AccountHolderAccess.cs" beforeDir="false" afterPath="$PROJECT_DIR$/DataAccess/Access/AccountHolderAccess.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DataAccess/Access/SetupAccess.cs" beforeDir="false" afterPath="$PROJECT_DIR$/DataAccess/Setup/SetupAccess.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Database/Setup/Reset.sql" beforeDir="false" afterPath="$PROJECT_DIR$/Database/Setup/Reset.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Database/Subroutines/SR_Accounts_CreateOne.sql" beforeDir="false" afterPath="$PROJECT_DIR$/Database/Subroutines/SR_Accounts_CreateOne.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Tests/Helpers/HttpClientBroker.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/Helpers/HttpClientBroker.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Tests/IntegrationTesting/Endpoints/AccountTypeEndpointTests.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/IntegrationTesting/Endpoints/Single/AccountTypeEndpointTests.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Tests/IntegrationTesting/Endpoints/AddressEndpointTests.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/IntegrationTesting/Endpoints/Single/AddressEndpointTests.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Tests/IntegrationTesting/Endpoints/HealthEndpointTests.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/IntegrationTesting/Endpoints/Single/HealthEndpointTests.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Tests/IntegrationTesting/Endpoints/HolderEndpointTests.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/IntegrationTesting/Endpoints/Single/HolderEndpointTests.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Tests/IntegrationTesting/Endpoints/PersonEndpointTests.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/IntegrationTesting/Endpoints/Single/PersonEndpointTests.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Tests/IntegrationTesting/Endpoints/Single/AccountEndpointTests.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/IntegrationTesting/Endpoints/Single/AccountEndpointTests.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -121,7 +110,7 @@
       <workItem from="1658352300865" duration="40381000" />
       <workItem from="1658692587153" duration="16518000" />
       <workItem from="1658764877525" duration="4047000" />
-      <workItem from="1658773077795" duration="8087000" />
+      <workItem from="1658773077795" duration="10854000" />
     </task>
     <servers />
   </component>

@@ -10,6 +10,7 @@ public static class AccountEndpoints
     public static void MapAccountEndpoints(this WebApplication app)
     {
         app.MapPost("/api/account", CreateNewAccount);
+        app.MapGet("/api/account/{accountId}", GetAccountById);
     }
 
     private static async Task<IResult> CreateNewAccount(
@@ -17,9 +18,18 @@ public static class AccountEndpoints
         [FromBody] AccountFormDTO accountInfoForm
     )
     {
-        Debugger.Break();
         var createdAccount = await access.CreateOne(accountInfoForm);
         if (createdAccount is null) return Results.BadRequest();
         return Results.Ok(createdAccount);
+    }
+    
+    private static async Task<IResult> GetAccountById(
+        Guid accountId,
+        IAccountAccess access
+    )
+    {
+        var fetchedAccount = await access.GetOne(accountId);
+        if (fetchedAccount is null) return Results.BadRequest();
+        return Results.Ok(fetchedAccount);
     }
 }
