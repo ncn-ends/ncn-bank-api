@@ -1,15 +1,11 @@
-CREATE OR REPLACE PROCEDURE SR_Checks_Insert(
-    _account_id UUID,
-    _pin_number numeric(4,0)
-) AS
-$$
-    BEGIN
-        INSERT INTO checks (
-            account_id,
-            pin_number
-        ) VALUES (
-            _account_id,
-            _pin_number
-        );
-    END;
-$$ LANGUAGE plpgsql;
+CREATE OR REPLACE PROCEDURE sr_checks_insert(
+    _account_id UUID
+)
+LANGUAGE plpgsql AS $$
+BEGIN
+    INSERT INTO cards (account_id, card_number, csv, pin_number, expiration)
+    VALUES (
+        _account_id,
+        now() + interval '54 month'
+    );
+END;$$

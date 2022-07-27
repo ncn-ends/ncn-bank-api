@@ -16,5 +16,6 @@ public static class DataAccessOrganizerExtension
         services.AddSingleton<IAccountHolderAccess, AccountHolderAccess>();
         services.AddSingleton<IAccountAccess, AccountAccess>();
         services.AddSingleton<ICardAccess, CardAccess>();
+        services.AddSingleton<ICheckAccess, CheckAccess>();
     }
 }
