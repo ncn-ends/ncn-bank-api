@@ -34,7 +34,6 @@ public class AccountTypeAccess : IAccountTypeAccess
             splitOn: "account_type_id,transfer_limit_id,monthly_fee_id",
             map: (accountType, transferLimit, monthlyFee) =>
             {
-                
                 accountType.monthly_fee = monthlyFee;
                 accountType.transfer_limit = transferLimit;
                 return accountType;

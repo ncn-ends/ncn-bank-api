@@ -28,7 +28,7 @@ public static class AccountEndpoints
         IAccountAccess access
     )
     {
-        var fetchedAccount = await access.GetOne(accountId);
+        var fetchedAccount = await access.GetOneById(accountId);
         if (fetchedAccount is null) return Results.BadRequest();
         return Results.Ok(fetchedAccount);
     }

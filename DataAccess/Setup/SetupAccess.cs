@@ -12,11 +12,15 @@ public class SetupAccess: ISetupAccess
 {
     private readonly ISqlDataAccess _dataAccess;
     private readonly IAccountHolderAccess _accountHolderAccess;
+    private readonly IAccountAccess _accountAccess;
 
-    public SetupAccess(ISqlDataAccess dataAccess, IAccountHolderAccess accountHolderAccess)
+    public SetupAccess(ISqlDataAccess dataAccess, 
+        IAccountHolderAccess accountHolderAccess,
+        IAccountAccess accountAccess)
     {
         _dataAccess = dataAccess;
         _accountHolderAccess = accountHolderAccess;
+        _accountAccess = accountAccess;
     }
 
     public async Task EnsureDatabaseSetup()
@@ -98,7 +102,10 @@ public class SetupAccess: ISetupAccess
     
     private async Task SetupFakeInitialData()
     {
-        await _accountHolderAccess.CreateOne(FakeInitialData.SampleAccountHolder1);
+        var holderId = await _accountHolderAccess.CreateOne(FakeInitialData.SampleAccountHolder1);
+        if (holderId is null)
+            throw new Exception("When creating fake initial data for account holder, it returned null");
+        await _accountAccess.CreateOne(FakeInitialData.SampleAccount1(holderId.Value));
     }
 
 

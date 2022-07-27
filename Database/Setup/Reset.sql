@@ -20,6 +20,7 @@ DROP TYPE IF EXISTS sr_address_insert_valuetype CASCADE;
 DROP TYPE IF EXISTS ReturnType_AccountTypes_GetAll CASCADE;
 DROP TYPE IF EXISTS returntype_accountholders_createone cascADE;
 DROP TYPE IF EXISTS returntype_accounts_createone cascADE;
+DROP TYPE IF EXISTS ReturnType_Cards_CreateOne CASCADE;
 
 -- ROUTINES --
 DROP FUNCTION IF EXISTS SR_AccountTypes_GetAll();
@@ -30,6 +31,8 @@ DROP FUNCTION IF EXISTS sr_accountholders_GETone(_account_holder_id uuid);
 DROP FUNCTION IF EXISTS sr_accountholders_GETRandomone();
 DROP FUNCTION IF EXISTS sr_accounts_createone(_account_holder_id uuid, _account_type_key text, _initial_deposit numeric);
 DROP FUNCTION IF EXISTS sr_accounts_getone(_account_id uuid);
+DROP FUNCTION if exists sr_accounts_getrandomone();
+DROP FUNCTION IF EXISTS sr_cards_insert(_account_id uuid, _pin_number numeric);
 
 -- UTILITIES --
 DROP FUNCTION IF EXISTS gen_random_number(_digits integer) CASCADE;

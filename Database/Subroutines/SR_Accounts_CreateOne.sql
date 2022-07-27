@@ -30,13 +30,3 @@ BEGIN
         accounts.account_number;
 END;
 $$ LANGUAGE plpgsql;
-
--- SELECT * FROM sr_accounts_createone(
---     '4f62b27c-379a-4152-99b1-2887f26bd626',
---     'stu_ca',
---     1000000
--- );
-
--- SELECT * FROM accounts;
-
-SELECT * FROM account_holders;

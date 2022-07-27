@@ -1,14 +1,10 @@
 using System;
-using System.Collections.Generic;
-using System.Diagnostics;
 using System.Threading.Tasks;
-using DataAccess;
 using DataAccess.Access;
 using DataAccess.Models;
 using DataAccess.Setup;
 using FluentAssertions;
 using Microsoft.Extensions.DependencyInjection;
-using Moq.Language.Flow;
 using Tests.Helpers;
 using Xunit;
 
@@ -17,7 +13,6 @@ namespace Tests.IntegrationTesting.Endpoints;
 [Collection("SequentialTesting")]
 public class AccountEndpointTests
 {
-
     [Fact]
     public async Task TestAccountHolderEndpoints()
     {
@@ -56,18 +51,5 @@ public class AccountEndpointTests
         getContent.account_number.ToString().Length.Should().Be(9);
         getContent.routing_number.ToString().Length.Should().Be(9);
         getContent.account_type_id.Should().BeInRange(1, 7);
-
-
-        // var holderResponse = await client.SendGet(route: $"/{postContent.account_holder_id}");
-        // var getContent = await JsonMapper.MapHttpContentAs<AccountHolderBO>(holderResponse);
-        // getContent.Should().NotBeNull();
-        // getContent.account_holder_id.Should().Be(postContent.account_holder_id);
-        // getContent.birthdate.Should().Be(sampleAccountHolderData.birthdate);
-        // getContent.firstname.Should().Be(sampleAccountHolderData.firstname);
-        // getContent.middlename.Should().Be(sampleAccountHolderData.middlename);
-        // getContent.lastname.Should().Be(sampleAccountHolderData.lastname);
-        // getContent.phone_number.Should().Be(sampleAccountHolderData.phone_number);
-        // getContent.job_title.Should().Be(sampleAccountHolderData.job_title);
-        // getContent.expected_salary.Should().Be(sampleAccountHolderData.expected_salary);
     }
 }

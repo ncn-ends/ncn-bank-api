@@ -27,9 +27,8 @@ public class AccountDataAccessTests
     }
 
     [Fact]
-    public async Task AccountCRUD()
+    public async Task AccountCRUDTests()
     {
-        
         var sampleAccountHolderData = new AccountHolderDTO
         {
             birthdate = new DateTime(),
@@ -41,7 +40,7 @@ public class AccountDataAccessTests
             expected_salary = 1000000
         };
         var holderInsertionGuid = await _accountHolderAccess.CreateOne(sampleAccountHolderData);
-        
+
         if (holderInsertionGuid is null) throw new Exception("AccountHolder creation insertion failed. Re-run those tests.");
         
         var sampleAccountForm = new AccountFormDTO
@@ -55,8 +54,8 @@ public class AccountDataAccessTests
         accountInfo.account_id.Should().NotBeEmpty();
         accountInfo.account_number.ToString().Length.Should().Be(9);
         accountInfo.routing_number.ToString().Length.Should().Be(9);
-        //
-        var holder = await _accountAccess.GetOne(accountInfo.account_id);
+
+        var holder = await _accountAccess.GetOneById(accountInfo.account_id);
         holder.Should().NotBeNull();
         holder.account_holder_id.Should().NotBeEmpty();
         holder.account_id.Should().NotBeEmpty();

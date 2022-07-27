@@ -6,7 +6,8 @@ namespace DataAccess.Access;
 public interface IAccountAccess
 {
     Task<AccountInsertionReturn?> CreateOne(AccountFormDTO accountForm);
-    Task<AccountBO?> GetOne(Guid accountId);
+    Task<AccountBO?> GetOneById(Guid accountId);
+    Task<AccountBO?> GetRandomOne();
 }
 
 public class AccountAccess : IAccountAccess
@@ -30,12 +31,20 @@ public class AccountAccess : IAccountAccess
         return createdAccount.FirstOrDefault();
     }
 
-    public async Task<AccountBO?> GetOne(Guid accountId)
+    public async Task<AccountBO?> GetOneById(Guid accountId)
     {
         var fetchedAccount = await _dataAccess.CallUdf<AccountBO, dynamic>("SR_Accounts_GetOne", new
         {
             _account_id = accountId
         });
+
+        return fetchedAccount.FirstOrDefault();
+    }
+    
+    // TODO: untested
+    public async Task<AccountBO?> GetRandomOne()
+    {
+        var fetchedAccount = await _dataAccess.CallUdf<AccountBO>("SR_Accounts_GetRandomOne");
 
         return fetchedAccount.FirstOrDefault();
     }

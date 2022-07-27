@@ -23,7 +23,7 @@ public class AccountHolderDataAccessTests
     }
 
     [Fact]
-    public async Task AccountHolderCRUD()
+    public async Task AccountHolderCRUDTests()
     {
         
         var sampleAccountHolderData = new AccountHolderDTO
