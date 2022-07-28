@@ -18,4 +18,6 @@ public class CheckInsertionReturn
     public string? account_number { get; set; }
     public string? routing_number { get; set; }
     public DateTime? expiration { get; set; }
+    public bool deactivated { get; set; }
+    public DateTime? created_at { get; set; }
 }

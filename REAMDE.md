@@ -1,5 +1,22 @@
 # ncn-bank-api
 
+## Introduction
+
+What is this?  
+This is a REST API meant to represent a bank system as closely as possible. The only differences are:
+- No authentication
+- No government security compliance
+- No email/phone alerts (although a placeholder is coded for future reference)  
+  
+This project was made with the following goals:
+   - Test myself in seeing how fast I can build an API without cutting corners on testing, architecture, or clean code
+   - Experiment with [Dapper](https://github.com/DapperLib/Dapper) and raw SQL over using a query builder ORM like EF Core
+   - Practice my skills at C#, ASP.NET, and SQL
+   - Improve at implementing [clean architecture](https://books.google.com/books/about/Clean_Architecture.html?id=uGE1DwAAQBAJ) with a TDD approach
+   - Experiment with the [minimal API](https://docs.microsoft.com/en-us/aspnet/core/fundamentals/minimal-apis?view=aspnetcore-6.0) introduced in .NET 6
+
+Overall the project was pretty successful and I enjoyed doing it a lot. 
+
 ## Setup
 
 ### Development

@@ -272,20 +272,40 @@
   - if the account is not linked to another account that is a non-student-checking account, reject the creation of the account
 
 ## Actions
-  - Card_Create()
-  - Card_Cancel()
-  - Check_Create()
-  - Check_Cancel()
-  - Address_Create()
-  - Address_Delete()
-  - Address_Update()
-  - Transfer_MakeBankTransfer()
-  - Transfer_MakeCardTransfer()
-  - Transfer_MakeCheckTransfer()
-  - AccountHolder_Create()
-  - AccountHolder_Update()
-  - AccountHolder_DeleteCascade()
-  - Account_Create()
-  - Account_ReassignAccountHolder()
-    - good example of naming scheme: If wanting to name `ReassignAccountHolder` wouldnt work as well
-  - Account_Deactivate()
+  - ~~Pull up info about an account holder~~
+  - ~~Create a new account holder~~
+    - **make sure that it includes address creation**
+  - Update holders information
+  - Get account holders cards
+  - Get account holders checks
+  - Get account holders transactions
+  - Get account holders balance
+  - Get account holders addresses
+  - Deactivate account holder
+    - Ensure that all accounts and cards are deactivated as well
+    
+  - ~~Create account attached to account holder~~
+    - Make initial deposit
+  - Get account info with address info
+  - Get account info with account type info
+  - ~~Get basic account info~~
+  - Get account cards
+  - Get account checks
+  - Get account transactions
+  - Get account balance
+  - Deactivate account
+
+  - ~~Create check attached to an account~~
+  - ~~Deactivate check~~
+
+  - ~~Create card attached to an account~~
+  - Deactivate card
+
+  - Create cash transfer
+  - Create card transfer
+  - Create check transfer
+  - Get paginated list of transfers  
+  
+  - Create branch attached to address
+  - Add additional address to holder
+  - Archive address

@@ -5,6 +5,7 @@ namespace DataAccess.Access;
 public interface ICheckAccess
 {
     Task<CheckInsertionReturn?> CreateOne(CheckCreationForm checkForm);
+    Task<CheckInsertionReturn?> DeactivateOneById(Guid checkId);
 }
 
 public class CheckAccess : ICheckAccess
@@ -24,5 +25,16 @@ public class CheckAccess : ICheckAccess
         });
 
         return createdCheck.FirstOrDefault();
+    }
+
+    public async Task<CheckInsertionReturn?> DeactivateOneById(Guid checkId)
+    {
+        var deactivatedCheck = await _dataAccess.CallUdf<CheckInsertionReturn, dynamic>("SR_Checks_DeactivateOneById",
+            new
+            {
+                _check_id = checkId
+            });
+
+        return deactivatedCheck.FirstOrDefault();
     }
 }

@@ -27,7 +27,7 @@ public class CheckDataAccessTests
         var randomAccount = await accountAccess.GetRandomOne();
         if (randomAccount is null) throw new Exception("While testing card creation, random account returned null");
 
-        var createdCheck = await checkAccess.CreateOne(new CheckCreationForm()
+        var createdCheck = await checkAccess.CreateOne(new CheckCreationForm
         {
             account_id = randomAccount.account_id
         });
@@ -42,5 +42,14 @@ public class CheckDataAccessTests
         var targetExpiration = DateTime.Now.AddMonths(6);
         var daysBetweenExpectedExpiration = (targetExpiration - createdCheck.expiration.Value).TotalDays;
         daysBetweenExpectedExpiration.Should().BeInRange(-5, 5);
+
+        var deactivatedCheck = await checkAccess.DeactivateOneById(createdCheck.check_id);
+        
+        deactivatedCheck.Should().NotBeNull();
+        deactivatedCheck.deactivated.Should().BeTrue();
+        deactivatedCheck.account_number.Should().Be(createdCheck.account_number);
+        
+        deactivatedCheck.check_id.Should().NotBe(createdCheck.check_id);
+        deactivatedCheck.routing_number.Should().NotBe(createdCheck.routing_number);
     }
 }
