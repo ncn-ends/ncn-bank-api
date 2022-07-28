@@ -6,16 +6,20 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="da88e022-a72c-429b-b2d2-ab358463d5d5" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/Api/Extensions/DataAccessOrganizerExtension.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Api/Extensions/DataAccessOrganizerExtension.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Database/SampleQueries/SR_Checks_Insert.sql" beforeDir="false" afterPath="$PROJECT_DIR$/Database/SampleQueries/SR_Checks_Insert.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Database/Setup/Reset.sql" beforeDir="false" afterPath="$PROJECT_DIR$/Database/Setup/Reset.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Database/Tables/Table_checks.sql" beforeDir="false" afterPath="$PROJECT_DIR$/Database/Tables/Table_checks.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Tests/IntegrationTesting/DataAccess/CardDataAccessTests.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/IntegrationTesting/DataAccess/CardDataAccessTests.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Api/Extensions/EndpointsOrganizerExtension.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Api/Extensions/EndpointsOrganizerExtension.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Tests/IntegrationTesting/DataAccess/CheckDataAccessTests.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/IntegrationTesting/DataAccess/CheckDataAccessTests.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="JavaScript File" />
+      </list>
+    </option>
   </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/038c1c69b9af41b7a0326e4e024508146e200/b3/ee982846/Enumerable.cs" root0="SKIP_HIGHLIGHTING" />
@@ -112,7 +116,7 @@
       <workItem from="1658352300865" duration="40381000" />
       <workItem from="1658692587153" duration="16518000" />
       <workItem from="1658764877525" duration="4047000" />
-      <workItem from="1658773077795" duration="24044000" />
+      <workItem from="1658773077795" duration="28828000" />
     </task>
     <servers />
   </component>

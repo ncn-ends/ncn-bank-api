@@ -36,8 +36,11 @@ public class CheckDataAccessTests
         createdCheck.check_id.Should().NotBeEmpty();
         createdCheck.account_number.Should().NotBeEmpty();
         createdCheck.account_number.Should().NotBeNull();
-        createdCheck.expiration.Should().BeAfter(1.March(2023));
         createdCheck.routing_number.Should().NotBeNull();
         createdCheck.routing_number.Length.Should().Be(9);
+        
+        var targetExpiration = DateTime.Now.AddMonths(6);
+        var daysBetweenExpectedExpiration = (targetExpiration - createdCheck.expiration.Value).TotalDays;
+        daysBetweenExpectedExpiration.Should().BeInRange(-5, 5);
     }
 }
