@@ -1,4 +1,3 @@
-
 CREATE TABLE IF NOT EXISTS account_holders (
       account_holder_id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
       birthdate timestamptz NOT NULL,

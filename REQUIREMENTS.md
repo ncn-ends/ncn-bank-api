@@ -299,7 +299,7 @@
   - ~~Deactivate check~~
 
   - ~~Create card attached to an account~~
-  - Deactivate card
+  - ~~Deactivate card~~
 
   - Create cash transfer
   - Create card transfer

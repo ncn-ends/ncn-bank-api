@@ -37,7 +37,18 @@ public class CardDataAccessTests
         createdCard.card_id.Should().NotBeEmpty();
         createdCard.card_number.Length.Should().Be(16);
         createdCard.csv.Length.Should().Be(3);
-        createdCard.expiration.Should().BeAfter(1.January(2027));
         createdCard.pin_number.Should().Be(sampleCard.pin_number);
+        
+        var targetExpiration = DateTime.Now.AddMonths(54);
+        var daysBetweenExpectedExpiration = (targetExpiration - createdCard.expiration).TotalDays;
+        daysBetweenExpectedExpiration.Should().BeInRange(-15, 15);
+
+        var deactivatedCard = await cardAccess.DeactivateOneById(createdCard.card_id);
+        deactivatedCard.Should().NotBeNull();
+        deactivatedCard.deactivated.Should().BeTrue();
+        deactivatedCard.card_id.Should().NotBeEmpty();
+        deactivatedCard.card_number.Length.Should().Be(16);
+        deactivatedCard.csv.Length.Should().Be(3);
+        deactivatedCard.pin_number.Should().Be(createdCard.pin_number);
     }
 }

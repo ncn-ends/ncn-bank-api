@@ -8,10 +8,12 @@ namespace DataAccess.Models;
 public class CardInsertionReturn
 {
     public Guid card_id { get; set; } = Guid.Empty;
-    public string card_number { get; set; } = "UNSET CARD NUMBER";
-    public string csv { get; set; } = "UNSET CSV";
-    public string pin_number { get; set; } = "UNSET PIN NUMBER";
+    public string? card_number { get; set; }
+    public string? csv { get; set; }
+    public string? pin_number { get; set; }
     public DateTime expiration { get; set; } = DateTime.Now;
+    public bool deactivated { get; set; }
+    public DateTime? created_at { get; set; }
 }
 
 public class CardCreationForm
