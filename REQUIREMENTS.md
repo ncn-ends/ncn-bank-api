@@ -301,7 +301,7 @@
   - ~~Create card attached to an account~~
   - ~~Deactivate card~~
 
-  - Create cash transfer
+  - ~~Create cash transfer~~
   - ~~Create card transfer~~
   - ~~Create check transfer~~
   - Get paginated list of transfers  
