@@ -31,6 +31,8 @@ DROP TYPE IF EXISTS returntype_checks_deactivateonebyid CASCADE;
 DROP TYPE IF EXISTS returntype_cards_deactivateonebyid CASCADE;
 DROP TYPE IF EXISTS ReturnType_Checks_GetRandomOne CASCADE;
 DROP TYPE IF EXISTS ReturnType_Transfers_MakeCheckTransfer CASCADE;
+DROP TYPE IF EXISTS ReturnType_Transfers_MakeCardTransfer CASCADE;
+DROP TYPE IF EXISTS ReturnType_Cards_GetRandomOne CASCADE;
 
 -- ROUTINES --
 DROP FUNCTION IF EXISTS SR_AccountTypes_GetAll();
@@ -49,6 +51,8 @@ DROP FUNCTION IF EXISTS sr_checks_deactivateonebyid(_check_id uuid);
 DROP FUNCTION IF EXISTS SR_Checks_GetRandomOne();
 DROP FUNCTION IF EXISTS SR_Transfers_MakeCheckTransfer(_amount money, _routing_number text, _transfer_target uuid, _memo text);
 DROP FUNCTION IF EXISTS sr_accounts_searchbyholdername(_name text);
+DROP FUNCTION IF EXISTS sr_transfers_makechecktransfer(_amount numeric, _routing_number text, _transfer_target uuid, _memo text);
+DROP FUNCTION IF EXISTS sr_cards_getrandomone();
 
 -- UTILITIES --
 DROP FUNCTION IF EXISTS gen_random_number(_digits integer) CASCADE;

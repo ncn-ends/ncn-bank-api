@@ -34,7 +34,7 @@ public class CardEndpointTests
         var postRes = await client.SendPost(sampleCard);
         postRes.EnsureSuccessStatusCode();
 
-        var postContent = await JsonMapper.MapHttpContentAs<CardInsertionReturn>(postRes);
+        var postContent = await JsonMapper.MapHttpContentAs<CardBO>(postRes);
 
         postContent.Should().NotBeNull();
         postContent.card_id.Should().NotBeEmpty();

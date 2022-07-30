@@ -19,3 +19,12 @@ public class CheckTransferForm
     public Guid transfer_target { get; set; }
     public string memo { get; set; } = "";
 }
+
+// _amount numeric, _card_number text, _transfer_target uuid, _memo text
+public class CardTransferForm
+{
+    public decimal amount { get; set; }
+    public string card_number { get; set; }
+    public Guid transfer_target { get; set; }
+    public string memo { get; set; } = "";
+}

@@ -287,8 +287,8 @@
   - ~~Create account attached to account holder~~
     - Make initial deposit
   - Get account info with address info
-  - Get account info with account type info
   - ~~Get basic account info~~
+  - ~~Search for account by account holder name~~
   - Get account cards
   - Get account checks
   - Get account transactions
@@ -303,7 +303,7 @@
 
   - Create cash transfer
   - Create card transfer
-  - Create check transfer
+  - ~~Create check transfer~~
   - Get paginated list of transfers  
   
   - Create branch attached to address

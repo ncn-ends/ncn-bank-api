@@ -5,7 +5,7 @@ namespace DataAccess.Models;
 // csv TEXT,
 // pin_number TEXT,
 // expiration TIMESTAMPTZ
-public class CardInsertionReturn
+public class CardBO
 {
     public Guid card_id { get; set; } = Guid.Empty;
     public string? card_number { get; set; }

@@ -15,16 +15,19 @@ public class SetupAccess: ISetupAccess
     private readonly IAccountHolderAccess _accountHolderAccess;
     private readonly IAccountAccess _accountAccess;
     private readonly ICheckAccess _checkAccess;
+    private readonly ICardAccess _cardAccess;
 
     public SetupAccess(ISqlDataAccess dataAccess, 
         IAccountHolderAccess accountHolderAccess,
         IAccountAccess accountAccess,
-        ICheckAccess checkAccess)
+        ICheckAccess checkAccess,
+        ICardAccess cardAccess)
     {
         _dataAccess = dataAccess;
         _accountHolderAccess = accountHolderAccess;
         _accountAccess = accountAccess;
         _checkAccess = checkAccess;
+        _cardAccess = cardAccess;
     }
 
     public async Task EnsureDatabaseSetup()
@@ -129,6 +132,14 @@ public class SetupAccess: ISetupAccess
             account_id = fakeAccount.account_id
         });
         if (fakeCheck is null) exceptionMsgTemplate("check");
+        
+        
+        var fakeCard = await _cardAccess.CreateOne(new CardCreationForm
+        {
+            account_id = fakeAccount.account_id,
+            pin_number = "1234"
+        });
+        if (fakeCard is null) exceptionMsgTemplate("card");
 
         var extraFakeHolderId = await _accountHolderAccess.CreateOne(FakeInitialData.SampleAccountHolder2);
         await _accountAccess.CreateOne(FakeInitialData.SampleAccount2(extraFakeHolderId.Value));
