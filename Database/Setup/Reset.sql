@@ -7,9 +7,14 @@ DROP TABLE IF EXISTS accounts CASCADE;
 DROP TABLE IF EXISTS addresses CASCADE;
 DROP TABLE IF EXISTS cards CASCADE;
 DROP TABLE IF EXISTS checks CASCADE;
-DROP TABLE IF EXISTS transfers CASCADE;
+DROP TABLE IF EXISTS transfers_check CASCADE;
+DROP TABLE IF EXISTS transfers_cash CASCADE;
+DROP TABLE IF EXISTS transfers_card CASCADE;
 DROP TABLE IF EXISTS branches CASCADE;
 DROP TABLE IF EXISTS account_links CASCADE;
+
+-- VIEWS --
+DROP VIEW IF EXISTS view_accountholdersaccounts cascade;
 
 -- TYPES --
 DROP TYPE IF EXISTS address_type CASCADE;
@@ -24,6 +29,8 @@ DROP TYPE IF EXISTS ReturnType_Cards_CreateOne CASCADE;
 DROP TYPE IF EXISTS ReturnType_Checks_CreateOne CASCADE;
 DROP TYPE IF EXISTS returntype_checks_deactivateonebyid CASCADE;
 DROP TYPE IF EXISTS returntype_cards_deactivateonebyid CASCADE;
+DROP TYPE IF EXISTS ReturnType_Checks_GetRandomOne CASCADE;
+DROP TYPE IF EXISTS ReturnType_Transfers_MakeCheckTransfer CASCADE;
 
 -- ROUTINES --
 DROP FUNCTION IF EXISTS SR_AccountTypes_GetAll();
@@ -39,6 +46,9 @@ DROP FUNCTION IF EXISTS sr_cards_insert(_account_id uuid, _pin_number numeric);
 DROP FUNCTION IF EXISTS sr_checks_deactivateonebyid(_check_id uuid);
 DROP FUNCTION IF EXISTS sr_checks_insert(_account_id uuid);
 DROP FUNCTION IF EXISTS sr_checks_deactivateonebyid(_check_id uuid);
+DROP FUNCTION IF EXISTS SR_Checks_GetRandomOne();
+DROP FUNCTION IF EXISTS SR_Transfers_MakeCheckTransfer(_amount money, _routing_number text, _transfer_target uuid, _memo text);
+DROP FUNCTION IF EXISTS sr_accounts_searchbyholdername(_name text);
 
 -- UTILITIES --
 DROP FUNCTION IF EXISTS gen_random_number(_digits integer) CASCADE;

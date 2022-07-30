@@ -22,11 +22,20 @@ public class AccountInsertionReturn
 // account_type_id INT NOT NULL REFERENCES account_types(account_type_id),
 // routing_number NUMERIC(9, 0) NOT NULL DEFAULT gen_random_number(9),
 // account_number NUMERIC(9, 0) NOT NULL DEFAULT gen_random_number(9)
-public class AccountBO
+public class AccountDTO
 {
     public Guid account_id { get; set; } = Guid.Empty;
     public Guid account_holder_id { get; set; } = Guid.Empty;
     public int account_type_id { get; set; } = -1;
     public long routing_number { get; set; } = -1;
     public long account_number { get; set; } = -1;
+}
+
+public class AccountBO
+{
+    public Guid account_id { get; set; }
+    public AccountHolderBO account_holder { get; set; }
+    public int account_type_id { get; set; }
+    public string routing_number { get; set; }
+    public string account_number { get; set; }
 }

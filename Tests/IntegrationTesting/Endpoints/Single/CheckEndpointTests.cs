@@ -37,7 +37,7 @@ public class CheckEndpointTests
         var postRes = await client.SendPost(sampleCheck);
         postRes.EnsureSuccessStatusCode();
 
-        var postContent = await JsonMapper.MapHttpContentAs<CheckInsertionReturn>(postRes);
+        var postContent = await JsonMapper.MapHttpContentAs<CheckBO>(postRes);
         
         postContent.Should().NotBeNull();
         postContent.check_id.Should().NotBeEmpty();

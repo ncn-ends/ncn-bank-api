@@ -12,7 +12,7 @@ public class CheckCreationForm
 // account_number TEXT,
 // routing_number TEXT,
 // expiration TIMESTAMPTZ
-public class CheckInsertionReturn
+public class CheckBO
 {
     public Guid check_id { get; set; }
     public string? account_number { get; set; }

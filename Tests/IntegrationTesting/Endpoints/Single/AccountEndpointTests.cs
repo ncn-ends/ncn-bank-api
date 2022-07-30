@@ -43,7 +43,7 @@ public class AccountEndpointTests
 
         var getResponse = await client.SendGet(route: $"/{postContent.account_id.ToString()}");
         getResponse.EnsureSuccessStatusCode();
-        var getContent = await JsonMapper.MapHttpContentAs<AccountBO>(getResponse);
+        var getContent = await JsonMapper.MapHttpContentAs<AccountDTO>(getResponse);
 
         getContent.Should().NotBeNull();
         getContent.account_holder_id.Should().NotBeEmpty();

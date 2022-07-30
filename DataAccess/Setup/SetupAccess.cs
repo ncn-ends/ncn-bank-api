@@ -1,4 +1,5 @@
 using DataAccess.Access;
+using DataAccess.Models;
 using FileReaderLib;
 
 namespace DataAccess.Setup;
@@ -13,14 +14,17 @@ public class SetupAccess: ISetupAccess
     private readonly ISqlDataAccess _dataAccess;
     private readonly IAccountHolderAccess _accountHolderAccess;
     private readonly IAccountAccess _accountAccess;
+    private readonly ICheckAccess _checkAccess;
 
     public SetupAccess(ISqlDataAccess dataAccess, 
         IAccountHolderAccess accountHolderAccess,
-        IAccountAccess accountAccess)
+        IAccountAccess accountAccess,
+        ICheckAccess checkAccess)
     {
         _dataAccess = dataAccess;
         _accountHolderAccess = accountHolderAccess;
         _accountAccess = accountAccess;
+        _checkAccess = checkAccess;
     }
 
     public async Task EnsureDatabaseSetup()
@@ -33,6 +37,7 @@ public class SetupAccess: ISetupAccess
         await SetupCustomTypes();
         await SetupUtilities();
         await SetupTables();
+        await SetupViews();
         await SetupSubroutines();
         await SetupRequiredInitialData();
 
@@ -93,6 +98,14 @@ public class SetupAccess: ISetupAccess
         await ExecuteFiles(files, executionOrder);
     }
     
+    
+    private async Task SetupViews()
+    {
+        var dbViewsPath = "Database/Views";
+        var files = FileReader.ReadDirectory(dbViewsPath);
+        await ExecuteFiles(files);
+    }
+
     private async Task SetupRequiredInitialData()
     {
         var dbInitialDataPath = "Database/Setup/CreateInitialData.sql";
@@ -102,10 +115,23 @@ public class SetupAccess: ISetupAccess
     
     private async Task SetupFakeInitialData()
     {
+        var exceptionMsgTemplate = new Func<string, object>((model) =>
+            throw new Exception($"When creating fake initial data for {model}, it returned null"));
+
         var holderId = await _accountHolderAccess.CreateOne(FakeInitialData.SampleAccountHolder1);
-        if (holderId is null)
-            throw new Exception("When creating fake initial data for account holder, it returned null");
-        await _accountAccess.CreateOne(FakeInitialData.SampleAccount1(holderId.Value));
+        if (holderId is null) exceptionMsgTemplate("account_holder");
+        
+        var fakeAccount = await _accountAccess.CreateOne(FakeInitialData.SampleAccount1(holderId.Value));
+        if (fakeAccount is null) exceptionMsgTemplate("account");
+
+        var fakeCheck = await _checkAccess.CreateOne(new CheckCreationForm
+        {
+            account_id = fakeAccount.account_id
+        });
+        if (fakeCheck is null) exceptionMsgTemplate("check");
+
+        var extraFakeHolderId = await _accountHolderAccess.CreateOne(FakeInitialData.SampleAccountHolder2);
+        await _accountAccess.CreateOne(FakeInitialData.SampleAccount2(extraFakeHolderId.Value));
     }
 
 

@@ -1,21 +1,30 @@
+using System.Data;
 using System.Diagnostics;
+using Dapper;
 using DataAccess.Models;
+using Microsoft.Extensions.Configuration;
+using Npgsql;
 
 namespace DataAccess.Access;
 
 public interface IAccountAccess
 {
     Task<AccountInsertionReturn?> CreateOne(AccountFormDTO accountForm);
-    Task<AccountBO?> GetOneById(Guid accountId);
-    Task<AccountBO?> GetRandomOne();
+    Task<AccountDTO?> GetOneById(Guid accountId);
+    Task<AccountDTO?> GetRandomOne();
+    Task<AccountBO?> SearchByHolderName(string name);
 }
 
 public class AccountAccess : IAccountAccess
 {
     private readonly ISqlDataAccess _dataAccess;
+    private readonly string _connectionString;
 
-    public AccountAccess(ISqlDataAccess dataAccess)
+    public AccountAccess(ISqlDataAccess dataAccess, IConfiguration config)
     {
+        _connectionString = config["POSTGRESQLCONNSTR_Default"]
+                            ?? config.GetConnectionString("Default");
+        
         _dataAccess = dataAccess;
     }
 
@@ -31,9 +40,9 @@ public class AccountAccess : IAccountAccess
         return createdAccount.FirstOrDefault();
     }
 
-    public async Task<AccountBO?> GetOneById(Guid accountId)
+    public async Task<AccountDTO?> GetOneById(Guid accountId)
     {
-        var fetchedAccount = await _dataAccess.CallUdf<AccountBO, dynamic>("SR_Accounts_GetOne", new
+        var fetchedAccount = await _dataAccess.CallUdf<AccountDTO, dynamic>("SR_Accounts_GetOne", new
         {
             _account_id = accountId
         });
@@ -42,10 +51,32 @@ public class AccountAccess : IAccountAccess
     }
     
     // TODO: untested
-    public async Task<AccountBO?> GetRandomOne()
+    public async Task<AccountDTO?> GetRandomOne()
     {
-        var fetchedAccount = await _dataAccess.CallUdf<AccountBO>("SR_Accounts_GetRandomOne");
+        var fetchedAccount = await _dataAccess.CallUdf<AccountDTO>("SR_Accounts_GetRandomOne");
 
         return fetchedAccount.FirstOrDefault();
+    }
+    
+    public async Task<AccountBO?> SearchByHolderName(string name)
+    {
+        using IDbConnection connection = new NpgsqlConnection(_connectionString);
+
+        var result = await connection.QueryAsync<AccountBO, AccountHolderBO, AccountBO>(
+            "SR_Accounts_SearchByHolderName",
+            commandType: CommandType.StoredProcedure,
+            splitOn: "account_id,account_holder_id",
+            param: new
+            {
+                _name = name  
+            },
+            map: (account, accountHolder) =>
+            {
+                account.account_holder = accountHolder;
+                return account;
+            }
+        );
+
+        return result.FirstOrDefault();
     }
 }
