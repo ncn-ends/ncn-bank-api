@@ -6,6 +6,7 @@ public interface ITransferAccess
 {
     Task<TransferInsertionReturn?> MakeTransfer(CheckTransferForm transferForm);
     Task<TransferInsertionReturn?> MakeTransfer(CardTransferForm transferForm);
+    Task<TransferInsertionReturn?> MakeTransfer(CashTransferForm transferForm);
 }
 
 public class TransferAccess : ITransferAccess
@@ -36,6 +37,19 @@ public class TransferAccess : ITransferAccess
         {
             _amount = transferForm.amount, 
             _card_number = transferForm.card_number, 
+            _transfer_target = transferForm.transfer_target, 
+            _memo = transferForm.memo
+        });
+
+        return transferMade.FirstOrDefault();
+    }
+    
+    
+    public async Task<TransferInsertionReturn?> MakeTransfer(CashTransferForm transferForm)
+    {
+        var transferMade = await _dataAccess.CallUdf<TransferInsertionReturn, dynamic>("SR_Transfers_MakeCashTransfer", new
+        {
+            _amount = transferForm.amount, 
             _transfer_target = transferForm.transfer_target, 
             _memo = transferForm.memo
         });

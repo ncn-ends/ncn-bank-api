@@ -302,7 +302,7 @@
   - ~~Deactivate card~~
 
   - Create cash transfer
-  - Create card transfer
+  - ~~Create card transfer~~
   - ~~Create check transfer~~
   - Get paginated list of transfers  
   
