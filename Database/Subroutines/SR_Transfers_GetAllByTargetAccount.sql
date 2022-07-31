@@ -1,4 +1,4 @@
-CREATE OR REPLACE FUNCTION SR_Transfers_GetAllByAccount(_account_id uuid)
+CREATE OR REPLACE FUNCTION SR_Transfers_GetAllByTargetAccount(_account_id uuid)
 RETURNS setof ReturnType_Transfers_StandardReturn AS $$
 BEGIN
     RETURN QUERY

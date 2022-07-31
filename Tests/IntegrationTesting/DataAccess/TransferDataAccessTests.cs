@@ -111,52 +111,99 @@ public class TransferDataAccessTests
         await _setupAccess.EnsureDatabaseSetup();
         var faker = new Faker();
 
+        var sourceAccount = await _accountAccess.SearchByHolderName(FakeInitialData.SampleAccountHolder1.lastname);
         var targetAccount = await _accountAccess.SearchByHolderName(FakeInitialData.SampleAccountHolder2.lastname);
         var randomCheck = await _checkAccess.GetRandomOne();
         var randomCard = await _cardAccess.GetRandomOne();
 
-        var checkTransferCount = 5;
-        var cardTransferCount = 7;
-        var cashTransferCount = 9;
-        var totalTransferCount = checkTransferCount + cardTransferCount + cashTransferCount;
+        var checkTransferAmounts = new[]
+        {
+            3147.85m,
+            9438.12m,
+            1239.55m,
+            5985.58m,
+            8574.21m,
+            23.57m,
+            485.59m
+        };
+        var cardTransferAmounts = new[]
+        {
+            5250.77m,
+            535.11m,
+            896.49m,
+            4145.99m,
+            6859.75m,
+            7746.85m
+        };
+        var cashTransferAmounts = new[]
+        {
+            942.71m,
+            5122.43m,
+            1883.76m,
+            3877.72m,
+            3251.46m,
+            4573.95m,
+            7107.09m,
+            5914.02m,
+            6028.79m
+        };
+        var totalTransferCount =        checkTransferAmounts.Length 
+                                        + cardTransferAmounts.Length 
+                                        + cashTransferAmounts.Length;
+        
+        var totalTransferAmountNoCash = checkTransferAmounts.Sum()
+                                        + cardTransferAmounts.Sum();
+        
+        var totalTransferAmount =       totalTransferAmountNoCash
+                                        + cashTransferAmounts.Sum();
 
-        for (int i = 0; i < checkTransferCount; i++)
+        for (int i = 0; i < checkTransferAmounts.Length; i++)
         {
             var transferForm = new CheckTransferForm
             {
-                amount = faker.Random.Int(0, 8000),
+                amount = checkTransferAmounts[i],
                 routing_number = randomCheck.routing_number,
                 transfer_target = targetAccount.account_id
             };
             await _transferAccess.MakeTransfer(transferForm);
         }
         
-        for (int i = 0; i < cardTransferCount; i++)
+        for (int i = 0; i < cardTransferAmounts.Length; i++)
         {
             var transferForm = new CardTransferForm
             {
-                amount = faker.Random.Int(0, 8000),
+                amount = cardTransferAmounts[i],
                 card_number = randomCard.card_number,
                 transfer_target = targetAccount.account_id
             };
             await _transferAccess.MakeTransfer(transferForm);
         }
         
-        for (int i = 0; i < cashTransferCount; i++)
+        for (int i = 0; i < cashTransferAmounts.Length; i++)
         {
             var transferForm = new CashTransferForm
             {
-                amount = faker.Random.Int(0, 8000),
+                amount = cashTransferAmounts[i],
                 transfer_target = targetAccount.account_id
             };
             await _transferAccess.MakeTransfer(transferForm);
         }
 
         /* CALLING TEST CASE */
-        var allTransfers = await _transferAccess.GetAllByAccountId(targetAccount.account_id);
-        allTransfers.Should().NotBeNull();
-        allTransfers.Length().Should().Be(totalTransferCount);
+        var allTransfersByTarget = await _transferAccess.GetAllByTargetAccount(targetAccount.account_id);
+        var allTransfersBySource = await _transferAccess.GetAllBySourceAccount(sourceAccount.account_id);
 
         /* ASSERTING TEST RESULTS */
+        allTransfersByTarget.Should().NotBeNull();
+        allTransfersByTarget.Length().Should().Be(totalTransferCount);
+
+        allTransfersBySource.Should().NotBeNull();
+        allTransfersBySource.Length().Should().Be(totalTransferCount - cashTransferAmounts.Length);
+
+        var targetAccountBalance = await _accountAccess.GetAccountBalance(targetAccount.account_id);
+        var sourceAccountBalance = await _accountAccess.GetAccountBalance(sourceAccount.account_id);
+
+        targetAccountBalance.balance.Should().Be(totalTransferAmount);
+        Math.Abs(sourceAccountBalance.balance).Should().Be(totalTransferAmountNoCash);
     }
 }

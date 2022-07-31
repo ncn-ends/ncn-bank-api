@@ -291,7 +291,8 @@
   - ~~Search for account by account holder name~~
   - Get account cards
   - Get account checks
-  - Get account transactions
+  - ~~Get account transactions~~
+    - both by target and by source
   - Get account balance
   - Deactivate account
 
@@ -304,8 +305,6 @@
   - ~~Create cash transfer~~
   - ~~Create card transfer~~
   - ~~Create check transfer~~
-  - Get paginated list of transfers  
   
-  - Create branch attached to address
   - Add additional address to holder
   - Archive address

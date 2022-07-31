@@ -39,3 +39,9 @@ public class AccountBO
     public string routing_number { get; set; }
     public string account_number { get; set; }
 }
+
+
+public class AccountBalanceDTO
+{
+    public decimal balance { get; set; }
+}

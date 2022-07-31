@@ -13,6 +13,7 @@ public interface IAccountAccess
     Task<AccountDTO?> GetOneById(Guid accountId);
     Task<AccountDTO?> GetRandomOne();
     Task<AccountBO?> SearchByHolderName(string name);
+    Task<AccountBalanceDTO?> GetAccountBalance(Guid accountId);
 }
 
 public class AccountAccess : IAccountAccess
@@ -78,5 +79,15 @@ public class AccountAccess : IAccountAccess
         );
 
         return result.FirstOrDefault();
+    }
+
+    public async Task<AccountBalanceDTO?> GetAccountBalance(Guid accountId)
+    {
+        var accountBalance = await _dataAccess.CallUdf<AccountBalanceDTO, dynamic>("SR_Accounts_GetAccountBalance", new
+        {
+            _account_id = accountId
+        });
+        
+        return accountBalance.FirstOrDefault();
     }
 }
