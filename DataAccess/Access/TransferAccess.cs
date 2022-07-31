@@ -7,6 +7,7 @@ public interface ITransferAccess
     Task<TransferInsertionReturn?> MakeTransfer(CheckTransferForm transferForm);
     Task<TransferInsertionReturn?> MakeTransfer(CardTransferForm transferForm);
     Task<TransferInsertionReturn?> MakeTransfer(CashTransferForm transferForm);
+    Task<IEnumerable<TransferInsertionReturn>?> GetAllByAccountId(Guid accountId);
 }
 
 public class TransferAccess : ITransferAccess
@@ -55,5 +56,15 @@ public class TransferAccess : ITransferAccess
         });
 
         return transferMade.FirstOrDefault();
+    }
+    
+    public async Task<IEnumerable<TransferInsertionReturn>?> GetAllByAccountId(Guid accountId)
+    {
+        var transferMade = await _dataAccess.CallUdf<TransferInsertionReturn, dynamic>("SR_Transfers_GetAllByAccount", new
+        {
+            _account_id = accountId
+        });
+
+        return transferMade;
     }
 }

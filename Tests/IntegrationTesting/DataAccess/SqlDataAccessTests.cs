@@ -5,7 +5,7 @@ using Tests.Helpers;
 using Xunit;
 using Xunit.Abstractions;
 
-namespace Tests.UnitTesting.DataAccess;
+namespace Tests.IntegrationTesting.DataAccess;
 
 class ExampleMappedObject
 {

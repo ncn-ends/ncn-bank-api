@@ -1,5 +1,4 @@
 using System;
-using System.Diagnostics;
 using System.Threading.Tasks;
 using DataAccess;
 using DataAccess.Access;
@@ -7,9 +6,8 @@ using DataAccess.Models;
 using FluentAssertions;
 using Tests.Helpers;
 using Xunit;
-using Xunit.Abstractions;
 
-namespace Tests.UnitTesting.DataAccess;
+namespace Tests.IntegrationTesting.DataAccess;
 
 [Collection("SequentialTesting")]
 public class AccountHolderDataAccessTests

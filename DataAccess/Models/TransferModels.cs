@@ -9,6 +9,7 @@ public class TransferInsertionReturn
     public Guid transfer_id { get; set; }
     public decimal amount { get; set; }
     public string memo { get; set; }
+    public DateTime created_at { get; set; }
 }
 
 // _amount money, _routing_number text, _transfer_target uuid, _memo text

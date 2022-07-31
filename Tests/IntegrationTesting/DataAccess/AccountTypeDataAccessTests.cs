@@ -5,7 +5,7 @@ using FluentAssertions;
 using Tests.Helpers;
 using Xunit;
 
-namespace Tests.UnitTesting.DataAccess;
+namespace Tests.IntegrationTesting.DataAccess;
 
 [Collection("SequentialTesting")]
 public class AccountTypeDataAccessTests

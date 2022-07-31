@@ -34,6 +34,7 @@ DROP TYPE IF EXISTS ReturnType_Transfers_MakeCheckTransfer CASCADE;
 DROP TYPE IF EXISTS ReturnType_Transfers_MakeCardTransfer CASCADE;
 DROP TYPE IF EXISTS ReturnType_Cards_GetRandomOne CASCADE;
 DROP TYPE IF EXISTS returntype_transfers_makecashtransfer CASCADE;
+DROP TYPE IF EXISTS ReturnType_Transfers_StandardReturn CASCADE;
 
 -- ROUTINES --
 DROP FUNCTION IF EXISTS SR_AccountTypes_GetAll();

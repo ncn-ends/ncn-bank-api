@@ -1,6 +1,5 @@
 using System;
 using System.Threading.Tasks;
-using DataAccess;
 using DataAccess.Access;
 using DataAccess.Models;
 using DataAccess.Setup;
@@ -9,7 +8,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Tests.Helpers;
 using Xunit;
 
-namespace Tests.UnitTesting.DataAccess;
+namespace Tests.IntegrationTesting.DataAccess;
 
 [Collection("SequentialTesting")]
 public class AccountDataAccessTests
@@ -17,7 +16,6 @@ public class AccountDataAccessTests
     [Fact]
     public async Task AccountCRUDTests()
     {
-        
         var waf = new CustomWAF<Program>();
         using var scope = waf.Services.CreateScope();
         var setupAccess = scope.ServiceProvider.GetRequiredService<ISetupAccess>();

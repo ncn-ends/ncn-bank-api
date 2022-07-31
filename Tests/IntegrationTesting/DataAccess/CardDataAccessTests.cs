@@ -1,18 +1,13 @@
 using System;
-using System.Diagnostics;
 using System.Threading.Tasks;
-using DataAccess;
 using DataAccess.Access;
-using DataAccess.Models;
 using DataAccess.Setup;
 using FluentAssertions;
-using FluentAssertions.Extensions;
 using Microsoft.Extensions.DependencyInjection;
 using Tests.Helpers;
 using Xunit;
-using Xunit.Abstractions;
 
-namespace Tests.UnitTesting.DataAccess;
+namespace Tests.IntegrationTesting.DataAccess;
 
 [Collection("SequentialTesting")]
 public class CardDataAccessTests
