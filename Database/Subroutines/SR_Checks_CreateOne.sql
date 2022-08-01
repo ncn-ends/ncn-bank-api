@@ -1,12 +1,5 @@
-CREATE TYPE ReturnType_Checks_CreateOne AS (
-    check_id uuid,
-    account_number TEXT,
-    routing_number TEXT,
-    expiration TIMESTAMPTZ
-);
-
 CREATE OR REPLACE FUNCTION SR_Checks_CreateOne(_account_id uuid)
-RETURNS setof ReturnType_Checks_CreateOne AS $$
+RETURNS setof returntype_checks_standardreturn AS $$
 BEGIN
     RETURN QUERY
     WITH account AS (
@@ -20,7 +13,8 @@ BEGIN
         checks.check_id,
         (SELECT * FROM account)::text AS account_number,
         checks.routing_number::text,
-        checks.expiration;
-
+        checks.expiration,
+        checks.deactivated,
+        checks.created_at;
 END;
 $$ LANGUAGE plpgsql;

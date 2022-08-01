@@ -1,4 +1,4 @@
-CREATE OR REPLACE FUNCTION SR_Checks_GetRandomOne()
+CREATE OR REPLACE FUNCTION SR_Checks_GetAllByAccount(_account_id uuid)
 RETURNS setof ReturnType_Checks_StandardReturn AS $$
 BEGIN
     RETURN QUERY
@@ -12,7 +12,6 @@ BEGIN
     FROM checks
     JOIN
         accounts accnt ON checks.account_id = accnt.account_id
-    ORDER BY random()
-    LIMIT 1;
+    WHERE checks.account_id = _account_id;
 END;
 $$ LANGUAGE plpgsql;

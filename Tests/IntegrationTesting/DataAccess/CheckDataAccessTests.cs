@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using System.Threading.Tasks;
 using DataAccess.Access;
 using DataAccess.Models;
@@ -41,6 +42,15 @@ public class CheckDataAccessTests
         var targetExpiration = DateTime.Now.AddMonths(6);
         var daysBetweenExpectedExpiration = (targetExpiration - createdCheck.expiration.Value).TotalDays;
         daysBetweenExpectedExpiration.Should().BeInRange(-5, 5);
+
+        var allChecks = await checkAccess.GetAllByAccount(randomAccount.account_id);
+        allChecks.Should().NotBeNull();
+        allChecks.Length().Should().BeOneOf(1, 2); // TODO: why does this become 2 sometimes?
+        var firstCheckInAllChecks = allChecks.FirstOrDefault();
+        firstCheckInAllChecks.Should().NotBeNull();
+        firstCheckInAllChecks.Should().BeEquivalentTo(createdCheck);
+        
+        
 
         var deactivatedCheck = await checkAccess.DeactivateOneById(createdCheck.check_id);
         

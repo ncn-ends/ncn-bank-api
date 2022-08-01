@@ -6,6 +6,7 @@ BEGIN
         cards.card_id,
         cards.card_number::TEXT,
         cards.pin_number::TEXT,
+        cards.csv::text,
         cards.expiration,
         cards.deactivated,
         cards.created_at

@@ -7,6 +7,7 @@ public interface ICheckAccess
     Task<CheckBO?> CreateOne(CheckCreationForm checkForm);
     Task<CheckBO?> DeactivateOneById(Guid checkId);
     Task<CheckBO?> GetRandomOne();
+    Task<IEnumerable<CheckBO>> GetAllByAccount(Guid accountId);
 }
 
 public class CheckAccess : ICheckAccess
@@ -47,5 +48,16 @@ public class CheckAccess : ICheckAccess
         var randomCheck = await _dataAccess.CallUdf<CheckBO>("SR_Checks_GetRandomOne");
 
         return randomCheck.FirstOrDefault();
+    }
+    
+    
+    public async Task<IEnumerable<CheckBO>> GetAllByAccount(Guid accountId)
+    {
+        var allChecks = await _dataAccess.CallUdf<CheckBO, dynamic>("SR_Checks_GetAllByAccount", new
+        {
+            _account_id = accountId
+        });
+
+        return allChecks;
     }
 }

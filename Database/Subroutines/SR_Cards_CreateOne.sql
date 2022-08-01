@@ -1,13 +1,5 @@
-CREATE TYPE ReturnType_Cards_CreateOne AS (
-    card_id uuid,
-    card_number TEXT,
-    csv TEXT,
-    pin_number TEXT,
-    expiration TIMESTAMPTZ
-);
-
 CREATE OR REPLACE FUNCTION SR_Cards_CreateOne(_account_id uuid, _pin_number TEXT)
-RETURNS setof ReturnType_Cards_CreateOne AS $$
+RETURNS setof returntype_cards_standardreturn AS $$
 BEGIN
     RETURN QUERY
     INSERT INTO cards (account_id, pin_number)
@@ -16,8 +8,10 @@ BEGIN
     RETURNING
         cards.card_id,
         cards.card_number::TEXT,
-        cards.csv::TEXT,
         cards.pin_number::TEXT,
-        cards.expiration;
+        cards.csv::TEXT,
+        cards.expiration,
+        cards.deactivated,
+        cards.created_at;
 END;
 $$ LANGUAGE plpgsql;
