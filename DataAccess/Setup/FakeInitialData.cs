@@ -36,13 +36,13 @@ public static class FakeInitialData
     {
         account_holder_id = holderId,
         account_type_key = "stu_ca",
-        initial_deposit = 1000000
+        initial_deposit_amount = 1000000
     };
     
     public static AccountFormDTO SampleAccount2(Guid holderId) => new()
     {
         account_holder_id = holderId,
         account_type_key = "sta_ca",
-        initial_deposit = 1000000
+        initial_deposit_amount = 1000000
     };
 }

@@ -288,8 +288,8 @@
     - Make initial deposit
   - ~~Get basic account info~~
   - ~~Search for account by account holder name~~
-  - Get account cards
-  - Get account checks
+  - ~~Get account cards~~
+  - ~~Get account checks~~
   - ~~Get account transactions~~
     - ~~both by target and by source~~
   - ~~Get account balance~~

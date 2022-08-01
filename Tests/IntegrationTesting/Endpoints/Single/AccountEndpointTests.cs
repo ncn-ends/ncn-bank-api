@@ -29,7 +29,7 @@ public class AccountEndpointTests
         {
             account_holder_id = randomHolder.account_holder_id,
             account_type_key = "stu_ca",
-            initial_deposit = 10000
+            initial_deposit_amount = 10000
         };
         var postResponse = await client.SendPost(sample);
         postResponse.EnsureSuccessStatusCode();

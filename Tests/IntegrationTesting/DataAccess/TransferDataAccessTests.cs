@@ -104,7 +104,6 @@ public class TransferDataAccessTests
     [Fact]
     public async Task TransferAggregationTests()
     {
-        /* SETTING UP TEST */
         await _setupAccess.EnsureDatabaseSetup();
         
         var sourceAccount = await _accountAccess.SearchByHolderName(FakeInitialData.SampleAccountHolder1.lastname);

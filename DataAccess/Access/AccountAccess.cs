@@ -31,12 +31,11 @@ public class AccountAccess : IAccountAccess
 
     public async Task<AccountInsertionReturn?> CreateOne(AccountFormDTO accountForm)
     {
-        // toDO: IMPLEMENT database code for initial deposit once creating transfer table
         var createdAccount = await _dataAccess.CallUdf<AccountInsertionReturn, dynamic>("SR_Accounts_CreateOne", new
         {
             _account_holder_id = accountForm.account_holder_id,
             _account_type_key = accountForm.account_type_key,
-            _initial_deposit = accountForm.initial_deposit
+            _initial_deposit_amount = accountForm.initial_deposit_amount
         });
         return createdAccount.FirstOrDefault();
     }

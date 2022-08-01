@@ -1,4 +1,5 @@
 using System;
+using System.Diagnostics;
 using System.Threading.Tasks;
 using DataAccess.Access;
 using DataAccess.Models;
@@ -21,6 +22,7 @@ public class AccountDataAccessTests
         var setupAccess = scope.ServiceProvider.GetRequiredService<ISetupAccess>();
         var accountHolderAccess = scope.ServiceProvider.GetRequiredService<IAccountHolderAccess>();
         var accountAccess = scope.ServiceProvider.GetRequiredService<IAccountAccess>();
+        var transferAccess = scope.ServiceProvider.GetRequiredService<ITransferAccess>();
         await setupAccess.EnsureDatabaseSetup();
 
         var holderInsertionGuid = await accountHolderAccess.CreateOne(FakeInitialData.SampleAccountHolder1);
@@ -31,7 +33,7 @@ public class AccountDataAccessTests
         {
             account_holder_id = holderInsertionGuid.Value,
             account_type_key = "stu_ca",
-            initial_deposit = 10000
+            initial_deposit_amount = 10000
         };
         var accountInfo = await accountAccess.CreateOne(sampleAccountForm);
         accountInfo.Should().NotBeNull();
@@ -45,5 +47,8 @@ public class AccountDataAccessTests
         holder.account_id.Should().NotBeEmpty();
         holder.account_number.Should().NotBe(-1);
         holder.routing_number.Should().NotBe(-1);
+
+        var initialBalance = await accountAccess.GetAccountBalance(accountInfo.account_id);
+        initialBalance.balance.Should().Be(sampleAccountForm.initial_deposit_amount);
     }
 }

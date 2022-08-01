@@ -4,7 +4,7 @@ public class AccountFormDTO
 {
     public Guid account_holder_id { get; set; }
     public string account_type_key { get; set; }
-    public decimal initial_deposit { get; set; }
+    public decimal initial_deposit_amount { get; set; }
 }
 
 // account_id UUID,
