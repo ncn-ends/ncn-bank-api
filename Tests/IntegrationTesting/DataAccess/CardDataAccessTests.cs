@@ -38,6 +38,9 @@ public class CardDataAccessTests
         var daysBetweenExpectedExpiration = (targetExpiration - createdCard.expiration).TotalDays;
         daysBetweenExpectedExpiration.Should().BeInRange(-15, 15);
 
+        var allCards = await cardAccess.GetAllByAccount(randomAccount.account_id);
+        allCards.Length().Should().Be(1);
+
         var deactivatedCard = await cardAccess.DeactivateOneById(createdCard.card_id);
         deactivatedCard.Should().NotBeNull();
         deactivatedCard.deactivated.Should().BeTrue();

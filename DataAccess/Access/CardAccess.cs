@@ -7,6 +7,7 @@ public interface ICardAccess
     Task<CardBO?> CreateOne(CardCreationForm cardForm);
     Task<CardBO?> DeactivateOneById(Guid cardId);
     Task<CardBO?> GetRandomOne();
+    Task<IEnumerable<CardBO>> GetAllByAccount(Guid accountId);
 }
 
 public class CardAccess : ICardAccess
@@ -47,5 +48,15 @@ public class CardAccess : ICardAccess
         var randomCard = await _dataAccess.CallUdf<CardBO>("SR_Cards_GetRandomOne");
 
         return randomCard.FirstOrDefault();
+    }
+
+    public async Task<IEnumerable<CardBO>> GetAllByAccount(Guid accountId)
+    {
+        var cards = await _dataAccess.CallUdf<CardBO, dynamic>("SR_Cards_GetAllByAccount", new
+        {
+            _account_id = accountId
+        });
+
+        return cards;
     }
 }

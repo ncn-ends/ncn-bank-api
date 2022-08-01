@@ -1,4 +1,4 @@
-CREATE OR REPLACE FUNCTION SR_Cards_GetRandomOne()
+CREATE OR REPLACE FUNCTION SR_Cards_GetAllByAccount(_account_id uuid)
 RETURNS setof ReturnType_Cards_StandardReturn AS $$
 BEGIN
     RETURN QUERY
@@ -10,7 +10,6 @@ BEGIN
         cards.deactivated,
         cards.created_at
     FROM cards
-    ORDER BY random()
-    LIMIT 1;
+    WHERE cards.account_id = _account_id;
 END;
 $$ LANGUAGE plpgsql;
