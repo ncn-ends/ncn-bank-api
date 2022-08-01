@@ -1,8 +1,6 @@
 using System;
-using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
-using Bogus;
 using DataAccess.Access;
 using DataAccess.Models;
 using DataAccess.Setup;
@@ -10,7 +8,6 @@ using FluentAssertions;
 using Microsoft.Extensions.DependencyInjection;
 using Tests.Helpers;
 using Xunit;
-using Xunit.Abstractions;
 
 namespace Tests.IntegrationTesting.DataAccess;
 
@@ -18,16 +15,15 @@ namespace Tests.IntegrationTesting.DataAccess;
 [Collection("SequentialTesting")]
 public class TransferDataAccessTests
 {
-    private readonly ITestOutputHelper _output;
     private readonly ISetupAccess _setupAccess;
     private readonly IAccountAccess _accountAccess;
     private readonly ITransferAccess _transferAccess;
     private readonly ICheckAccess _checkAccess;
     private readonly ICardAccess _cardAccess;
-    
-    public TransferDataAccessTests(ITestOutputHelper output)
+    private readonly IAccountHolderAccess _holderAccess;
+
+    public TransferDataAccessTests()
     {
-        _output = output;
         var waf = new CustomWAF<Program>();
         using var scope = waf.Services.CreateScope();
         _setupAccess = scope.ServiceProvider.GetRequiredService<ISetupAccess>();
@@ -35,6 +31,7 @@ public class TransferDataAccessTests
         _transferAccess = scope.ServiceProvider.GetRequiredService<ITransferAccess>();
         _checkAccess = scope.ServiceProvider.GetRequiredService<ICheckAccess>();
         _cardAccess = scope.ServiceProvider.GetRequiredService<ICardAccess>();
+        _holderAccess = scope.ServiceProvider.GetRequiredService<IAccountHolderAccess>();
     }
     
     [Fact]
@@ -109,8 +106,7 @@ public class TransferDataAccessTests
     {
         /* SETTING UP TEST */
         await _setupAccess.EnsureDatabaseSetup();
-        var faker = new Faker();
-
+        
         var sourceAccount = await _accountAccess.SearchByHolderName(FakeInitialData.SampleAccountHolder1.lastname);
         var targetAccount = await _accountAccess.SearchByHolderName(FakeInitialData.SampleAccountHolder2.lastname);
         var randomCheck = await _checkAccess.GetRandomOne();
@@ -189,11 +185,9 @@ public class TransferDataAccessTests
             await _transferAccess.MakeTransfer(transferForm);
         }
 
-        /* CALLING TEST CASE */
         var allTransfersByTarget = await _transferAccess.GetAllByTargetAccount(targetAccount.account_id);
         var allTransfersBySource = await _transferAccess.GetAllBySourceAccount(sourceAccount.account_id);
 
-        /* ASSERTING TEST RESULTS */
         allTransfersByTarget.Should().NotBeNull();
         allTransfersByTarget.Length().Should().Be(totalTransferCount);
 
@@ -205,5 +199,11 @@ public class TransferDataAccessTests
 
         targetAccountBalance.balance.Should().Be(totalTransferAmount);
         Math.Abs(sourceAccountBalance.balance).Should().Be(totalTransferAmountNoCash);
+
+        var targetHolderBalance = await _holderAccess.GetBalance(targetAccount.account_holder.account_holder_id);
+        var sourceHolderBalance = await _holderAccess.GetBalance(sourceAccount.account_holder.account_holder_id);
+        
+        targetHolderBalance.balance.Should().Be(targetAccountBalance.balance);
+        sourceHolderBalance.balance.Should().Be(sourceAccountBalance.balance);
     }
 }

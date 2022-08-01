@@ -286,14 +286,13 @@
     
   - ~~Create account attached to account holder~~
     - Make initial deposit
-  - Get account info with address info
   - ~~Get basic account info~~
   - ~~Search for account by account holder name~~
   - Get account cards
   - Get account checks
   - ~~Get account transactions~~
-    - both by target and by source
-  - Get account balance
+    - ~~both by target and by source~~
+  - ~~Get account balance~~
   - Deactivate account
 
   - ~~Create check attached to an account~~
