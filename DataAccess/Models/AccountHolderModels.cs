@@ -21,6 +21,11 @@ public class AccountHolderBO
     public decimal expected_salary { get; set; } = -1;
 }
 
+public class AccountHolderWithAddressBO : AccountHolderBO
+{
+    public AddressBO Address { get; set; }
+}
+
 public class AccountHolderForm
 {
     public DateTime birthdate { get; set; }

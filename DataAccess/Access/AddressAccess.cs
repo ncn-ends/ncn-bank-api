@@ -6,15 +6,18 @@ namespace DataAccess.Access;
 public interface IAddressAccess
 {
     Task<int> AddAddress(AddressDTO addressDetails);
+    Task<IEnumerable<AddressBO>> GetAllByAccountHolder(Guid holderId);
 }
 
 public class AddressAccess : IAddressAccess
 {
     private readonly ISqlDataAccess _db;
+    private readonly ISqlDataAccess _dataAccess;
 
-    public AddressAccess(ISqlDataAccess db)
+    public AddressAccess(ISqlDataAccess db, ISqlDataAccess dataAccess)
     {
         _db = db;
+        _dataAccess = dataAccess;
     }
 
     public async Task<int> AddAddress(AddressDTO addressDetails)
@@ -34,5 +37,17 @@ public class AddressAccess : IAddressAccess
         if (row is null) throw new DataException();
         
         return row.address_id;
+    }
+
+    public async Task<IEnumerable<AddressBO>> GetAllByAccountHolder(Guid holderId)
+    {
+        var udfName = "SR_Addresses_GetAllByAccountHolder";
+        var udfParams = new
+        {
+            _account_holder_id = holderId
+        };
+        var addresses = await _dataAccess.CallUdf<AddressBO, dynamic>(udfName, udfParams);
+        
+        return addresses;
     }
 }

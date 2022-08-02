@@ -7,15 +7,15 @@
   <component name="ChangeListManager">
     <list default="true" id="da88e022-a72c-429b-b2d2-ab358463d5d5" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.bank-api/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.bank-api/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Api/Endpoints/HolderEndpoints.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Api/Endpoints/HolderEndpoints.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/DataAccess/Access/AccountHolderAccess.cs" beforeDir="false" afterPath="$PROJECT_DIR$/DataAccess/Access/AccountHolderAccess.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DataAccess/Access/AddressAccess.cs" beforeDir="false" afterPath="$PROJECT_DIR$/DataAccess/Access/AddressAccess.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/DataAccess/Models/AccountHolderModels.cs" beforeDir="false" afterPath="$PROJECT_DIR$/DataAccess/Models/AccountHolderModels.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DataAccess/Setup/FakeInitialData.cs" beforeDir="false" afterPath="$PROJECT_DIR$/DataAccess/Setup/FakeInitialData.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DataAccess/Setup/SetupAccess.cs" beforeDir="false" afterPath="$PROJECT_DIR$/DataAccess/Setup/SetupAccess.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Database/Setup/Reset.sql" beforeDir="false" afterPath="$PROJECT_DIR$/Database/Setup/Reset.sql" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Database/Subroutines/SR_AccountHolders_CreateOne.sql" beforeDir="false" afterPath="$PROJECT_DIR$/Database/Subroutines/SR_AccountHolders_CreateOne.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Tests/IntegrationTesting/DataAccess/AccountHolderDataAccessTests.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/IntegrationTesting/DataAccess/AccountHolderDataAccessTests.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Tests/IntegrationTesting/DataAccess/TransferDataAccessTests.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/IntegrationTesting/DataAccess/TransferDataAccessTests.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Tests/IntegrationTesting/Endpoints/Single/HolderEndpointTests.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/IntegrationTesting/Endpoints/Single/HolderEndpointTests.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Database/Subroutines/SR_Address_Insert.sql" beforeDir="false" afterPath="$PROJECT_DIR$/Database/Subroutines/SR_Address_Insert.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Database/Tables/Table_addresses.sql" beforeDir="false" afterPath="$PROJECT_DIR$/Database/Tables/Table_addresses.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/REQUIREMENTS.md" beforeDir="false" afterPath="$PROJECT_DIR$/REQUIREMENTS.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -34,6 +34,7 @@
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/2a925edfe5584632978e98fd8509cdf4d7a8/42/9715ab2e/CollectionAttribute.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/34097e45bb354c36a678d3bc66df67d494dc00/8a/8f4300aa/PropertyInfo.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/34097e45bb354c36a678d3bc66df67d494dc00/a0/fcd219e8/Interop.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/34097e45bb354c36a678d3bc66df67d494dc00/ab/ffb9a31f/Assembly.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/34097e45bb354c36a678d3bc66df67d494dc00/cf/e32ed25e/ExceptionDispatchInfo.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/34097e45bb354c36a678d3bc66df67d494dc00/ee/5489963b/String.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/b643966c808a41d1a192437cc081a17f1fb800/89/993cf6bf/BodyControl.cs" root0="SKIP_HIGHLIGHTING" />
@@ -41,6 +42,7 @@
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/d290c8ecd1bd4a4859611fd1708df621d343e5335564e1fbd405610a3a5b342/WebApplicationFactory.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/ebb231c117958ac4656c73e1c1cc053d3e993dea5e30287e7c868be37642/XUnit2TestFramework.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/f5f6c4c45aa9784d53fe3f28bfc882a8e68bc2921f1e0ca59c4b72702afeb4/SqlMapper.Async.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$USER_HOME$/.nuget/packages/microsoft.net.test.sdk/16.11.0/build/netcoreapp2.1/Microsoft.NET.Test.Sdk.Program.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/DataAccess/Access/Persons.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Tests/IntegrationTesting/Endpoints/Single/PersonEndpointTests.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
@@ -129,7 +131,7 @@
       <workItem from="1659102774300" duration="18997000" />
       <workItem from="1659256489947" duration="11223000" />
       <workItem from="1659302349513" duration="257000" />
-      <workItem from="1659302624508" duration="16625000" />
+      <workItem from="1659302624508" duration="22135000" />
     </task>
     <servers />
   </component>
@@ -174,6 +176,19 @@
           </properties>
           <option name="timeStamp" value="6" />
         </breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Tests/IntegrationTesting/DataAccess/AddressDataAccessTests.cs</url>
+          <line>31</line>
+          <properties documentPath="$PROJECT_DIR$/Tests/IntegrationTesting/DataAccess/AddressDataAccessTests.cs" initialLine="29" containingFunctionPresentation="method 'AddressCRUDTests'">
+            <startOffsets>
+              <option value="1049" />
+            </startOffsets>
+            <endOffsets>
+              <option value="1083" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="7" />
+        </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
   </component>

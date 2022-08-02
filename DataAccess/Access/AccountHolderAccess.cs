@@ -56,10 +56,11 @@ public class AccountHolderAccess : IAccountHolderAccess
         return first.account_holder_id;
     }
     
-
-    // TODO: untested
     public async Task<AccountHolderBO?> GetRandomOne()
     {
+        var isDev = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") == "Development";
+        if (!isDev) throw new Exception("Method is only available in Development.");
+        
         var randomHolder = await _dataAccess.CallUdf<AccountHolderBO>("sr_accountholders_getrandomone");
         return randomHolder.FirstOrDefault();
     }

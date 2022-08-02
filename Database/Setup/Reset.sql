@@ -35,6 +35,7 @@ DROP TYPE IF EXISTS returntype_transfers_makecashtransfer CASCADE;
 DROP TYPE IF EXISTS ReturnType_Transfers_StandardReturn CASCADE;
 DROP TYPE IF EXISTS returntype_cards_standardReturn cascade;
 DROP TYPE IF EXISTS returntype_checks_standardreturn CASCADE;
+DROP TYPE IF EXISTS returntype_addresses_standardreturn cascade;
 
 -- ROUTINES --
 DROP FUNCTION IF EXISTS SR_AccountTypes_GetAll();
@@ -59,6 +60,8 @@ DROP FUNCTION IF EXISTS SR_Accounts_GetAccountBalance(_account_id uuid);
 DROP FUNCTION IF EXISTS sr_cards_getallbyaccount(_account_id uuid);
 DROP FUNCTION IF EXISTS sr_checks_getallbyaccount(_account_id uuid);
 DROP FUNCTION IF EXISTS sr_address_insert(_street TEXT, _zipcode TEXT, _city TEXT, _state TEXT, _country TEXT, _unit_number INTEGER, _address_type TEXT);
+DROP FUNCTION IF EXISTS sr_accountholders_getone(_account_holder_id UUID);
+DROP FUNCTION IF EXISTS sr_addresses_getallbyaccountholder(_account_holder_id UUID);
 
 -- UTILITIES --
 DROP FUNCTION IF EXISTS gen_random_number(_digits integer) CASCADE;

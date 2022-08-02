@@ -1,3 +1,4 @@
+using System.Diagnostics;
 using DataAccess.Access;
 using DataAccess.Models;
 using FileReaderLib;
@@ -61,7 +62,10 @@ public class SetupAccess: ISetupAccess
     {
         var dbTypesPath = "Database/Types";
         var files = FileReader.ReadDirectory(dbTypesPath);
-        await ExecuteFiles(files);
+        await ExecuteFiles(files, delay: new[]
+        {
+            "Addresses_StandardReturn"
+        });
     }
 
     private async Task SetupUtilities()
@@ -87,8 +91,8 @@ public class SetupAccess: ISetupAccess
             "monthly_fees",
             "account_types",
             "account_holders",
-            "accounts",
             "addresses",
+            "accounts",
             "cards",
             "checks",
             "transfers",
@@ -98,7 +102,7 @@ public class SetupAccess: ISetupAccess
         
         var files = FileReader.ReadDirectory(dbTablesPath);
         
-        await ExecuteFiles(files, executionOrder);
+        await ExecuteFiles(files, executionOrder: executionOrder);
     }
     
     
@@ -146,12 +150,32 @@ public class SetupAccess: ISetupAccess
     }
 
 
-    private async Task ExecuteFiles(IEnumerable<FileData> files)
+    private async Task ExecuteFiles(
+        IEnumerable<FileData> files, 
+        string[] delay = null
+    )
     {
         files = files.ToArray();
+        List<FileData> delayedFiles = new List<FileData>();
+        
         foreach (var file in files)
         {
+            if (delay is not null)
+            {
+                var fileIsToBeDelayed = delay.Any(el => file.FileName.Contains(el));
+                if (fileIsToBeDelayed)
+                {
+                    delayedFiles.Add(file);
+                    continue;
+                }
+            }
+            
             await ExecuteFileFromPath(file.FilePath);
+        }
+        
+        foreach (var delayedFile in delayedFiles)
+        {
+            await ExecuteFileFromPath(delayedFile.FilePath);
         }
     }
 

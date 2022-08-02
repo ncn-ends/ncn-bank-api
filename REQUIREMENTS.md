@@ -274,13 +274,13 @@
 ## Actions
   - ~~Pull up info about an account holder~~
   - ~~Create a new account holder~~
-    - **make sure that it includes address creation**
+    ~~- **make sure that it includes address creation**~~
+  - Get account holders addresses
   - Update holders information
   - Get account holders cards
   - Get account holders checks
   - Get account holders transactions
   - ~~Get account holders balance~~
-  - Get account holders addresses
   - Deactivate account holder
     - Ensure that all accounts and cards are deactivated as well
     
