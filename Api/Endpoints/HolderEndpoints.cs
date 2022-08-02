@@ -16,10 +16,10 @@ public static class HolderEndpoints
     private static async Task<IResult> CreateAccountHolder(
         IAccountHolderAccess holderAccess,
         HttpRequest req, 
-        [FromBody] AccountHolderDTO holderDto
+        [FromBody] AccountHolderForm holderForm
     )
     {
-        var insertedId = await holderAccess.CreateOne(holderDto);
+        var insertedId = await holderAccess.CreateOne(holderForm);
         
         if (insertedId is null) Results.BadRequest();
         

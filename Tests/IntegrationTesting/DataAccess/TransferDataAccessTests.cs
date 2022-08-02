@@ -185,7 +185,6 @@ public class TransferDataAccessTests
                 amount = cashTransferAmounts[i],
                 transfer_target = targetAccount.account_id
             };
-            Debugger.Break();
             await _transferAccess.MakeTransfer(transferForm);
         }
 

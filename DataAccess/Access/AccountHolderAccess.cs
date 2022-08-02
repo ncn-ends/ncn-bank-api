@@ -6,7 +6,7 @@ namespace DataAccess.Access;
 public interface IAccountHolderAccess
 {
     Task<AccountHolderBO?> GetOne(Guid holderId);
-    Task<Guid?> CreateOne(AccountHolderDTO holderDto);
+    Task<Guid?> CreateOne(AccountHolderForm holderForm);
     Task<AccountHolderBO?> GetRandomOne();
     Task<AccountBalanceDTO?> GetBalance(Guid holderId);
 }
@@ -29,25 +29,33 @@ public class AccountHolderAccess : IAccountHolderAccess
         return holder.FirstOrDefault();
     }
 
-    public async Task<Guid?> CreateOne(AccountHolderDTO holderDto)
+    public async Task<Guid?> CreateOne(AccountHolderForm holderForm)
     {
         var holderCreateUdfRes = await _dataAccess.CallUdf<AccountHolderInsertionResult, dynamic>(
             "sr_accountholders_createone", 
             new
             {
-                _birthdate = holderDto.birthdate,
-                _firstname = holderDto.firstname, 
-                _middlename = holderDto.middlename, 
-                _lastname = holderDto.lastname, 
-                _phone_number = holderDto.phone_number, 
-                _job_title = holderDto.job_title, 
-                _expected_salary = holderDto.expected_salary
+                _birthdate = holderForm.birthdate,
+                _firstname = holderForm.firstname, 
+                _middlename = holderForm.middlename, 
+                _lastname = holderForm.lastname, 
+                _phone_number = holderForm.phone_number, 
+                _job_title = holderForm.job_title, 
+                _expected_salary = holderForm.expected_salary,
+                _street = holderForm.street,
+                _zipcode = holderForm.zipcode,
+                _city = holderForm.city,
+                _state = holderForm.state,
+                _country = holderForm.country,
+                _unit_number = holderForm.unit_number,
+                _address_type = holderForm.address_type
             });
 
         var first = holderCreateUdfRes.FirstOrDefault();
         if (first is null) return null;
         return first.account_holder_id;
     }
+    
 
     // TODO: untested
     public async Task<AccountHolderBO?> GetRandomOne()

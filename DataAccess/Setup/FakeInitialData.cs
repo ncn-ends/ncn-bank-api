@@ -4,7 +4,7 @@ namespace DataAccess.Access;
 
 public static class FakeInitialData
 {
-    public static readonly AccountHolderDTO SampleAccountHolder1 = new()
+    public static readonly AccountHolderForm SampleAccountHolder1 = new()
     {
         birthdate = new DateTime(),
         firstname = "Mike",
@@ -12,10 +12,17 @@ public static class FakeInitialData
         lastname = "Tyson",
         phone_number = "111-111-1111",
         job_title = "Boxer",
-        expected_salary = 1000000
+        expected_salary = 1000000,
+        street = "123 Pierce St",
+        zipcode = "11111-1111",
+        city = "San Francisco",
+        state = "California",
+        country = "USA",
+        unit_number = 111,
+        address_type = "Condo/Apartment"
     };
     
-    public static readonly AccountHolderDTO SampleAccountHolder2 = new()
+    public static readonly AccountHolderForm SampleAccountHolder2 = new()
     {
         birthdate = new DateTime(),
         firstname = "James",
@@ -23,7 +30,14 @@ public static class FakeInitialData
         lastname = "Ajax",
         phone_number = "222-222-2222",
         job_title = "Investor",
-        expected_salary = 10000000
+        expected_salary = 10000000,
+        street = "234 Euclid Ave",
+        zipcode = "22222-2222",
+        city = "Bishop",
+        state = "California",
+        country = "USA",
+        unit_number = 222,
+        address_type = "Condo/Apartment"
     };
 
     public static CardCreationForm SampleCard1(Guid accountId) => new()

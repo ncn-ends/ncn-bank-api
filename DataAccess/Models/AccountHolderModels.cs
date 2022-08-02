@@ -21,7 +21,7 @@ public class AccountHolderBO
     public decimal expected_salary { get; set; } = -1;
 }
 
-public class AccountHolderDTO
+public class AccountHolderForm
 {
     public DateTime birthdate { get; set; }
     public string? firstname { get; set; }
@@ -30,6 +30,13 @@ public class AccountHolderDTO
     public string? phone_number { get; set; }
     public string? job_title { get; set; }
     public decimal? expected_salary { get; set; }
+    public string street { get; set; }
+    public string zipcode { get; set; }
+    public string city { get; set; }
+    public string state { get; set; }
+    public string country { get; set; }
+    public int unit_number { get; set; }
+    public string address_type { get; set; }
 }
 
 public class AccountHolderInsertionResult

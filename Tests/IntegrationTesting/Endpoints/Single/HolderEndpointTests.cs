@@ -31,7 +31,7 @@ public class HolderEndpointTests
     public async Task TestAccountHolderEndpoints()
     {
         var client = new HttpClientBroker("/api/holder");
-        var sampleAccountHolderData = new AccountHolderDTO
+        var sampleAccountHolderData = new AccountHolderForm
         {
             birthdate = new DateTime(),
             firstname = "Bobby",
