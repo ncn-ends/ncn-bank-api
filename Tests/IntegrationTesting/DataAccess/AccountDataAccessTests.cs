@@ -22,7 +22,7 @@ public class AccountDataAccessTests
         var setupAccess = scope.ServiceProvider.GetRequiredService<ISetupAccess>();
         var accountHolderAccess = scope.ServiceProvider.GetRequiredService<IAccountHolderAccess>();
         var accountAccess = scope.ServiceProvider.GetRequiredService<IAccountAccess>();
-        var transferAccess = scope.ServiceProvider.GetRequiredService<ITransferAccess>();
+        
         await setupAccess.EnsureDatabaseSetup();
 
         var holderInsertionGuid = await accountHolderAccess.CreateOne(FakeInitialData.SampleAccountHolder1);

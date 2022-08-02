@@ -1,4 +1,5 @@
 using System;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using DataAccess.Access;
@@ -110,6 +111,9 @@ public class TransferDataAccessTests
         var targetAccount = await _accountAccess.SearchByHolderName(FakeInitialData.SampleAccountHolder2.lastname);
         var randomCheck = await _checkAccess.GetRandomOne();
         var randomCard = await _cardAccess.GetRandomOne();
+        
+        var initialTransfers = await _transferAccess.GetAllByTargetAccount(targetAccount.account_id);
+        var initialTransfer = initialTransfers.FirstOrDefault();
 
         var checkTransferAmounts = new[]
         {
@@ -142,9 +146,9 @@ public class TransferDataAccessTests
             5914.02m,
             6028.79m
         };
-        var totalTransferCount =        checkTransferAmounts.Length 
-                                        + cardTransferAmounts.Length 
-                                        + cashTransferAmounts.Length;
+        var totalTransferCount = checkTransferAmounts.Length
+                                 + cardTransferAmounts.Length
+                                 + cashTransferAmounts.Length;
         
         var totalTransferAmountNoCash = checkTransferAmounts.Sum()
                                         + cardTransferAmounts.Sum();
@@ -181,6 +185,7 @@ public class TransferDataAccessTests
                 amount = cashTransferAmounts[i],
                 transfer_target = targetAccount.account_id
             };
+            Debugger.Break();
             await _transferAccess.MakeTransfer(transferForm);
         }
 
@@ -188,7 +193,8 @@ public class TransferDataAccessTests
         var allTransfersBySource = await _transferAccess.GetAllBySourceAccount(sourceAccount.account_id);
 
         allTransfersByTarget.Should().NotBeNull();
-        allTransfersByTarget.Length().Should().Be(totalTransferCount);
+        var initialTransferCount = 1;
+        allTransfersByTarget.Length().Should().Be(totalTransferCount + initialTransferCount);
 
         allTransfersBySource.Should().NotBeNull();
         allTransfersBySource.Length().Should().Be(totalTransferCount - cashTransferAmounts.Length);
@@ -196,8 +202,10 @@ public class TransferDataAccessTests
         var targetAccountBalance = await _accountAccess.GetAccountBalance(targetAccount.account_id);
         var sourceAccountBalance = await _accountAccess.GetAccountBalance(sourceAccount.account_id);
 
-        targetAccountBalance.balance.Should().Be(totalTransferAmount);
-        Math.Abs(sourceAccountBalance.balance).Should().Be(totalTransferAmountNoCash);
+        var initialSourceAccountBalance = 300;
+        
+        targetAccountBalance.balance.Should().Be(totalTransferAmount + initialTransfer.amount);
+        sourceAccountBalance.balance.Should().Be(initialSourceAccountBalance - totalTransferAmountNoCash);
 
         var targetHolderBalance = await _holderAccess.GetBalance(targetAccount.account_holder.account_holder_id);
         var sourceHolderBalance = await _holderAccess.GetBalance(sourceAccount.account_holder.account_holder_id);

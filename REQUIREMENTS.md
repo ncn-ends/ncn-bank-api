@@ -285,7 +285,7 @@
     - Ensure that all accounts and cards are deactivated as well
     
   - ~~Create account attached to account holder~~
-    - Make initial deposit
+    ~~- Make initial deposit~~
   - ~~Get basic account info~~
   - ~~Search for account by account holder name~~
   - ~~Get account cards~~

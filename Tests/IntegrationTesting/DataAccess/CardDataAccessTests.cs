@@ -44,6 +44,7 @@ public class CardDataAccessTests
 
         var firstCardInAllCards = allCards.FirstOrDefault();
         firstCardInAllCards.Should().NotBeNull();
+        Debugger.Break();
         firstCardInAllCards.Should().BeEquivalentTo(createdCard);
 
         var deactivatedCard = await cardAccess.DeactivateOneById(createdCard.card_id);

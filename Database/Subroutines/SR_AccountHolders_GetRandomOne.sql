@@ -1,8 +1,6 @@
-CREATE OR REPLACE FUNCTION SR_AccountHolders_GetRandomOne()
-RETURNS SETOF account_holders AS $$
+CREATE OR REPLACE FUNCTION sr_accountholders_getrandomone() RETURNS SETOF account_holders AS $$
 BEGIN
-    RETURN QUERY
-    SELECT
+    RETURN QUERY SELECT
         account_holder_id,
         birthdate,
         firstname,
@@ -14,5 +12,4 @@ BEGIN
     FROM account_holders
     ORDER BY random()
     LIMIT 1;
-END;
-$$ LANGUAGE plpgsql;
+END; $$ LANGUAGE plpgsql;

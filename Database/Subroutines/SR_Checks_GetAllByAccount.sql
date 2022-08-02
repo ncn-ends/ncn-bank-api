@@ -1,17 +1,16 @@
-CREATE OR REPLACE FUNCTION SR_Checks_GetAllByAccount(_account_id uuid)
-RETURNS setof ReturnType_Checks_StandardReturn AS $$
+CREATE OR REPLACE FUNCTION sr_checks_getallbyaccount(
+    _account_id uuid
+) RETURNS SETOF returntype_checks_standardreturn AS $$
 BEGIN
-    RETURN QUERY
-    SELECT
+    RETURN QUERY SELECT
         checks.check_id,
-        accnt.account_number::text,
-        checks.routing_number::text,
+        accnt.account_number::TEXT,
+        checks.routing_number::TEXT,
         checks.expiration,
         checks.deactivated,
         checks.created_at
-    FROM checks
-    JOIN
-        accounts accnt ON checks.account_id = accnt.account_id
+    FROM
+        checks
+        JOIN accounts accnt ON checks.account_id = accnt.account_id
     WHERE checks.account_id = _account_id;
-END;
-$$ LANGUAGE plpgsql;
+END; $$ LANGUAGE plpgsql;
