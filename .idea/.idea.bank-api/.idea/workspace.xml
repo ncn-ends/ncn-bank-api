@@ -7,15 +7,15 @@
   <component name="ChangeListManager">
     <list default="true" id="da88e022-a72c-429b-b2d2-ab358463d5d5" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.bank-api/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.bank-api/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DataAccess/Access/AccountHolderAccess.cs" beforeDir="false" afterPath="$PROJECT_DIR$/DataAccess/Access/AccountHolderAccess.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DataAccess/Access/AddressAccess.cs" beforeDir="false" afterPath="$PROJECT_DIR$/DataAccess/Access/AddressAccess.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DataAccess/Models/AccountHolderModels.cs" beforeDir="false" afterPath="$PROJECT_DIR$/DataAccess/Models/AccountHolderModels.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DataAccess/Setup/SetupAccess.cs" beforeDir="false" afterPath="$PROJECT_DIR$/DataAccess/Setup/SetupAccess.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DataAccess/Access/CardAccess.cs" beforeDir="false" afterPath="$PROJECT_DIR$/DataAccess/Access/CardAccess.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DataAccess/Access/CheckAccess.cs" beforeDir="false" afterPath="$PROJECT_DIR$/DataAccess/Access/CheckAccess.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Database/Setup/Reset.sql" beforeDir="false" afterPath="$PROJECT_DIR$/Database/Setup/Reset.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Database/Subroutines/SR_AccountHolders_CreateOne.sql" beforeDir="false" afterPath="$PROJECT_DIR$/Database/Subroutines/SR_AccountHolders_CreateOne.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Database/Subroutines/SR_Address_Insert.sql" beforeDir="false" afterPath="$PROJECT_DIR$/Database/Subroutines/SR_Address_Insert.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Database/Tables/Table_addresses.sql" beforeDir="false" afterPath="$PROJECT_DIR$/Database/Tables/Table_addresses.sql" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/REQUIREMENTS.md" beforeDir="false" afterPath="$PROJECT_DIR$/REQUIREMENTS.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Tests/IntegrationTesting/DataAccess/CardDataAccessTests.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/IntegrationTesting/DataAccess/CardDataAccessTests.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Tests/IntegrationTesting/DataAccess/CheckDataAccessTests.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/IntegrationTesting/DataAccess/CheckDataAccessTests.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Tests/IntegrationTesting/DataAccess/TransferDataAccessTests.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/IntegrationTesting/DataAccess/TransferDataAccessTests.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Tests/IntegrationTesting/Endpoints/Single/AddressEndpointTests.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/IntegrationTesting/Endpoints/Single/AddressEndpointTests.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Tests/IntegrationTesting/Endpoints/Single/HolderEndpointTests.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/IntegrationTesting/Endpoints/Single/HolderEndpointTests.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -131,7 +131,7 @@
       <workItem from="1659102774300" duration="18997000" />
       <workItem from="1659256489947" duration="11223000" />
       <workItem from="1659302349513" duration="257000" />
-      <workItem from="1659302624508" duration="22135000" />
+      <workItem from="1659302624508" duration="29881000" />
     </task>
     <servers />
   </component>
@@ -142,12 +142,12 @@
     <option name="coveragePercentColumnWidth" value="188" />
     <option name="sortOrder" value="DESCENDING" />
     <option name="sortedColumn" value="1" />
-    <option name="symbolColumnWidth" value="546" />
+    <option name="symbolColumnWidth" value="609" />
     <coverage-tree-state>
       <expand>
         <path>
           <item name="rootNode" type="c53c71d1:RiderDotCoverCoverageTreeModel$RootNode" />
-          <item name="Total 89% 131/1190" type="8b8fad3a:RiderDotCoverCoverageTreeNode" />
+          <item name="Total 84% 218/1373" type="8b8fad3a:RiderDotCoverCoverageTreeNode" />
         </path>
       </expand>
       <select />
@@ -176,19 +176,6 @@
           </properties>
           <option name="timeStamp" value="6" />
         </breakpoint>
-        <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/Tests/IntegrationTesting/DataAccess/AddressDataAccessTests.cs</url>
-          <line>31</line>
-          <properties documentPath="$PROJECT_DIR$/Tests/IntegrationTesting/DataAccess/AddressDataAccessTests.cs" initialLine="29" containingFunctionPresentation="method 'AddressCRUDTests'">
-            <startOffsets>
-              <option value="1049" />
-            </startOffsets>
-            <endOffsets>
-              <option value="1083" />
-            </endOffsets>
-          </properties>
-          <option name="timeStamp" value="7" />
-        </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
   </component>

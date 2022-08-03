@@ -146,9 +146,9 @@ public class TransferDataAccessTests
             5914.02m,
             6028.79m
         };
-        var totalTransferCount = checkTransferAmounts.Length
-                                 + cardTransferAmounts.Length
-                                 + cashTransferAmounts.Length;
+        var totalTransferCount =        checkTransferAmounts.Length
+                                        + cardTransferAmounts.Length
+                                        + cashTransferAmounts.Length;
         
         var totalTransferAmountNoCash = checkTransferAmounts.Sum()
                                         + cardTransferAmounts.Sum();
@@ -205,7 +205,7 @@ public class TransferDataAccessTests
         
         targetAccountBalance.balance.Should().Be(totalTransferAmount + initialTransfer.amount);
         sourceAccountBalance.balance.Should().Be(initialSourceAccountBalance - totalTransferAmountNoCash);
-
+        
         var targetHolderBalance = await _holderAccess.GetBalance(targetAccount.account_holder.account_holder_id);
         var sourceHolderBalance = await _holderAccess.GetBalance(sourceAccount.account_holder.account_holder_id);
         

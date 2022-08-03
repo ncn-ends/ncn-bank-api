@@ -1,6 +1,7 @@
 using System;
 using System.Diagnostics;
 using System.Threading.Tasks;
+using DataAccess.Access;
 using DataAccess.Models;
 using FluentAssertions;
 using Tests.Helpers;
@@ -31,16 +32,7 @@ public class HolderEndpointTests
     public async Task TestAccountHolderEndpoints()
     {
         var client = new HttpClientBroker("/api/holder");
-        var sampleAccountHolderData = new AccountHolderForm
-        {
-            birthdate = new DateTime(),
-            firstname = "Bobby",
-            middlename = "James",
-            lastname = "Christopher",
-            phone_number = "111-111-1111",
-            job_title = "Software Dev",
-            expected_salary = 1000000
-        };
+        var sampleAccountHolderData = FakeInitialData.SampleAccountHolder1;
         var postResponse = await client.SendPost(sampleAccountHolderData);
         postResponse.EnsureSuccessStatusCode();
         

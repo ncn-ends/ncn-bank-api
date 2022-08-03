@@ -1,0 +1,51 @@
+-- CREATE OR REPLACE FUNCTION SR_Transfers_GetAllByAccountHolder(_account_holder_id uuid)
+-- RETURNS setof ReturnType_Transfers_StandardReturn AS $$
+-- BEGIN
+--     RETURN QUERY
+--     WITH check_transfers_source AS (
+--         SELECT
+--             transfers_check.transfer_id,
+--             transfers_check.amount * -1,
+--             transfers_check.memo::text,
+--             transfers_check.created_at
+--         FROM transfers_check
+--         JOIN checks c ON transfers_check.check_id = c.check_id
+--         WHERE c.account_id = _account_id
+--     ), card_transfers_source AS (
+--         SELECT
+--             transfers_card.transfer_id,
+--             transfers_card.amount * -1,
+--             transfers_card.memo::text,
+--             transfers_card.created_at
+--         FROM transfers_card
+--         JOIN cards c ON transfers_card.card_id = c.card_id
+--         WHERE c.account_id = _account_id
+--     ), check_transfers_target AS (
+--         SELECT
+--             transfer_id,
+--             amount,
+--             memo::text,
+--             created_at
+--         FROM transfers_check
+--         WHERE transfer_target = _account_id
+--     ), card_transfers AS (
+--         SELECT
+--             transfer_id,
+--             amount,
+--             memo::text,
+--             created_at
+--         FROM transfers_card
+--         WHERE transfer_target = _account_id
+--     ), cash_transfers AS (
+--         SELECT
+--             transfer_id,
+--             amount,
+--             memo::text,
+--             created_at
+--         FROM transfers_cash
+--         WHERE transfer_target = _account_id
+--     )
+--     SELECT * FROM check_transfers
+--     UNION ALL
+--     SELECT * FROM card_transfers;
+-- END; $$ LANGUAGE plpgsql;

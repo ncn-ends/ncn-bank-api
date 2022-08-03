@@ -3,6 +3,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using DataAccess.Access;
+using DataAccess.Models;
 using DataAccess.Setup;
 using FluentAssertions;
 using Microsoft.Extensions.DependencyInjection;
@@ -14,44 +15,75 @@ namespace Tests.IntegrationTesting.DataAccess;
 [Collection("SequentialTesting")]
 public class CardDataAccessTests
 {
-    [Fact]
-    public async Task CardCRUDTests()
+    private readonly ISetupAccess _setupAccess;
+    private readonly IAccountAccess _accountAccess;
+    private readonly ICardAccess _cardAccess;
+
+    public CardDataAccessTests()
     {
         var waf = new CustomWAF<Program>();
         using var scope = waf.Services.CreateScope();
-        var setupAccess = scope.ServiceProvider.GetRequiredService<ISetupAccess>();
-        var accountAccess = scope.ServiceProvider.GetRequiredService<IAccountAccess>();
-        var cardAccess = scope.ServiceProvider.GetRequiredService<ICardAccess>();
-        await setupAccess.EnsureDatabaseSetup();
         
-        var randomAccount = await accountAccess.GetRandomOne();
+        _setupAccess = scope.ServiceProvider.GetRequiredService<ISetupAccess>();
+        _accountAccess = scope.ServiceProvider.GetRequiredService<IAccountAccess>();
+        _cardAccess = scope.ServiceProvider.GetRequiredService<ICardAccess>();
+    }
+    [Fact]
+    public async Task CardCRUDTests()
+    {
+        await _setupAccess.EnsureDatabaseSetup();
+        
+        var randomAccount = await _accountAccess.GetRandomOne();
 
         var sampleCard = FakeInitialData.SampleCard1(randomAccount.account_id);
-        var createdCard = await cardAccess.CreateOne(sampleCard);
+        var createdCard = await _cardAccess.CreateOne(sampleCard);
 
-        createdCard.Should().NotBeNull();
-        createdCard.card_id.Should().NotBeEmpty();
-        createdCard.card_number.Length.Should().Be(16);
-        createdCard.csv.Length.Should().Be(3);
+        await AssertCardIsValid(createdCard);
         createdCard.pin_number.Should().Be(sampleCard.pin_number);
         
         var targetExpiration = DateTime.Now.AddMonths(54);
         var daysBetweenExpectedExpiration = (targetExpiration - createdCard.expiration).TotalDays;
         daysBetweenExpectedExpiration.Should().BeInRange(-15, 15);
 
-        var allCards = await cardAccess.GetAllByAccount(randomAccount.account_id);
-        allCards.Length().Should().BeOneOf(1, 2); // TODO: why does this become 2 sometimes?
+        var allCards = await _cardAccess.GetAllByAccount(randomAccount.account_id);
+        allCards.Length().Should().BeOneOf(1, 2);
 
-        var firstCardInAllCards = allCards.FirstOrDefault();
-        firstCardInAllCards.Should().NotBeNull();
-        firstCardInAllCards.Should().BeEquivalentTo(createdCard);
+        var lastCardInAllCards = allCards.LastOrDefault();
+        lastCardInAllCards.Should().NotBeNull();
+        lastCardInAllCards.Should().BeEquivalentTo(createdCard);
 
-        var deactivatedCard = await cardAccess.DeactivateOneById(createdCard.card_id);
+        var deactivatedCard = await _cardAccess.DeactivateOneById(createdCard.card_id);
         deactivatedCard.Should().NotBeNull();
         deactivatedCard.deactivated.Should().BeTrue();
         deactivatedCard.card_id.Should().NotBeEmpty();
         deactivatedCard.card_number.Length.Should().Be(16);
         deactivatedCard.csv.Length.Should().Be(3);
         deactivatedCard.pin_number.Should().Be(createdCard.pin_number);
+    }
+    
+
+    [Fact]
+    public async Task CardsByAccountHolderTests()
+    {
+        await _setupAccess.EnsureDatabaseSetup();
+
+        var account = await _accountAccess.SearchByHolderName(FakeInitialData.SampleAccountHolder1.firstname);
+        var cards = await _cardAccess.GetAllByAccountHolder(account.account_holder.account_holder_id);
+        
+        cards.Length().Should().Be(1);
+        
+        var firstCheck = cards.FirstOrDefault();
+        
+        await AssertCardIsValid(firstCheck);
+
+    }
+
+    private async Task AssertCardIsValid(CardBO card)
+    {
+        
+        card.Should().NotBeNull();
+        card.card_id.Should().NotBeEmpty();
+        card.card_number.Length.Should().Be(16);
+        card.csv.Length.Should().Be(3);
     }
 }

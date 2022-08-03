@@ -275,10 +275,9 @@
   - ~~Pull up info about an account holder~~
   - ~~Create a new account holder~~
     ~~- **make sure that it includes address creation**~~
-  - Get account holders addresses
-  - Update holders information
-  - Get account holders cards
-  - Get account holders checks
+  ~~- Get account holders addresses~~
+  ~~- Get account holders cards~~
+  ~~- Get account holders checks~~
   - Get account holders transactions
   - ~~Get account holders balance~~
   - Deactivate account holder
