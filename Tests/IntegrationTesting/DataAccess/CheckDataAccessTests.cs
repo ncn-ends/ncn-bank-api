@@ -21,7 +21,6 @@ public class CheckDataAccessTests
 
     public CheckDataAccessTests()
     {
-        
         var waf = new CustomWAF<Program>();
         using var scope = waf.Services.CreateScope();
         _setupAccess = scope.ServiceProvider.GetRequiredService<ISetupAccess>();
@@ -63,7 +62,6 @@ public class CheckDataAccessTests
         deactivatedCheck.Should().NotBeNull();
         deactivatedCheck.deactivated.Should().BeTrue();
         deactivatedCheck.account_number.Should().Be(createdCheck.account_number);
-        
         deactivatedCheck.check_id.Should().NotBe(createdCheck.check_id);
         deactivatedCheck.routing_number.Should().NotBe(createdCheck.routing_number);
     }

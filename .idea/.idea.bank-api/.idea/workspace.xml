@@ -7,15 +7,12 @@
   <component name="ChangeListManager">
     <list default="true" id="da88e022-a72c-429b-b2d2-ab358463d5d5" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.bank-api/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.bank-api/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DataAccess/Access/CardAccess.cs" beforeDir="false" afterPath="$PROJECT_DIR$/DataAccess/Access/CardAccess.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DataAccess/Access/CheckAccess.cs" beforeDir="false" afterPath="$PROJECT_DIR$/DataAccess/Access/CheckAccess.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Database/Setup/Reset.sql" beforeDir="false" afterPath="$PROJECT_DIR$/Database/Setup/Reset.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/REQUIREMENTS.md" beforeDir="false" afterPath="$PROJECT_DIR$/REQUIREMENTS.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DataAccess/Access/TransferAccess.cs" beforeDir="false" afterPath="$PROJECT_DIR$/DataAccess/Access/TransferAccess.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Database/Subroutines/SR_Transfers_GetAllByAccountHolder.sql" beforeDir="false" afterPath="$PROJECT_DIR$/Database/Subroutines/SR_Transfers_GetAllByAccountHolder.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Database/Views/View_CardsWithFullAccountDetails.sql" beforeDir="false" afterPath="$PROJECT_DIR$/Database/Views/View_CardsWithFullAccountDetails.sql" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Tests/IntegrationTesting/DataAccess/CardDataAccessTests.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/IntegrationTesting/DataAccess/CardDataAccessTests.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Tests/IntegrationTesting/DataAccess/CheckDataAccessTests.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/IntegrationTesting/DataAccess/CheckDataAccessTests.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Tests/IntegrationTesting/DataAccess/TransferDataAccessTests.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/IntegrationTesting/DataAccess/TransferDataAccessTests.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Tests/IntegrationTesting/Endpoints/Single/AddressEndpointTests.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/IntegrationTesting/Endpoints/Single/AddressEndpointTests.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Tests/IntegrationTesting/Endpoints/Single/HolderEndpointTests.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/IntegrationTesting/Endpoints/Single/HolderEndpointTests.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -131,7 +128,8 @@
       <workItem from="1659102774300" duration="18997000" />
       <workItem from="1659256489947" duration="11223000" />
       <workItem from="1659302349513" duration="257000" />
-      <workItem from="1659302624508" duration="29881000" />
+      <workItem from="1659302624508" duration="31563000" />
+      <workItem from="1659552981557" duration="283000" />
     </task>
     <servers />
   </component>
@@ -147,7 +145,7 @@
       <expand>
         <path>
           <item name="rootNode" type="c53c71d1:RiderDotCoverCoverageTreeModel$RootNode" />
-          <item name="Total 84% 218/1373" type="8b8fad3a:RiderDotCoverCoverageTreeNode" />
+          <item name="Total 79% 299/1392" type="8b8fad3a:RiderDotCoverCoverageTreeNode" />
         </path>
       </expand>
       <select />

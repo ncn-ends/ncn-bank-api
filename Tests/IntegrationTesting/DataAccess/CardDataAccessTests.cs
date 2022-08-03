@@ -46,13 +46,16 @@ public class CardDataAccessTests
         daysBetweenExpectedExpiration.Should().BeInRange(-15, 15);
 
         var allCards = await _cardAccess.GetAllByAccount(randomAccount.account_id);
+        
         allCards.Length().Should().BeOneOf(1, 2);
 
         var lastCardInAllCards = allCards.LastOrDefault();
+        
         lastCardInAllCards.Should().NotBeNull();
         lastCardInAllCards.Should().BeEquivalentTo(createdCard);
 
         var deactivatedCard = await _cardAccess.DeactivateOneById(createdCard.card_id);
+        
         deactivatedCard.Should().NotBeNull();
         deactivatedCard.deactivated.Should().BeTrue();
         deactivatedCard.card_id.Should().NotBeEmpty();
