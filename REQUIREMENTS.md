@@ -278,7 +278,7 @@
   ~~- Get account holders addresses~~
   ~~- Get account holders cards~~
   ~~- Get account holders checks~~
-  - Get account holders transactions
+  ~~- Get account holders transactions~~
   - ~~Get account holders balance~~
   - Deactivate account holder
     - Ensure that all accounts and cards are deactivated as well

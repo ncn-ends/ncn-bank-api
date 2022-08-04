@@ -6,7 +6,7 @@ namespace DataAccess.Access;
 public interface IAddressAccess
 {
     Task<int> AddAddress(AddressDTO addressDetails);
-    Task<IEnumerable<AddressBO>> GetAllByAccountHolder(Guid holderId);
+    Task<IEnumerable<AddressDTO>> GetAllByAccountHolder(Guid holderId);
 }
 
 public class AddressAccess : IAddressAccess
@@ -30,7 +30,8 @@ public class AddressAccess : IAddressAccess
             _state = addressDetails.state,
             _country = addressDetails.country,
             _unit_number = addressDetails.unit_number,
-            _address_type = addressDetails.address_type
+            _address_type = addressDetails.address_type,
+            _account_holder_id = addressDetails.account_holder_id
         });
 
         var row = queryResult.FirstOrDefault();
@@ -39,14 +40,14 @@ public class AddressAccess : IAddressAccess
         return row.address_id;
     }
 
-    public async Task<IEnumerable<AddressBO>> GetAllByAccountHolder(Guid holderId)
+    public async Task<IEnumerable<AddressDTO>> GetAllByAccountHolder(Guid holderId)
     {
         var udfName = "SR_Addresses_GetAllByAccountHolder";
         var udfParams = new
         {
             _account_holder_id = holderId
         };
-        var addresses = await _dataAccess.CallUdf<AddressBO, dynamic>(udfName, udfParams);
+        var addresses = await _dataAccess.CallUdf<AddressDTO, dynamic>(udfName, udfParams);
         
         return addresses;
     }

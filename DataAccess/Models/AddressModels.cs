@@ -14,6 +14,7 @@ public class AddressDTO
     public string country { get; set; } = "UNSET COUNTRY";
     public int unit_number { get; set; } = -1;
     public string address_type { get; set; } = "UNSET ADDRESS TYPE";
+    public Guid account_holder_id { get; set; }
 }
 
 public class AddressInsertionReturnType

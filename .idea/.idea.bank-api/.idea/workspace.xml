@@ -7,11 +7,11 @@
   <component name="ChangeListManager">
     <list default="true" id="da88e022-a72c-429b-b2d2-ab358463d5d5" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.bank-api/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.bank-api/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DataAccess/Access/TransferAccess.cs" beforeDir="false" afterPath="$PROJECT_DIR$/DataAccess/Access/TransferAccess.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Database/Subroutines/SR_Transfers_GetAllByAccountHolder.sql" beforeDir="false" afterPath="$PROJECT_DIR$/Database/Subroutines/SR_Transfers_GetAllByAccountHolder.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Database/Views/View_CardsWithFullAccountDetails.sql" beforeDir="false" afterPath="$PROJECT_DIR$/Database/Views/View_CardsWithFullAccountDetails.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Tests/IntegrationTesting/DataAccess/CardDataAccessTests.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/IntegrationTesting/DataAccess/CardDataAccessTests.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Tests/IntegrationTesting/DataAccess/CheckDataAccessTests.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/IntegrationTesting/DataAccess/CheckDataAccessTests.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DataAccess/Access/AddressAccess.cs" beforeDir="false" afterPath="$PROJECT_DIR$/DataAccess/Access/AddressAccess.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DataAccess/Models/AddressModels.cs" beforeDir="false" afterPath="$PROJECT_DIR$/DataAccess/Models/AddressModels.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Database/Subroutines/SR_Address_Insert.sql" beforeDir="false" afterPath="$PROJECT_DIR$/Database/Subroutines/SR_Address_Insert.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/REQUIREMENTS.md" beforeDir="false" afterPath="$PROJECT_DIR$/REQUIREMENTS.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Tests/IntegrationTesting/DataAccess/AddressDataAccessTests.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/IntegrationTesting/DataAccess/AddressDataAccessTests.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Tests/IntegrationTesting/DataAccess/TransferDataAccessTests.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/IntegrationTesting/DataAccess/TransferDataAccessTests.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -32,6 +32,7 @@
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/34097e45bb354c36a678d3bc66df67d494dc00/8a/8f4300aa/PropertyInfo.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/34097e45bb354c36a678d3bc66df67d494dc00/a0/fcd219e8/Interop.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/34097e45bb354c36a678d3bc66df67d494dc00/ab/ffb9a31f/Assembly.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/34097e45bb354c36a678d3bc66df67d494dc00/b7/bf731eb4/ExceptionDispatchInfo.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/34097e45bb354c36a678d3bc66df67d494dc00/cf/e32ed25e/ExceptionDispatchInfo.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/34097e45bb354c36a678d3bc66df67d494dc00/ee/5489963b/String.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/b643966c808a41d1a192437cc081a17f1fb800/89/993cf6bf/BodyControl.cs" root0="SKIP_HIGHLIGHTING" />
@@ -130,6 +131,7 @@
       <workItem from="1659302349513" duration="257000" />
       <workItem from="1659302624508" duration="31563000" />
       <workItem from="1659552981557" duration="283000" />
+      <workItem from="1659553288455" duration="3607000" />
     </task>
     <servers />
   </component>
