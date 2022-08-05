@@ -5,16 +5,18 @@ RETURNS SETOF Returntype_addresses_standardreturn AS $$
 BEGIN
     RETURN QUERY
     SELECT
-        addresses.address_id,
-        addresses.street,
-        addresses.city,
-        addresses.zipcode::text,
-        addresses.state,
-        addresses.country,
-        addresses.unit_number::int,
-        addresses.address_type::text,
-        addresses.account_holder_id
-    FROM addresses
-    WHERE addresses.account_holder_id = _account_holder_id;
+         address_id,
+         street,
+         city,
+         zipcode::text,
+         state,
+         country,
+         unit_number,
+         address_type::text,
+         account_holder_id
+    FROM
+        view_activeaddresses
+    WHERE
+        account_holder_id = _account_holder_id;
 END;
 $$ LANGUAGE plpgsql;

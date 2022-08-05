@@ -8,6 +8,7 @@ public interface IAddressAccess
 {
     Task<Guid> AddAddress(AddressInsertionForm addressForm);
     Task<IEnumerable<AddressBO>> GetAllByAccountHolder(Guid holderId);
+    Task<Guid?> DeactivateOneById(Guid addressId);
 }
 
 public class AddressAccess : IAddressAccess
@@ -34,7 +35,6 @@ public class AddressAccess : IAddressAccess
             _address_type = addressForm.address_type,
             _account_holder_id = addressForm.account_holder_id
         });
-        Debugger.Break();
         var row = queryResult.FirstOrDefault();
         if (row is null) throw new DataException();
         
@@ -51,5 +51,17 @@ public class AddressAccess : IAddressAccess
         var addresses = await _dataAccess.CallUdf<AddressBO, dynamic>(udfName, udfParams);
         
         return addresses;
+    }
+
+    public async Task<Guid?> DeactivateOneById(Guid addressId)
+    {
+        var udfName = "SR_Addresses_DeactivateOneById";
+        var udfParams = new
+        {
+            _address_id = addressId
+        };
+        var deactivatedAddress = await _dataAccess.CallUdf<AddressInsertionReturnType, dynamic>(udfName, udfParams);
+
+        return deactivatedAddress.FirstOrDefault()?.address_id;
     }
 }

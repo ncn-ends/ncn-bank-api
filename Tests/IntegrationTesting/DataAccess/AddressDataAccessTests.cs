@@ -53,11 +53,17 @@ public class AddressDataAccessTests
         var addressesAfterInsertion = await addressAccess.GetAllByAccountHolder(randomHolder.account_holder_id);
         
         addressesAfterInsertion.Length().Should().Be(addresses.Length() + 1);
-        
+
+        var firstEntry = addressesAfterInsertion.FirstOrDefault();
         var lastEntry = addressesAfterInsertion.LastOrDefault();
         
         lastEntry.Should().BeEquivalentTo(entry);
-        
-        // var deactivatedAddress = await addressAccess.DeactivateOne()
+
+        var deactivatedAddress = await addressAccess.DeactivateOneById(lastEntry.address_id);
+        deactivatedAddress.Should().NotBe(lastEntry.address_id);
+
+        var addressesAfterDeactivated = await addressAccess.GetAllByAccountHolder(randomHolder.account_holder_id);
+        addressesAfterDeactivated.Length().Should().Be(1);
+        firstEntry.address_id.Should().Be(addressesAfterDeactivated.FirstOrDefault().address_id);
     }
 }

@@ -11,6 +11,7 @@ public class AddressBO
     public int unit_number { get; set; } = -1;
     public string address_type { get; set; } = "UNSET ADDRESS TYPE";
     public Guid? account_holder_id { get; set; }
+    public Guid? deactivated_address { get; set; } = null;
 }
 
 public class AddressInsertionForm
@@ -24,6 +25,7 @@ public class AddressInsertionForm
     public int unit_number { get; set; } = -1;
     public string address_type { get; set; } = "UNSET ADDRESS TYPE";
     public Guid? account_holder_id { get; set; }
+    public Guid? deactivated_address { get; set; } = null;
 }
 
 public class AddressInsertionReturnType

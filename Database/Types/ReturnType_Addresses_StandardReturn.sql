@@ -5,7 +5,7 @@ CREATE TYPE ReturnType_Addresses_StandardReturn AS (
     zipcode text,
     state text,
     country text,
-    unit_number int,
+    unit_number text,
     address_type text,
     account_holder_id uuid
 )

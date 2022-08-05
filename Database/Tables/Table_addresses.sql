@@ -7,5 +7,6 @@ CREATE TABLE IF NOT EXISTS addresses (
     state TEXT NOT NULL,
     country TEXT NOT NULL,
     unit_number TEXT DEFAULT NULL,
-    address_type address_type NOT NULL
+    address_type address_type NOT NULL,
+    deactivated_address UUID REFERENCES addresses(address_id)
 )
