@@ -31,12 +31,13 @@ public class AddressDataAccessTests
 
         await setupAccess.EnsureDatabaseSetup();
 
+        
         var randomHolder = await holderAccess.GetRandomOne();
         var addresses = await addressAccess.GetAllByAccountHolder(randomHolder.account_holder_id);
 
         addresses.Length().Should().Be(1);
 
-        var entry = new AddressDTO
+        var entry = new AddressInsertionForm
         {
             street = street,
             zipcode = zipcode,
@@ -50,8 +51,13 @@ public class AddressDataAccessTests
 
         await addressAccess.AddAddress(entry);
         var addressesAfterInsertion = await addressAccess.GetAllByAccountHolder(randomHolder.account_holder_id);
+        
         addressesAfterInsertion.Length().Should().Be(addresses.Length() + 1);
+        
         var lastEntry = addressesAfterInsertion.LastOrDefault();
+        
         lastEntry.Should().BeEquivalentTo(entry);
+        
+        // var deactivatedAddress = await addressAccess.DeactivateOne()
     }
 }

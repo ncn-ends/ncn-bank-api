@@ -1,5 +1,5 @@
 CREATE TYPE ReturnType_Addresses_StandardReturn AS (
-    address_id int,
+    address_id uuid,
     street text,
     city text,
     zipcode text,

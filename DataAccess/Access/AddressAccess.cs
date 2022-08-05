@@ -1,12 +1,13 @@
 using System.Data;
+using System.Diagnostics;
 using DataAccess.Models;
 
 namespace DataAccess.Access;
 
 public interface IAddressAccess
 {
-    Task<int> AddAddress(AddressDTO addressDetails);
-    Task<IEnumerable<AddressDTO>> GetAllByAccountHolder(Guid holderId);
+    Task<Guid> AddAddress(AddressInsertionForm addressForm);
+    Task<IEnumerable<AddressBO>> GetAllByAccountHolder(Guid holderId);
 }
 
 public class AddressAccess : IAddressAccess
@@ -20,34 +21,34 @@ public class AddressAccess : IAddressAccess
         _dataAccess = dataAccess;
     }
 
-    public async Task<int> AddAddress(AddressDTO addressDetails)
+    public async Task<Guid> AddAddress(AddressInsertionForm addressForm)
     {
         var queryResult = await _db.CallUdf<AddressInsertionReturnType, dynamic>("SR_Address_Insert", new
         {
-            _street = addressDetails.street,
-            _zipcode = addressDetails.zipcode,
-            _city = addressDetails.city,
-            _state = addressDetails.state,
-            _country = addressDetails.country,
-            _unit_number = addressDetails.unit_number,
-            _address_type = addressDetails.address_type,
-            _account_holder_id = addressDetails.account_holder_id
+            _street = addressForm.street,
+            _zipcode = addressForm.zipcode,
+            _city = addressForm.city,
+            _state = addressForm.state,
+            _country = addressForm.country,
+            _unit_number = addressForm.unit_number,
+            _address_type = addressForm.address_type,
+            _account_holder_id = addressForm.account_holder_id
         });
-
+        Debugger.Break();
         var row = queryResult.FirstOrDefault();
         if (row is null) throw new DataException();
         
         return row.address_id;
     }
 
-    public async Task<IEnumerable<AddressDTO>> GetAllByAccountHolder(Guid holderId)
+    public async Task<IEnumerable<AddressBO>> GetAllByAccountHolder(Guid holderId)
     {
         var udfName = "SR_Addresses_GetAllByAccountHolder";
         var udfParams = new
         {
             _account_holder_id = holderId
         };
-        var addresses = await _dataAccess.CallUdf<AddressDTO, dynamic>(udfName, udfParams);
+        var addresses = await _dataAccess.CallUdf<AddressBO, dynamic>(udfName, udfParams);
         
         return addresses;
     }

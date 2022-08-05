@@ -1,5 +1,5 @@
 CREATE TABLE IF NOT EXISTS addresses (
-    address_id SERIAL PRIMARY KEY NOT NULL,
+    address_id UUID PRIMARY KEY NOT NULL DEFAULT gen_random_uuid(),
     account_holder_id UUID REFERENCES account_holders(account_holder_id),
     street TEXT NOT NULL,
     zipcode VARCHAR(10) NOT NULL,

@@ -13,7 +13,7 @@ public static class AddressEndpoints
         app.MapPost("/api/address", AddAddress);
     }
 
-    private static async Task<IResult> AddAddress(AddressDTO address, IAddressAccess addressAccess)
+    private static async Task<IResult> AddAddress(AddressInsertionForm address, IAddressAccess addressAccess)
     {
         var address_id = await addressAccess.AddAddress(address);
         return Results.Ok(new {address_id});

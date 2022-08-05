@@ -1,4 +1,4 @@
-CREATE TYPE SR_Address_Insert_ValueType AS (address_id int);
+CREATE TYPE SR_Address_Insert_ValueType AS (address_id uuid);
 
 CREATE OR REPLACE FUNCTION SR_Address_Insert(
     _street TEXT,

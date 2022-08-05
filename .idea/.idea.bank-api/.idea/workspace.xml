@@ -7,12 +7,15 @@
   <component name="ChangeListManager">
     <list default="true" id="da88e022-a72c-429b-b2d2-ab358463d5d5" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.bank-api/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.bank-api/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Api/Endpoints/AddressEndpoints.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Api/Endpoints/AddressEndpoints.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/DataAccess/Access/AddressAccess.cs" beforeDir="false" afterPath="$PROJECT_DIR$/DataAccess/Access/AddressAccess.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/DataAccess/Models/AddressModels.cs" beforeDir="false" afterPath="$PROJECT_DIR$/DataAccess/Models/AddressModels.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Database/Subroutines/SR_Address_Insert.sql" beforeDir="false" afterPath="$PROJECT_DIR$/Database/Subroutines/SR_Address_Insert.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Database/Tables/Table_addresses.sql" beforeDir="false" afterPath="$PROJECT_DIR$/Database/Tables/Table_addresses.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Database/Tables/Table_branches.sql" beforeDir="false" afterPath="$PROJECT_DIR$/Database/Tables/Table_branches.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Database/Types/ReturnType_Addresses_StandardReturn.sql" beforeDir="false" afterPath="$PROJECT_DIR$/Database/Types/ReturnType_Addresses_StandardReturn.sql" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/REQUIREMENTS.md" beforeDir="false" afterPath="$PROJECT_DIR$/REQUIREMENTS.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Tests/IntegrationTesting/DataAccess/AddressDataAccessTests.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/IntegrationTesting/DataAccess/AddressDataAccessTests.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Tests/IntegrationTesting/DataAccess/TransferDataAccessTests.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/IntegrationTesting/DataAccess/TransferDataAccessTests.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -29,14 +32,18 @@
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/038c1c69b9af41b7a0326e4e024508146e200/b3/ee982846/Enumerable.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/2a925edfe5584632978e98fd8509cdf4d7a8/42/9715ab2e/CollectionAttribute.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/34097e45bb354c36a678d3bc66df67d494dc00/06/0a14348a/Volatile.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/34097e45bb354c36a678d3bc66df67d494dc00/8a/8f4300aa/PropertyInfo.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/34097e45bb354c36a678d3bc66df67d494dc00/a0/fcd219e8/Interop.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/34097e45bb354c36a678d3bc66df67d494dc00/ab/ffb9a31f/Assembly.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/34097e45bb354c36a678d3bc66df67d494dc00/b7/bf731eb4/ExceptionDispatchInfo.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/34097e45bb354c36a678d3bc66df67d494dc00/cf/e32ed25e/ExceptionDispatchInfo.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/34097e45bb354c36a678d3bc66df67d494dc00/d5/a4ca8ff6/GC.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/34097e45bb354c36a678d3bc66df67d494dc00/ee/5489963b/String.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/b643966c808a41d1a192437cc081a17f1fb800/89/993cf6bf/BodyControl.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/137081ba02cc6db44ee2fbc1b73c2b61c15198e5aec96c8ae97f992a175/WebApplicationFactoryClientOptions.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/649ef811857fbc61d6bbf9273322f28fb54cb196dbbbd35a474eded225a2234d/NpgsqlConnection.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/98ce963b43deea968d6df57f5ee5809329cf9c2f6c1364e89a3a12d46ff2bd/PoolManager.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/d290c8ecd1bd4a4859611fd1708df621d343e5335564e1fbd405610a3a5b342/WebApplicationFactory.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/ebb231c117958ac4656c73e1c1cc053d3e993dea5e30287e7c868be37642/XUnit2TestFramework.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/f5f6c4c45aa9784d53fe3f28bfc882a8e68bc2921f1e0ca59c4b72702afeb4/SqlMapper.Async.cs" root0="SKIP_HIGHLIGHTING" />
@@ -131,7 +138,8 @@
       <workItem from="1659302349513" duration="257000" />
       <workItem from="1659302624508" duration="31563000" />
       <workItem from="1659552981557" duration="283000" />
-      <workItem from="1659553288455" duration="3607000" />
+      <workItem from="1659553288455" duration="5722000" />
+      <workItem from="1659666043320" duration="981000" />
     </task>
     <servers />
   </component>
