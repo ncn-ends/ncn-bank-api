@@ -3,6 +3,6 @@ CREATE TYPE ReturnType_Checks_StandardReturn AS (
     account_number TEXT,
     routing_number TEXT,
     expiration TIMESTAMPTZ,
-    deactivated BOOL,
+    deactivated UUID,
     created_at timestamptz
 );

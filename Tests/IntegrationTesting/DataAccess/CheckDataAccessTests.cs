@@ -58,9 +58,10 @@ public class CheckDataAccessTests
         lastCheckInAllChecks.Should().BeEquivalentTo(createdCheck);
 
         var deactivatedCheck = await _checkAccess.DeactivateOneById(createdCheck.check_id);
-        
+
         deactivatedCheck.Should().NotBeNull();
-        deactivatedCheck.deactivated.Should().BeTrue();
+        deactivatedCheck.deactivated.Should().NotBeEmpty();
+        deactivatedCheck.deactivated.Should().Be(createdCheck.check_id);
         deactivatedCheck.account_number.Should().Be(createdCheck.account_number);
         deactivatedCheck.check_id.Should().NotBe(createdCheck.check_id);
         deactivatedCheck.routing_number.Should().NotBe(createdCheck.routing_number);

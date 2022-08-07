@@ -5,10 +5,7 @@
     <projectFile profileName="IIS Express">Api/Api.csproj</projectFile>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="da88e022-a72c-429b-b2d2-ab358463d5d5" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.bank-api/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.bank-api/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/REQUIREMENTS.md" beforeDir="false" afterPath="$PROJECT_DIR$/REQUIREMENTS.md" afterDir="false" />
-    </list>
+    <list default="true" id="da88e022-a72c-429b-b2d2-ab358463d5d5" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -132,7 +129,7 @@
       <workItem from="1659552981557" duration="283000" />
       <workItem from="1659553288455" duration="5722000" />
       <workItem from="1659666043320" duration="7857000" />
-      <workItem from="1659753009863" duration="622000" />
+      <workItem from="1659753009863" duration="1014000" />
     </task>
     <servers />
   </component>
