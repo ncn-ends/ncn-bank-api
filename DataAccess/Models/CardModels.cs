@@ -12,7 +12,7 @@ public class CardBO
     public string? csv { get; set; }
     public string? pin_number { get; set; }
     public DateTime expiration { get; set; } = DateTime.Now;
-    public bool deactivated { get; set; }
+    public Guid deactivated { get; set; }
     public DateTime? created_at { get; set; }
 }
 

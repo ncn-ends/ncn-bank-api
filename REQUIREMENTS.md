@@ -305,4 +305,4 @@
   - ~~Create check transfer~~
   
   ~~- Add additional address to holder~~
-  - Archive address
+  ~~- Archive address~~

@@ -57,7 +57,8 @@ public class CardDataAccessTests
         var deactivatedCard = await _cardAccess.DeactivateOneById(createdCard.card_id);
         
         deactivatedCard.Should().NotBeNull();
-        deactivatedCard.deactivated.Should().BeTrue();
+        deactivatedCard.deactivated.Should().NotBeEmpty();
+        deactivatedCard.deactivated.Should().Be(createdCard.card_id);
         deactivatedCard.card_id.Should().NotBeEmpty();
         deactivatedCard.card_number.Length.Should().Be(16);
         deactivatedCard.csv.Length.Should().Be(3);

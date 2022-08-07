@@ -7,13 +7,7 @@
   <component name="ChangeListManager">
     <list default="true" id="da88e022-a72c-429b-b2d2-ab358463d5d5" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.bank-api/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.bank-api/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DataAccess/Access/AddressAccess.cs" beforeDir="false" afterPath="$PROJECT_DIR$/DataAccess/Access/AddressAccess.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DataAccess/Models/AddressModels.cs" beforeDir="false" afterPath="$PROJECT_DIR$/DataAccess/Models/AddressModels.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Database/Subroutines/SR_Addresses_GetAllByAccountHolder.sql" beforeDir="false" afterPath="$PROJECT_DIR$/Database/Subroutines/SR_Addresses_GetAllByAccountHolder.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Database/Tables/Table_addresses.sql" beforeDir="false" afterPath="$PROJECT_DIR$/Database/Tables/Table_addresses.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Database/Types/ReturnType_Addresses_StandardReturn.sql" beforeDir="false" afterPath="$PROJECT_DIR$/Database/Types/ReturnType_Addresses_StandardReturn.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Tests/Fixtures/AddressTestData.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/Fixtures/AddressTestData.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Tests/IntegrationTesting/DataAccess/AddressDataAccessTests.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/IntegrationTesting/DataAccess/AddressDataAccessTests.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/REQUIREMENTS.md" beforeDir="false" afterPath="$PROJECT_DIR$/REQUIREMENTS.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -137,7 +131,8 @@
       <workItem from="1659302624508" duration="31563000" />
       <workItem from="1659552981557" duration="283000" />
       <workItem from="1659553288455" duration="5722000" />
-      <workItem from="1659666043320" duration="7133000" />
+      <workItem from="1659666043320" duration="7857000" />
+      <workItem from="1659753009863" duration="622000" />
     </task>
     <servers />
   </component>

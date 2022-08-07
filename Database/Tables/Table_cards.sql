@@ -5,6 +5,6 @@ CREATE TABLE IF NOT EXISTS cards (
     csv NUMERIC(3, 0) NOT NULL DEFAULT gen_random_number(3),
     pin_number NUMERIC(4, 0),
     expiration TIMESTAMPTZ NOT NULL DEFAULT now() + INTERVAL '54 month',
-    deactivated BOOL DEFAULT false,
+    deactivated UUID REFERENCES cards(card_id),
     created_at TIMESTAMPTZ DEFAULT now()
 )

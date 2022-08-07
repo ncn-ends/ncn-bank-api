@@ -4,6 +4,6 @@ CREATE TYPE ReturnType_Cards_StandardReturn AS (
     pin_number TEXT,
     csv TEXT,
     expiration TIMESTAMPTZ,
-    deactivated BOOL,
+    deactivated UUID,
     created_at timestamptz
 )
