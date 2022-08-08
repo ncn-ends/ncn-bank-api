@@ -14,6 +14,7 @@ public interface IAccountAccess
     Task<AccountDTO?> GetRandomOne();
     Task<AccountBO?> SearchByHolderName(string name);
     Task<AccountBalanceDTO?> GetAccountBalance(Guid accountId);
+    Task<AccountBO?> DeactivateOneById(Guid accountId);
 }
 
 public class AccountAccess : IAccountAccess
@@ -88,5 +89,16 @@ public class AccountAccess : IAccountAccess
         });
         
         return accountBalance.FirstOrDefault();
+    }
+
+    public async Task<AccountBO?> DeactivateOneById(Guid accountId)
+    {
+        var udfName = "SR_Accounts_DeactivateOneById";
+        var udfParams = new
+        {
+            _account_id = accountId
+        };
+        var deactivatedAccount = await _dataAccess.CallUdf<AccountBO, dynamic>(udfName, udfParams);
+        return deactivatedAccount.FirstOrDefault();
     }
 }

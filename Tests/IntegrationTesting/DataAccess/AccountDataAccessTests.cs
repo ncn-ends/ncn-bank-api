@@ -1,5 +1,6 @@
 using System;
 using System.Diagnostics;
+using System.Linq;
 using System.Threading.Tasks;
 using DataAccess.Access;
 using DataAccess.Models;
@@ -14,18 +15,28 @@ namespace Tests.IntegrationTesting.DataAccess;
 [Collection("SequentialTesting")]
 public class AccountDataAccessTests
 {
+    private readonly ISetupAccess _setupAccess;
+    private readonly IAccountHolderAccess _accountHolderAccess;
+    private readonly IAccountAccess _accountAccess;
+    private readonly ICardAccess _cardAccess;
+
+    public AccountDataAccessTests()
+    {
+        
+        var waf = new CustomWAF<Program>();
+        using var scope = waf.Services.CreateScope();
+        _setupAccess = scope.ServiceProvider.GetRequiredService<ISetupAccess>();
+        _accountHolderAccess = scope.ServiceProvider.GetRequiredService<IAccountHolderAccess>();
+        _accountAccess = scope.ServiceProvider.GetRequiredService<IAccountAccess>();
+        _cardAccess = scope.ServiceProvider.GetRequiredService<ICardAccess>();
+    }
     [Fact]
     public async Task AccountCRUDTests()
     {
-        var waf = new CustomWAF<Program>();
-        using var scope = waf.Services.CreateScope();
-        var setupAccess = scope.ServiceProvider.GetRequiredService<ISetupAccess>();
-        var accountHolderAccess = scope.ServiceProvider.GetRequiredService<IAccountHolderAccess>();
-        var accountAccess = scope.ServiceProvider.GetRequiredService<IAccountAccess>();
         
-        await setupAccess.EnsureDatabaseSetup();
+        await _setupAccess.EnsureDatabaseSetup();
 
-        var holderInsertionGuid = await accountHolderAccess.CreateOne(FakeInitialData.SampleAccountHolder1);
+        var holderInsertionGuid = await _accountHolderAccess.CreateOne(FakeInitialData.SampleAccountHolder1);
         
         if (holderInsertionGuid is null) throw new Exception("AccountHolder creation insertion failed. Re-run those tests.");
 
@@ -35,20 +46,62 @@ public class AccountDataAccessTests
             account_type_key = "stu_ca",
             initial_deposit_amount = 10000
         };
-        var accountInfo = await accountAccess.CreateOne(sampleAccountForm);
-        accountInfo.Should().NotBeNull();
-        accountInfo.account_id.Should().NotBeEmpty();
-        accountInfo.account_number.ToString().Length.Should().Be(9);
-        accountInfo.routing_number.ToString().Length.Should().Be(9);
+        var account = await _accountAccess.CreateOne(sampleAccountForm);
+        account.Should().NotBeNull();
+        account.account_id.Should().NotBeEmpty();
+        account.account_number.ToString().Length.Should().Be(9);
+        account.routing_number.ToString().Length.Should().Be(9);
 
-        var holder = await accountAccess.GetOneById(accountInfo.account_id);
+        var holder = await _accountAccess.GetOneById(account.account_id);
         holder.Should().NotBeNull();
         holder.account_holder_id.Should().NotBeEmpty();
         holder.account_id.Should().NotBeEmpty();
         holder.account_number.Should().NotBe(-1);
         holder.routing_number.Should().NotBe(-1);
 
-        var initialBalance = await accountAccess.GetAccountBalance(accountInfo.account_id);
+        var initialBalance = await _accountAccess.GetAccountBalance(account.account_id);
         initialBalance.balance.Should().Be(sampleAccountForm.initial_deposit_amount);
+
+        await AccountDeactivationAndAssertion(account);
+    }
+
+    private async Task AccountDeactivationAndAssertion(AccountInsertionReturn account)
+    {
+        var cardsToCreate = new[]
+        {
+            new CardCreationForm
+            {
+                account_id = account.account_id,
+                pin_number = "1111"
+            },
+            new CardCreationForm
+            {
+                account_id = account.account_id,
+                pin_number = "2222"
+            },
+            new CardCreationForm
+            {
+                account_id = account.account_id,
+                pin_number = "3333"
+            },
+        };
+
+        foreach (var cardForm in cardsToCreate)
+        {
+            await _cardAccess.CreateOne(cardForm);
+        }
+
+        var createdCards = await _cardAccess.GetAllByAccount(account.account_id);
+
+        createdCards.Length().Should().Be(3);
+        createdCards.FirstOrDefault().pin_number.Should().Be("1111");
+        createdCards.LastOrDefault().pin_number.Should().Be("3333");
+
+        var deactivatedAccount = await _accountAccess.DeactivateOneById(account.account_id);
+        
+        deactivatedAccount.deactivated.Should().Be(account.account_id);
+
+        var activeCardsAfterDeactivating = await _cardAccess.GetAllByAccount(deactivatedAccount.deactivated);
+        activeCardsAfterDeactivating.Length().Should().Be(0);
     }
 }

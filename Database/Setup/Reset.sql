@@ -15,6 +15,10 @@ DROP TABLE IF EXISTS account_links CASCADE;
 
 -- VIEWS --
 DROP VIEW IF EXISTS view_accountholdersaccounts cascade;
+DROP VIEW IF EXISTS view_activeaddresses cascade;
+DROP VIEW IF EXISTS view_activecards cascade;
+DROP VIEW IF EXISTS view_activechecks cascade;
+DROP VIEW IF EXISTS view_activeaccounts cascade;
 
 -- TYPES --
 DROP TYPE IF EXISTS address_type CASCADE;
