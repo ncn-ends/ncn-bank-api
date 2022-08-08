@@ -19,6 +19,7 @@ public class AccountDataAccessTests
     private readonly IAccountHolderAccess _accountHolderAccess;
     private readonly IAccountAccess _accountAccess;
     private readonly ICardAccess _cardAccess;
+    private readonly ICheckAccess _checkAccess;
 
     public AccountDataAccessTests()
     {
@@ -29,6 +30,7 @@ public class AccountDataAccessTests
         _accountHolderAccess = scope.ServiceProvider.GetRequiredService<IAccountHolderAccess>();
         _accountAccess = scope.ServiceProvider.GetRequiredService<IAccountAccess>();
         _cardAccess = scope.ServiceProvider.GetRequiredService<ICardAccess>();
+        _checkAccess = scope.ServiceProvider.GetRequiredService<ICheckAccess>();
     }
     [Fact]
     public async Task AccountCRUDTests()
@@ -96,6 +98,31 @@ public class AccountDataAccessTests
         createdCards.Length().Should().Be(3);
         createdCards.FirstOrDefault().pin_number.Should().Be("1111");
         createdCards.LastOrDefault().pin_number.Should().Be("3333");
+        
+        var checksToCreate = new[]
+        {
+            new CheckCreationForm
+            {
+                account_id = account.account_id
+            },
+            new CheckCreationForm
+            {
+                account_id = account.account_id
+            },
+            new CheckCreationForm
+            {
+                account_id = account.account_id
+            }
+        };
+        
+        foreach (var checkForm in checksToCreate)
+        {
+            await _checkAccess.CreateOne(checkForm);
+        }
+        
+        var createdChecks = await _cardAccess.GetAllByAccount(account.account_id);
+
+        createdChecks.Length().Should().Be(3);
 
         var deactivatedAccount = await _accountAccess.DeactivateOneById(account.account_id);
         
@@ -103,5 +130,8 @@ public class AccountDataAccessTests
 
         var activeCardsAfterDeactivating = await _cardAccess.GetAllByAccount(deactivatedAccount.deactivated);
         activeCardsAfterDeactivating.Length().Should().Be(0);
+
+        var activeChecksAfterDeactivating = await _checkAccess.GetAllByAccount(deactivatedAccount.deactivated);
+        activeChecksAfterDeactivating.Length().Should().Be(0);
     }
 }
