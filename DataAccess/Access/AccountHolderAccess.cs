@@ -9,6 +9,7 @@ public interface IAccountHolderAccess
     Task<Guid?> CreateOne(AccountHolderForm holderForm);
     Task<AccountHolderBO?> GetRandomOne();
     Task<AccountBalanceDTO?> GetBalance(Guid holderId);
+    Task<AccountHolderBO?> DeactivateOneById(Guid holderId);
 }
 
 public class AccountHolderAccess : IAccountHolderAccess
@@ -73,5 +74,18 @@ public class AccountHolderAccess : IAccountHolderAccess
         });
 
         return overallBalance.FirstOrDefault();
+    }
+
+    public async Task<AccountHolderBO?> DeactivateOneById(Guid holderId)
+    {
+        var udfName = "SR_AccountHolders_DeactivateOneById";
+        var udfParams = new
+        {
+            _account_holder_id = holderId
+        };
+
+        var deactivatedHolder = await _dataAccess.CallUdf<AccountHolderBO, dynamic>(udfName, udfParams);
+
+        return deactivatedHolder.FirstOrDefault();
     }
 }

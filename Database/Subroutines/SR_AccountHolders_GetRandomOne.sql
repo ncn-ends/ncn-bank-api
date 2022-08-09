@@ -8,7 +8,8 @@ BEGIN
         lastname,
         phone_number,
         job_title,
-        expected_salary
+        expected_salary,
+        deactivated
     FROM account_holders
     ORDER BY random()
     LIMIT 1;

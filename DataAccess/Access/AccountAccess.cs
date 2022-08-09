@@ -12,7 +12,7 @@ public interface IAccountAccess
     Task<AccountInsertionReturn?> CreateOne(AccountFormDTO accountForm);
     Task<AccountDTO?> GetOneById(Guid accountId);
     Task<AccountDTO?> GetRandomOne();
-    Task<AccountBO?> SearchByHolderName(string name);
+    Task<IEnumerable<AccountBO>> SearchByHolderName(string name);
     Task<AccountBalanceDTO?> GetAccountBalance(Guid accountId);
     Task<AccountBO?> DeactivateOneById(Guid accountId);
 }
@@ -51,7 +51,6 @@ public class AccountAccess : IAccountAccess
         return fetchedAccount.FirstOrDefault();
     }
     
-    // TODO: untested
     public async Task<AccountDTO?> GetRandomOne()
     {
         var fetchedAccount = await _dataAccess.CallUdf<AccountDTO>("SR_Accounts_GetRandomOne");
@@ -59,7 +58,7 @@ public class AccountAccess : IAccountAccess
         return fetchedAccount.FirstOrDefault();
     }
     
-    public async Task<AccountBO?> SearchByHolderName(string name)
+    public async Task<IEnumerable<AccountBO>> SearchByHolderName(string name)
     {
         using IDbConnection connection = new NpgsqlConnection(_connectionString);
 
@@ -78,7 +77,7 @@ public class AccountAccess : IAccountAccess
             }
         );
 
-        return result.FirstOrDefault();
+        return result;
     }
 
     public async Task<AccountBalanceDTO?> GetAccountBalance(Guid accountId)

@@ -38,7 +38,7 @@ public class AccountBO
     public int account_type_id { get; set; }
     public string routing_number { get; set; }
     public string account_number { get; set; }
-    public Guid deactivated { get; set; }
+    public Guid? deactivated { get; set; }
 }
 
 

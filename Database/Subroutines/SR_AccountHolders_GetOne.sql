@@ -12,7 +12,8 @@ BEGIN
         lastname,
         phone_number,
         job_title,
-        expected_salary
+        expected_salary,
+        deactivated
     FROM account_holders
     WHERE account_holder_id = _account_holder_id;
 END;

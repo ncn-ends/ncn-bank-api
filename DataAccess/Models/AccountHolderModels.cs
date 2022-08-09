@@ -19,6 +19,7 @@ public class AccountHolderBO
     public string phone_number { get; set; } = "UNSET PHONE NUMBER";
     public string job_title { get; set; } = "UNSET JOB TITLE";
     public decimal expected_salary { get; set; } = -1;
+    public Guid? deactivated { get; set; }
 }
 
 public class AccountHolderWithAddressBO : AccountHolderBO

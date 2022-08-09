@@ -68,6 +68,8 @@ DROP FUNCTION IF EXISTS sr_accountholders_getone(_account_holder_id UUID);
 DROP FUNCTION IF EXISTS sr_addresses_getallbyaccountholder(_account_holder_id UUID);
 DROP FUNCTION IF EXISTS sr_cards_getallbyaccountholder(_account_holder_id UUID);
 DROP FUNCTION IF EXISTS sr_checks_getallbyaccountholder(_account_holder_id UUID);
+DROP FUNCTION IF EXISTS sr_accounts_deactivateonebyid(_account_id UUID);
+DROP FUNCTION IF EXISTS sr_addresses_deactivateonebyid(_address_id UUID);
 
 -- UTILITIES --
 DROP FUNCTION IF EXISTS gen_random_number(_digits integer) CASCADE;

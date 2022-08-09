@@ -128,10 +128,10 @@ public class AccountDataAccessTests
         
         deactivatedAccount.deactivated.Should().Be(account.account_id);
 
-        var activeCardsAfterDeactivating = await _cardAccess.GetAllByAccount(deactivatedAccount.deactivated);
+        var activeCardsAfterDeactivating = await _cardAccess.GetAllByAccount(deactivatedAccount.deactivated.Value);
         activeCardsAfterDeactivating.Length().Should().Be(0);
 
-        var activeChecksAfterDeactivating = await _checkAccess.GetAllByAccount(deactivatedAccount.deactivated);
+        var activeChecksAfterDeactivating = await _checkAccess.GetAllByAccount(deactivatedAccount.deactivated.Value);
         activeChecksAfterDeactivating.Length().Should().Be(0);
     }
 }

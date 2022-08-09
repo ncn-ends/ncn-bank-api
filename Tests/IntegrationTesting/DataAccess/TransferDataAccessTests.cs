@@ -40,7 +40,8 @@ public class TransferDataAccessTests
     {
         await _setupAccess.EnsureDatabaseSetup();
 
-        var targetAccount = await _accountAccess.SearchByHolderName(FakeInitialData.SampleAccountHolder2.lastname);
+        var holdersAccounts = await _accountAccess.SearchByHolderName(FakeInitialData.SampleAccountHolder2.lastname);
+        var targetAccount = holdersAccounts.FirstOrDefault();
         var randomCheck = await _checkAccess.GetRandomOne();
 
         var transferForm = new CheckTransferForm
@@ -62,10 +63,10 @@ public class TransferDataAccessTests
     public async Task CardTransferCRUDTests()
     {
         await _setupAccess.EnsureDatabaseSetup();
-        var targetAccount = await _accountAccess.SearchByHolderName(FakeInitialData.SampleAccountHolder2.lastname);
+        var holdersAccounts = await _accountAccess.SearchByHolderName(FakeInitialData.SampleAccountHolder2.lastname);
+        var targetAccount = holdersAccounts.FirstOrDefault();
+        
         var randomCard = await _cardAccess.GetRandomOne();
-        if (randomCard is null || targetAccount is null)
-            throw new Exception("Something was null that shouldn't've been.");
 
         var transferForm = new CardTransferForm
         {
@@ -87,7 +88,8 @@ public class TransferDataAccessTests
     {
         await _setupAccess.EnsureDatabaseSetup();
         
-        var targetAccount = await _accountAccess.SearchByHolderName(FakeInitialData.SampleAccountHolder2.lastname);
+        var holdersAccounts = await _accountAccess.SearchByHolderName(FakeInitialData.SampleAccountHolder2.lastname);
+        var targetAccount = holdersAccounts.FirstOrDefault();
 
         var transferForm = new CashTransferForm
         {
@@ -107,8 +109,11 @@ public class TransferDataAccessTests
     {
         await _setupAccess.EnsureDatabaseSetup();
         
-        var sourceAccount = await _accountAccess.SearchByHolderName(FakeInitialData.SampleAccountHolder1.lastname);
-        var targetAccount = await _accountAccess.SearchByHolderName(FakeInitialData.SampleAccountHolder2.lastname);
+        var sourceHolderAccounts = await _accountAccess.SearchByHolderName(FakeInitialData.SampleAccountHolder1.lastname);
+        var targetHolderAccount = await _accountAccess.SearchByHolderName(FakeInitialData.SampleAccountHolder2.lastname);
+        var sourceAccount = sourceHolderAccounts.FirstOrDefault();
+        var targetAccount = targetHolderAccount.FirstOrDefault();
+        
         var randomCheck = await _checkAccess.GetRandomOne();
         var randomCard = await _cardAccess.GetRandomOne();
         

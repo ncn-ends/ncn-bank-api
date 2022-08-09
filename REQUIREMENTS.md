@@ -292,7 +292,7 @@
   - ~~Get account transactions~~
     - ~~both by target and by source~~
   - ~~Get account balance~~
-  - Deactivate account
+  - ~~Deactivate account~~
 
   - ~~Create check attached to an account~~
   - ~~Deactivate check~~

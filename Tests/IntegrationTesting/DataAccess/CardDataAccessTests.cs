@@ -72,7 +72,8 @@ public class CardDataAccessTests
         await _setupAccess.EnsureDatabaseSetup();
 
         var account = await _accountAccess.SearchByHolderName(FakeInitialData.SampleAccountHolder1.firstname);
-        var cards = await _cardAccess.GetAllByAccountHolder(account.account_holder.account_holder_id);
+        var firstAccountFound = account.FirstOrDefault();
+        var cards = await _cardAccess.GetAllByAccountHolder(firstAccountFound.account_holder.account_holder_id);
         
         cards.Length().Should().Be(1);
         

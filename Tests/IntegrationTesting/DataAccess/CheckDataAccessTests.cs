@@ -73,7 +73,8 @@ public class CheckDataAccessTests
         await _setupAccess.EnsureDatabaseSetup();
 
         var account = await _accountAccess.SearchByHolderName(FakeInitialData.SampleAccountHolder1.firstname);
-        var checks = await _checkAccess.GetAllByAccountHolder(account.account_holder.account_holder_id);
+        var firstAccountFound = account.FirstOrDefault();
+        var checks = await _checkAccess.GetAllByAccountHolder(firstAccountFound.account_holder.account_holder_id);
         
         checks.Length().Should().Be(1);
         
