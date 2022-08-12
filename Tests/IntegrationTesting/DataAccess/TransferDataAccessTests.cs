@@ -48,7 +48,7 @@ public class TransferDataAccessTests
         {
             amount = 323.23m,
             routing_number = randomCheck.routing_number,
-            transfer_target = targetAccount.account_id,
+            transfer_target = targetAccount.account_id
         };
         var transferMade = await _transferAccess.MakeTransfer(transferForm);
 
@@ -172,22 +172,22 @@ public class TransferDataAccessTests
             await _transferAccess.MakeTransfer(transferForm);
         }
         
-        for (int i = 0; i < cardTransferAmounts.Length; i++)
+        foreach (var t in cardTransferAmounts)
         {
             var transferForm = new CardTransferForm
             {
-                amount = cardTransferAmounts[i],
+                amount = t,
                 card_number = randomCard.card_number,
                 transfer_target = targetAccount.account_id
             };
             await _transferAccess.MakeTransfer(transferForm);
         }
         
-        for (int i = 0; i < cashTransferAmounts.Length; i++)
+        foreach (var t in cashTransferAmounts)
         {
             var transferForm = new CashTransferForm
             {
-                amount = cashTransferAmounts[i],
+                amount = t,
                 transfer_target = targetAccount.account_id
             };
             await _transferAccess.MakeTransfer(transferForm);

@@ -280,8 +280,8 @@
   ~~- Get account holders checks~~
   ~~- Get account holders transactions~~
   - ~~Get account holders balance~~
-  - Deactivate account holder
-    - Ensure that all accounts and cards are deactivated as well
+  ~~- Deactivate account holder~~
+    ~~- Ensure that all accounts and cards are deactivated as well~~
     
   - ~~Create account attached to account holder~~
     ~~- Make initial deposit~~

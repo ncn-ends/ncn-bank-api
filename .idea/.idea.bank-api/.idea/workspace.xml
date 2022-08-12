@@ -7,19 +7,7 @@
   <component name="ChangeListManager">
     <list default="true" id="da88e022-a72c-429b-b2d2-ab358463d5d5" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.bank-api/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.bank-api/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DataAccess/Access/AccountAccess.cs" beforeDir="false" afterPath="$PROJECT_DIR$/DataAccess/Access/AccountAccess.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DataAccess/Access/AccountHolderAccess.cs" beforeDir="false" afterPath="$PROJECT_DIR$/DataAccess/Access/AccountHolderAccess.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DataAccess/Models/AccountHolderModels.cs" beforeDir="false" afterPath="$PROJECT_DIR$/DataAccess/Models/AccountHolderModels.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DataAccess/Models/AccountModels.cs" beforeDir="false" afterPath="$PROJECT_DIR$/DataAccess/Models/AccountModels.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Database/Setup/Reset.sql" beforeDir="false" afterPath="$PROJECT_DIR$/Database/Setup/Reset.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Database/Subroutines/SR_AccountHolders_GetOne.sql" beforeDir="false" afterPath="$PROJECT_DIR$/Database/Subroutines/SR_AccountHolders_GetOne.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Database/Subroutines/SR_AccountHolders_GetRandomOne.sql" beforeDir="false" afterPath="$PROJECT_DIR$/Database/Subroutines/SR_AccountHolders_GetRandomOne.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Database/Tables/Table_account_holders.sql" beforeDir="false" afterPath="$PROJECT_DIR$/Database/Tables/Table_account_holders.sql" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/REQUIREMENTS.md" beforeDir="false" afterPath="$PROJECT_DIR$/REQUIREMENTS.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Tests/IntegrationTesting/DataAccess/AccountDataAccessTests.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/IntegrationTesting/DataAccess/AccountDataAccessTests.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Tests/IntegrationTesting/DataAccess/AccountHolderDataAccessTests.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/IntegrationTesting/DataAccess/AccountHolderDataAccessTests.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Tests/IntegrationTesting/DataAccess/CardDataAccessTests.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/IntegrationTesting/DataAccess/CardDataAccessTests.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Tests/IntegrationTesting/DataAccess/CheckDataAccessTests.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/IntegrationTesting/DataAccess/CheckDataAccessTests.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Tests/IntegrationTesting/DataAccess/TransferDataAccessTests.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/IntegrationTesting/DataAccess/TransferDataAccessTests.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -54,6 +42,7 @@
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/f5f6c4c45aa9784d53fe3f28bfc882a8e68bc2921f1e0ca59c4b72702afeb4/SqlMapper.Async.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$USER_HOME$/.nuget/packages/microsoft.net.test.sdk/16.11.0/build/netcoreapp2.1/Microsoft.NET.Test.Sdk.Program.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/DataAccess/Access/Persons.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/FileReader/FileReader.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Tests/IntegrationTesting/Endpoints/Single/PersonEndpointTests.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="MarkdownSettingsMigration">
@@ -145,7 +134,8 @@
       <workItem from="1659552981557" duration="283000" />
       <workItem from="1659553288455" duration="5722000" />
       <workItem from="1659666043320" duration="7857000" />
-      <workItem from="1659753009863" duration="15392000" />
+      <workItem from="1659753009863" duration="18081000" />
+      <workItem from="1660041182628" duration="8723000" />
     </task>
     <servers />
   </component>
