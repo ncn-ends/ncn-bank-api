@@ -7,7 +7,7 @@
   <component name="ChangeListManager">
     <list default="true" id="da88e022-a72c-429b-b2d2-ab358463d5d5" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.bank-api/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.bank-api/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Api/Endpoints/AccountEndpoints.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Api/Endpoints/AccountEndpoints.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Api/Endpoints/HealthEndpoints.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Api/Endpoints/HealthEndpoints.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -136,7 +136,7 @@
       <workItem from="1659753009863" duration="18081000" />
       <workItem from="1660041182628" duration="9063000" />
       <workItem from="1660309791160" duration="3196000" />
-      <workItem from="1660966722968" duration="2250000" />
+      <workItem from="1660966722968" duration="4599000" />
     </task>
     <servers />
   </component>

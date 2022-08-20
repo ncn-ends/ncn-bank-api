@@ -1,3 +1,6 @@
+using LanguageExt.Common;
+using Microsoft.AspNetCore.Mvc;
+
 namespace Api.Endpoints;
 
 public static class HealthEndpoints
