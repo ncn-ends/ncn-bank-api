@@ -10,7 +10,7 @@ public static class AccountEndpoints
     public static void MapAccountEndpoints(this WebApplication app)
     {
         app.MapPost("/api/account", CreateNewAccount);
-        app.MapGet("/api/account/{accountId}", GetAccountById);
+        app.MapGet("/api/account/{accountId:guid}", GetAccountById);
     }
 
     private static async Task<IResult> CreateNewAccount(
@@ -19,8 +19,9 @@ public static class AccountEndpoints
     )
     {
         var createdAccount = await access.CreateOne(accountInfoForm);
-        if (createdAccount is null) return Results.BadRequest();
-        return Results.Ok(createdAccount);
+        return createdAccount is null 
+            ? Results.BadRequest() 
+            : Results.Ok(createdAccount);
     }
     
     private static async Task<IResult> GetAccountById(

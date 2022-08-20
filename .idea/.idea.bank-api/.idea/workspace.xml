@@ -7,8 +7,7 @@
   <component name="ChangeListManager">
     <list default="true" id="da88e022-a72c-429b-b2d2-ab358463d5d5" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.bank-api/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.bank-api/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/REQUIREMENTS.md" beforeDir="false" afterPath="$PROJECT_DIR$/REQUIREMENTS.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Tests/IntegrationTesting/DataAccess/TransferDataAccessTests.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/IntegrationTesting/DataAccess/TransferDataAccessTests.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Api/Endpoints/AccountEndpoints.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Api/Endpoints/AccountEndpoints.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -63,7 +62,7 @@
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/home/one/code/bank-api&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/home/one/code/redrover&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
     &quot;settings.editor.selected.configurable&quot;: &quot;RiderDotCoverHighlightingPageId&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
@@ -135,7 +134,9 @@
       <workItem from="1659553288455" duration="5722000" />
       <workItem from="1659666043320" duration="7857000" />
       <workItem from="1659753009863" duration="18081000" />
-      <workItem from="1660041182628" duration="8723000" />
+      <workItem from="1660041182628" duration="9063000" />
+      <workItem from="1660309791160" duration="3196000" />
+      <workItem from="1660966722968" duration="2250000" />
     </task>
     <servers />
   </component>

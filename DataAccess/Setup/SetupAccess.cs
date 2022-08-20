@@ -34,10 +34,11 @@ public class SetupAccess: ISetupAccess
     public async Task EnsureDatabaseSetup()
     {
         var isDevEnv = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") == "Development";
-        if (isDevEnv)
-        {
+        // if (isDevEnv)
+        // {
             await DatabaseDropAll();
-        }
+        // }
+        
         await SetupCustomTypes();
         await SetupUtilities();
         await SetupTables();
@@ -45,10 +46,10 @@ public class SetupAccess: ISetupAccess
         await SetupSubroutines();
         await SetupRequiredInitialData();
 
-        if (isDevEnv)
-        {
+        // if (isDevEnv)
+        // {
             await SetupFakeInitialData();
-        }
+        // }
     }
     
     private async Task DatabaseDropAll()
