@@ -135,7 +135,7 @@
       <workItem from="1659753009863" duration="18081000" />
       <workItem from="1660041182628" duration="9063000" />
       <workItem from="1660309791160" duration="3196000" />
-      <workItem from="1660966722968" duration="10127000" />
+      <workItem from="1660966722968" duration="11393000" />
     </task>
     <servers />
   </component>
@@ -146,12 +146,12 @@
     <option name="coveragePercentColumnWidth" value="188" />
     <option name="sortOrder" value="DESCENDING" />
     <option name="sortedColumn" value="1" />
-    <option name="symbolColumnWidth" value="609" />
+    <option name="symbolColumnWidth" value="641" />
     <coverage-tree-state>
       <expand>
         <path>
           <item name="rootNode" type="c53c71d1:RiderDotCoverCoverageTreeModel$RootNode" />
-          <item name="Total 79% 299/1392" type="8b8fad3a:RiderDotCoverCoverageTreeNode" />
+          <item name="Total 91% 137/1517" type="8b8fad3a:RiderDotCoverCoverageTreeNode" />
         </path>
       </expand>
       <select />
