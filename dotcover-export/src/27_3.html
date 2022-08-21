@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <title>/home/one/code/bank-api/DataAccess/Models/AccountTypeModels.cs</title>
+    <script type="text/javascript" src="../js/dotcover.sourceview.js"></script>
+    <link rel="stylesheet" type="text/css" href="../css/dotcover.report.css" />
+  </head>
+  <body>
+    <pre id="content" class="source-code">
+namespace DataAccess.Models;
+
+// account_type_id SERIAL PRIMARY KEY,
+// name_internal VARCHAR(10) NOT NULL,
+// name_display VARCHAR(64) NOT NULL,
+// debit_card_access BOOLEAN NOT NULL,
+// paper_check_access BOOLEAN NOT NULL,
+// monthly_fee_id INT NOT NULL REFERENCES monthly_fees(monthly_fee_id),
+// overcharge_fee_amount MONEY,
+// holder_minimum_age INT2 NOT NULL,
+// transfer_limit_id INT REFERENCES transfer_limits(transfer_limit_id),
+// minimum_balance MONEY NOT NULL,
+// minimum_initial_deposit MONEY NOT NULL,
+// withdrawal_penalty_flat MONEY NOT NULL,
+// withdrawal_penalty_rate DECIMAL(7, 6) NOT NULL,
+// apy DECIMAL(7, 6) NOT NULL,
+// maturity_term_days INT2
+
+public class AccountTypeBO
+{
+    public int account_type_id { get; set; } = -1;
+    public string name_internal { get; set; } = &quot;UNSET INTERNAL NAME&quot;;
+    public string name_display { get; set; } = &quot;UNSET DISPLAY NAME&quot;;
+    public bool debit_card_access { get; set; }
+    public bool paper_check_access { get; set; }
+    public MonthlyFeeBO monthly_fee { get; set; } = new ();
+    public decimal? overcharge_fee_amount { get; set; }
+    public int holder_minimum_age { get; set; } = -1;
+    public TransferLimitBO? transfer_limit { get; set; }
+    public decimal minimum_balance { get; set; } = -1;
+    public decimal minimum_initial_deposit { get; set; } = -1;
+    public decimal withdrawal_penalty_flat { get; set; } = -1;
+    public decimal withdrawal_penalty_rate { get; set; } = -1;
+    public decimal apy { get; set; } = -1;
+    public int? maturity_term_days { get; set; }
+}
+    </pre>
+    <script type="text/javascript">
+      highlightRanges([[21,34,21,38,1],[21,39,21,43,1],[21,48,21,50,1],[22,35,22,39,1],[22,40,22,44,1],[22,49,22,70,1],[23,34,23,38,1],[23,39,23,43,1],[23,48,23,68,1],[24,37,24,41,1],[24,42,24,46,1],[25,38,25,42,1],[25,43,25,47,1],[26,39,26,43,1],[26,44,26,48,1],[26,53,26,59,1],[27,45,27,49,1],[27,50,27,54,1],[28,37,28,41,1],[28,42,28,46,1],[28,51,28,53,1],[29,46,29,50,1],[29,51,29,55,1],[30,38,30,42,1],[30,43,30,47,1],[30,52,30,54,1],[31,46,31,50,1],[31,51,31,55,1],[31,60,31,62,1],[32,46,32,50,1],[32,51,32,55,1],[32,60,32,62,1],[33,46,33,50,1],[33,51,33,55,1],[33,60,33,62,1],[34,26,34,30,1],[34,31,34,35,1],[34,40,34,42,1],[35,38,35,42,1],[35,43,35,47,1]]);
+    </script>
+  </body>
+</html>

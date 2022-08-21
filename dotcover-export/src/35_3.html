@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <title>/home/one/code/bank-api/DataAccess/Setup/FakeInitialData.cs</title>
+    <script type="text/javascript" src="../js/dotcover.sourceview.js"></script>
+    <link rel="stylesheet" type="text/css" href="../css/dotcover.report.css" />
+  </head>
+  <body>
+    <pre id="content" class="source-code">
+using DataAccess.Models;
+
+namespace DataAccess.Access;
+
+public static class FakeInitialData
+{
+    public static readonly AccountHolderForm SampleAccountHolder1 = new()
+    {
+        birthdate = new DateTime(),
+        firstname = &quot;Mike&quot;,
+        middlename = &quot;Gerard&quot;,
+        lastname = &quot;Tyson&quot;,
+        phone_number = &quot;111-111-1111&quot;,
+        job_title = &quot;Boxer&quot;,
+        expected_salary = 1000000,
+        street = &quot;123 Pierce St&quot;,
+        zipcode = &quot;11111-1111&quot;,
+        city = &quot;San Francisco&quot;,
+        state = &quot;California&quot;,
+        country = &quot;USA&quot;,
+        unit_number = 111,
+        address_type = &quot;Condo/Apartment&quot;
+    };
+    
+    public static readonly AccountHolderForm SampleAccountHolder2 = new()
+    {
+        birthdate = new DateTime(),
+        firstname = &quot;James&quot;,
+        middlename = &quot;McGee&quot;,
+        lastname = &quot;Ajax&quot;,
+        phone_number = &quot;222-222-2222&quot;,
+        job_title = &quot;Investor&quot;,
+        expected_salary = 10000000,
+        street = &quot;234 Euclid Ave&quot;,
+        zipcode = &quot;22222-2222&quot;,
+        city = &quot;Bishop&quot;,
+        state = &quot;California&quot;,
+        country = &quot;USA&quot;,
+        unit_number = 222,
+        address_type = &quot;Condo/Apartment&quot;
+    };
+
+    public static CardCreationForm SampleCard1(Guid accountId) =&gt; new()
+    {
+        account_id = accountId,
+        pin_number = &quot;1234&quot;
+    };
+
+    public static AccountFormDTO SampleAccount1(Guid holderId) =&gt; new()
+    {
+        account_holder_id = holderId,
+        account_type_key = &quot;stu_ca&quot;,
+        initial_deposit_amount = 300
+    };
+    
+    public static AccountFormDTO SampleAccount2(Guid holderId) =&gt; new()
+    {
+        account_holder_id = holderId,
+        account_type_key = &quot;sta_ca&quot;,
+        initial_deposit_amount = 1000000
+    };
+}
+    </pre>
+    <script type="text/javascript">
+      highlightRanges([[7,5,23,7,1],[25,5,41,7,1],[43,67,47,6,1],[49,67,54,6,1],[56,67,61,6,1]]);
+    </script>
+  </body>
+</html>

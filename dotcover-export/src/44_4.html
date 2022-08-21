@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <title>/home/one/code/bank-api/Tests/Fixtures/AddressTestData.cs</title>
+    <script type="text/javascript" src="../js/dotcover.sourceview.js"></script>
+    <link rel="stylesheet" type="text/css" href="../css/dotcover.report.css" />
+  </head>
+  <body>
+    <pre id="content" class="source-code">
+using System.Collections;
+using System.Collections.Generic;
+using Bogus;
+
+namespace Tests.Fixtures;
+
+public class AddressTestData : IEnumerable&lt;object[]&gt;
+{
+    private readonly Faker _faker = new();
+    
+    private object[] GenerateRandomizedDataset()
+    {
+        var streetName = _faker.Address.StreetName();
+        var streetSuffix = _faker.Address.StreetSuffix();
+        var houseNumber = _faker.Random.Number(1, 3000);
+        var street = $&quot;{houseNumber} {streetName} {streetSuffix}&quot;;
+        var zipcode = _faker.Address.ZipCode();
+        var city = _faker.Address.City();
+        var state = _faker.Address.State();
+        var country = &quot;United States&quot;;
+        var unit_number = _faker.Random.Number(1, 500);
+        var address_type = &quot;Condo/Apartment&quot;;
+
+        return new object[]{street, zipcode, city, state, country, unit_number, address_type};
+    }
+    
+    public IEnumerator&lt;object[]&gt; GetEnumerator()
+    {
+        yield return GenerateRandomizedDataset();
+        yield return GenerateRandomizedDataset();
+        yield return GenerateRandomizedDataset();
+    }
+
+    IEnumerator IEnumerable.GetEnumerator()
+    {
+        return GetEnumerator();
+    }
+}
+    </pre>
+    <script type="text/javascript">
+      highlightRanges([[9,5,9,43,1],[12,5,12,6,1],[13,9,13,54,1],[14,9,14,58,1],[15,9,15,57,1],[16,9,16,67,1],[17,9,17,48,1],[18,9,18,42,1],[19,9,19,44,1],[20,9,20,39,1],[21,9,21,56,1],[22,9,22,46,1],[24,9,24,95,1],[25,5,25,6,1],[28,5,28,6,1],[29,9,29,50,1],[30,9,30,50,1],[31,9,31,50,1],[32,5,32,6,1],[35,5,35,6,0],[36,9,36,32,0],[37,5,37,6,0]]);
+    </script>
+  </body>
+</html>

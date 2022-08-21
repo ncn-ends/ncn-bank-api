@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <title>/home/one/code/bank-api/Tests/IntegrationTesting/Endpoints/Single/AccountEndpointTests.cs</title>
+    <script type="text/javascript" src="../js/dotcover.sourceview.js"></script>
+    <link rel="stylesheet" type="text/css" href="../css/dotcover.report.css" />
+  </head>
+  <body>
+    <pre id="content" class="source-code">
+using System;
+using System.Threading.Tasks;
+using DataAccess.Access;
+using DataAccess.Models;
+using DataAccess.Setup;
+using FluentAssertions;
+using Microsoft.Extensions.DependencyInjection;
+using Tests.Helpers;
+using Xunit;
+
+namespace Tests.IntegrationTesting.Endpoints;
+
+[Collection(&quot;SequentialTesting&quot;)]
+public class AccountEndpointTests
+{
+    [Fact]
+    public async Task TestAccountHolderEndpoints()
+    {
+        var waf = new CustomWAF&lt;Program&gt;();
+        using var scope = waf.Services.CreateScope();
+        var setupAccess = scope.ServiceProvider.GetRequiredService&lt;ISetupAccess&gt;();
+        var holderAccess = scope.ServiceProvider.GetRequiredService&lt;IAccountHolderAccess&gt;();
+        await setupAccess.EnsureDatabaseSetup();
+        var randomHolder = await holderAccess.GetRandomOne();
+        if (randomHolder is null) throw new Exception(&quot;Sample Account Holder wasn&#39;t created properly&quot;);
+
+        var client = new HttpClientBroker(&quot;/api/account&quot;, injectedClient: waf.CreateClient());
+        var sample = new AccountFormDTO
+        {
+            account_holder_id = randomHolder.account_holder_id,
+            account_type_key = &quot;stu_ca&quot;,
+            initial_deposit_amount = 10000
+        };
+        var postResponse = await client.SendPost(sample);
+        postResponse.EnsureSuccessStatusCode();
+
+        var postContent = await JsonMapper.MapHttpContentAs&lt;AccountInsertionReturn&gt;(postResponse);
+
+        postContent.Should().NotBeNull();
+        postContent.account_id.Should().NotBeEmpty();
+        postContent.routing_number.ToString().Length.Should().Be(9);
+        postContent.account_number.ToString().Length.Should().Be(9);
+
+        var getResponse = await client.SendGet(route: $&quot;/{postContent.account_id.ToString()}&quot;);
+        getResponse.EnsureSuccessStatusCode();
+        var getContent = await JsonMapper.MapHttpContentAs&lt;AccountDTO&gt;(getResponse);
+
+        getContent.Should().NotBeNull();
+        getContent.account_holder_id.Should().NotBeEmpty();
+        getContent.account_id.Should().NotBeEmpty();
+        getContent.account_number.ToString().Length.Should().Be(9);
+        getContent.routing_number.ToString().Length.Should().Be(9);
+        getContent.account_type_id.Should().BeInRange(1, 7);
+    }
+}
+    </pre>
+    <script type="text/javascript">
+      highlightRanges([[18,5,18,6,1],[19,9,19,44,1],[20,9,20,54,1],[21,9,21,84,1],[22,9,22,93,1],[23,9,23,49,1],[24,9,24,62,1],[25,9,25,34,1],[25,35,25,104,0],[27,9,27,95,1],[28,9,33,11,1],[34,9,34,58,1],[35,9,35,48,1],[37,9,37,99,1],[39,9,39,42,1],[40,9,40,54,1],[41,9,41,69,1],[42,9,42,69,1],[44,9,44,96,1],[45,9,45,47,1],[46,9,46,85,1],[48,9,48,41,1],[49,9,49,60,1],[50,9,50,53,1],[51,9,51,68,1],[52,9,52,68,1],[53,9,53,61,1],[54,5,54,6,1]]);
+    </script>
+  </body>
+</html>

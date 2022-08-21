@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <title>/home/one/code/bank-api/Tests/Helpers/CustomWAF.cs</title>
+    <script type="text/javascript" src="../js/dotcover.sourceview.js"></script>
+    <link rel="stylesheet" type="text/css" href="../css/dotcover.report.css" />
+  </head>
+  <body>
+    <pre id="content" class="source-code">
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Mvc.Testing;
+
+namespace Tests.Helpers;
+
+// TODO: ask about why we cant just pass Program to this generic directly
+public class CustomWAF&lt;TStartup&gt; : WebApplicationFactory&lt;TStartup&gt; where TStartup : class
+{
+    protected override void ConfigureWebHost(IWebHostBuilder builder)
+    {
+        builder.ConfigureServices(Services =&gt;
+        {
+            
+        });
+    }
+    
+}
+    </pre>
+    <script type="text/javascript">
+      highlightRanges([[10,5,10,6,1],[11,9,12,9,1],[12,9,12,10,1],[12,10,14,9,1],[14,9,14,10,1],[14,10,14,12,1],[15,5,15,6,1]]);
+    </script>
+  </body>
+</html>

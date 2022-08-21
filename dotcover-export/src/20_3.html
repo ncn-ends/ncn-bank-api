@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <title>/home/one/code/bank-api/DataAccess/Access/AddressAccess.cs</title>
+    <script type="text/javascript" src="../js/dotcover.sourceview.js"></script>
+    <link rel="stylesheet" type="text/css" href="../css/dotcover.report.css" />
+  </head>
+  <body>
+    <pre id="content" class="source-code">
+using System.Data;
+using System.Diagnostics;
+using DataAccess.Models;
+
+namespace DataAccess.Access;
+
+public interface IAddressAccess
+{
+    Task&lt;Guid&gt; AddAddress(AddressInsertionForm addressForm);
+    Task&lt;IEnumerable&lt;AddressBO&gt;&gt; GetAllByAccountHolder(Guid holderId);
+    Task&lt;Guid?&gt; DeactivateOneById(Guid addressId);
+}
+
+public class AddressAccess : IAddressAccess
+{
+    private readonly ISqlDataAccess _db;
+    private readonly ISqlDataAccess _dataAccess;
+
+    public AddressAccess(ISqlDataAccess db, ISqlDataAccess dataAccess)
+    {
+        _db = db;
+        _dataAccess = dataAccess;
+    }
+
+    public async Task&lt;Guid&gt; AddAddress(AddressInsertionForm addressForm)
+    {
+        var queryResult = await _db.CallUdf&lt;AddressInsertionReturnType, dynamic&gt;(&quot;SR_Address_Insert&quot;, new
+        {
+            _street = addressForm.street,
+            _zipcode = addressForm.zipcode,
+            _city = addressForm.city,
+            _state = addressForm.state,
+            _country = addressForm.country,
+            _unit_number = addressForm.unit_number,
+            _address_type = addressForm.address_type,
+            _account_holder_id = addressForm.account_holder_id
+        });
+        var row = queryResult.FirstOrDefault();
+        if (row is null) throw new DataException();
+        
+        return row.address_id;
+    }
+
+    public async Task&lt;IEnumerable&lt;AddressBO&gt;&gt; GetAllByAccountHolder(Guid holderId)
+    {
+        var udfName = &quot;SR_Addresses_GetAllByAccountHolder&quot;;
+        var udfParams = new
+        {
+            _account_holder_id = holderId
+        };
+        var addresses = await _dataAccess.CallUdf&lt;AddressBO, dynamic&gt;(udfName, udfParams);
+        
+        return addresses;
+    }
+
+    public async Task&lt;Guid?&gt; DeactivateOneById(Guid addressId)
+    {
+        var udfName = &quot;SR_Addresses_DeactivateOneById&quot;;
+        var udfParams = new
+        {
+            _address_id = addressId
+        };
+        var deactivatedAddress = await _dataAccess.CallUdf&lt;AddressInsertionReturnType, dynamic&gt;(udfName, udfParams);
+
+        return deactivatedAddress.FirstOrDefault()?.address_id;
+    }
+}
+    </pre>
+    <script type="text/javascript">
+      highlightRanges([[19,5,19,71,1],[20,5,20,6,1],[21,9,21,18,1],[22,9,22,34,1],[23,5,23,6,1],[26,5,26,6,1],[27,9,37,12,1],[38,9,38,48,1],[39,9,39,25,1],[39,26,39,52,0],[41,9,41,31,1],[42,5,42,6,1],[45,5,45,6,1],[46,9,46,60,1],[47,9,50,11,1],[51,9,51,91,1],[53,9,53,26,1],[54,5,54,6,1],[57,5,57,6,1],[58,9,58,56,1],[59,9,62,11,1],[63,9,63,117,1],[65,9,65,64,1],[66,5,66,6,1]]);
+    </script>
+  </body>
+</html>

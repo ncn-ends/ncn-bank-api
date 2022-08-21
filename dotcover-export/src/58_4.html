@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <title>/home/one/code/bank-api/Tests/IntegrationTesting/DataAccess/TransferDataAccessTests.cs</title>
+    <script type="text/javascript" src="../js/dotcover.sourceview.js"></script>
+    <link rel="stylesheet" type="text/css" href="../css/dotcover.report.css" />
+  </head>
+  <body>
+    <pre id="content" class="source-code">
+using System;
+using System.Diagnostics;
+using System.Linq;
+using System.Threading.Tasks;
+using DataAccess.Access;
+using DataAccess.Models;
+using DataAccess.Setup;
+using FluentAssertions;
+using Microsoft.Extensions.DependencyInjection;
+using Tests.Helpers;
+using Xunit;
+
+namespace Tests.IntegrationTesting.DataAccess;
+
+
+[Collection(&quot;SequentialTesting&quot;)]
+public class TransferDataAccessTests
+{
+    private readonly ISetupAccess _setupAccess;
+    private readonly IAccountAccess _accountAccess;
+    private readonly ITransferAccess _transferAccess;
+    private readonly ICheckAccess _checkAccess;
+    private readonly ICardAccess _cardAccess;
+    private readonly IAccountHolderAccess _holderAccess;
+
+    public TransferDataAccessTests()
+    {
+        var waf = new CustomWAF&lt;Program&gt;();
+        using var scope = waf.Services.CreateScope();
+        _setupAccess = scope.ServiceProvider.GetRequiredService&lt;ISetupAccess&gt;();
+        _accountAccess = scope.ServiceProvider.GetRequiredService&lt;IAccountAccess&gt;();
+        _transferAccess = scope.ServiceProvider.GetRequiredService&lt;ITransferAccess&gt;();
+        _checkAccess = scope.ServiceProvider.GetRequiredService&lt;ICheckAccess&gt;();
+        _cardAccess = scope.ServiceProvider.GetRequiredService&lt;ICardAccess&gt;();
+        _holderAccess = scope.ServiceProvider.GetRequiredService&lt;IAccountHolderAccess&gt;();
+    }
+    
+    [Fact]
+    public async Task CheckTransferCRUDTests()
+    {
+        await _setupAccess.EnsureDatabaseSetup();
+
+        var holdersAccounts = await _accountAccess.SearchByHolderName(FakeInitialData.SampleAccountHolder2.lastname);
+        var targetAccount = holdersAccounts.FirstOrDefault();
+        var randomCheck = await _checkAccess.GetRandomOne();
+
+        var transferForm = new CheckTransferForm
+        {
+            amount = 323.23m,
+            routing_number = randomCheck.routing_number,
+            transfer_target = targetAccount.account_id
+        };
+        var transferMade = await _transferAccess.MakeTransfer(transferForm);
+
+        transferMade.Should().NotBeNull();
+        transferMade.amount.Should().Be(transferForm.amount);
+        transferMade.memo.Should().Be(&quot;&quot;);
+        transferMade.transfer_id.Should().NotBeEmpty();
+    }
+    
+    
+    [Fact]
+    public async Task CardTransferCRUDTests()
+    {
+        await _setupAccess.EnsureDatabaseSetup();
+        var holdersAccounts = await _accountAccess.SearchByHolderName(FakeInitialData.SampleAccountHolder2.lastname);
+        var targetAccount = holdersAccounts.FirstOrDefault();
+        
+        var randomCard = await _cardAccess.GetRandomOne();
+
+        var transferForm = new CardTransferForm
+        {
+            amount = 167.89m,
+            card_number = randomCard.card_number,
+            transfer_target = targetAccount.account_id
+        };
+        var transferMade = await _transferAccess.MakeTransfer(transferForm);
+
+        transferMade.Should().NotBeNull();
+        transferMade.amount.Should().Be(transferForm.amount);
+        transferMade.memo.Should().Be(&quot;&quot;);
+        transferMade.transfer_id.Should().NotBeEmpty();
+    }
+    
+    
+    [Fact]
+    public async Task CashTransferCRUDTests()
+    {
+        await _setupAccess.EnsureDatabaseSetup();
+        
+        var holdersAccounts = await _accountAccess.SearchByHolderName(FakeInitialData.SampleAccountHolder2.lastname);
+        var targetAccount = holdersAccounts.FirstOrDefault();
+
+        var transferForm = new CashTransferForm
+        {
+            amount = 523.85m,
+            transfer_target = targetAccount.account_id
+        };
+        var transferMade = await _transferAccess.MakeTransfer(transferForm);
+
+        transferMade.Should().NotBeNull();
+        transferMade.amount.Should().Be(transferForm.amount);
+        transferMade.memo.Should().Be(&quot;&quot;);
+        transferMade.transfer_id.Should().NotBeEmpty();
+    }
+
+    [Fact]
+    public async Task TransferAggregationTests()
+    {
+        await _setupAccess.EnsureDatabaseSetup();
+        
+        var sourceHolderAccounts = await _accountAccess.SearchByHolderName(FakeInitialData.SampleAccountHolder1.lastname);
+        var targetHolderAccount = await _accountAccess.SearchByHolderName(FakeInitialData.SampleAccountHolder2.lastname);
+        var sourceAccount = sourceHolderAccounts.FirstOrDefault();
+        var targetAccount = targetHolderAccount.FirstOrDefault();
+        
+        var randomCheck = await _checkAccess.GetRandomOne();
+        var randomCard = await _cardAccess.GetRandomOne();
+        
+        var initialTransfers = await _transferAccess.GetAllByTargetAccount(targetAccount.account_id);
+        var initialTransfer = initialTransfers.FirstOrDefault();
+
+        var checkTransferAmounts = new[]
+        {
+            3147.85m,
+            9438.12m,
+            1239.55m,
+            5985.58m,
+            8574.21m,
+            23.57m,
+            485.59m
+        };
+        var cardTransferAmounts = new[]
+        {
+            5250.77m,
+            535.11m,
+            896.49m,
+            4145.99m,
+            6859.75m,
+            7746.85m
+        };
+        var cashTransferAmounts = new[]
+        {
+            942.71m,
+            5122.43m,
+            1883.76m,
+            3877.72m,
+            3251.46m,
+            4573.95m,
+            7107.09m,
+            5914.02m,
+            6028.79m
+        };
+        var totalTransferCount =        checkTransferAmounts.Length
+                                        + cardTransferAmounts.Length
+                                        + cashTransferAmounts.Length;
+        
+        var totalTransferAmountNoCash = checkTransferAmounts.Sum()
+                                        + cardTransferAmounts.Sum();
+        
+        var totalTransferAmount =       totalTransferAmountNoCash
+                                        + cashTransferAmounts.Sum();
+
+        for (int i = 0; i &lt; checkTransferAmounts.Length; i++)
+        {
+            var transferForm = new CheckTransferForm
+            {
+                amount = checkTransferAmounts[i],
+                routing_number = randomCheck.routing_number,
+                transfer_target = targetAccount.account_id
+            };
+            await _transferAccess.MakeTransfer(transferForm);
+        }
+        
+        foreach (var t in cardTransferAmounts)
+        {
+            var transferForm = new CardTransferForm
+            {
+                amount = t,
+                card_number = randomCard.card_number,
+                transfer_target = targetAccount.account_id
+            };
+            await _transferAccess.MakeTransfer(transferForm);
+        }
+        
+        foreach (var t in cashTransferAmounts)
+        {
+            var transferForm = new CashTransferForm
+            {
+                amount = t,
+                transfer_target = targetAccount.account_id
+            };
+            await _transferAccess.MakeTransfer(transferForm);
+        }
+
+        var allTransfersByTarget = await _transferAccess.GetAllByTargetAccount(targetAccount.account_id);
+        var allTransfersBySource = await _transferAccess.GetAllBySourceAccount(sourceAccount.account_id);
+
+        allTransfersByTarget.Should().NotBeNull();
+        var initialTransferCount = 1;
+        allTransfersByTarget.Length().Should().Be(totalTransferCount + initialTransferCount);
+
+        allTransfersBySource.Should().NotBeNull();
+        var allTransfersBySourceExpectedLength = totalTransferCount - cashTransferAmounts.Length;
+        allTransfersBySource.Length().Should().Be(allTransfersBySourceExpectedLength);
+
+        var targetAccountBalance = await _accountAccess.GetAccountBalance(targetAccount.account_id);
+        var sourceAccountBalance = await _accountAccess.GetAccountBalance(sourceAccount.account_id);
+
+        var initialSourceAccountBalance = 300;
+        
+        targetAccountBalance.balance.Should().Be(totalTransferAmount + initialTransfer.amount);
+        sourceAccountBalance.balance.Should().Be(initialSourceAccountBalance - totalTransferAmountNoCash);
+        
+        var targetHolderBalance = await _holderAccess.GetBalance(targetAccount.account_holder.account_holder_id);
+        var sourceHolderBalance = await _holderAccess.GetBalance(sourceAccount.account_holder.account_holder_id);
+        
+        targetHolderBalance.balance.Should().Be(targetAccountBalance.balance);
+        sourceHolderBalance.balance.Should().Be(sourceAccountBalance.balance);
+
+        var targetAllTransfers = await _transferAccess.GetAllByAccountHolder(targetAccount.account_holder.account_holder_id);
+        var sourceAllTransfers = await _transferAccess.GetAllByAccountHolder(sourceAccount.account_holder.account_holder_id);
+        
+        targetAllTransfers.Length().Should().Be(allTransfersByTarget.Length());
+        sourceAllTransfers.Length().Should().Be(allTransfersBySourceExpectedLength + 1);
+    }
+}
+    </pre>
+    <script type="text/javascript">
+      highlightRanges([[26,5,26,37,1],[27,5,27,6,1],[28,9,28,44,1],[29,9,29,54,1],[30,9,30,81,1],[31,9,31,85,1],[32,9,32,87,1],[33,9,33,81,1],[34,9,34,79,1],[35,9,35,90,1],[36,5,36,6,1],[40,5,40,6,1],[41,9,41,50,1],[43,9,43,118,1],[44,9,44,62,1],[45,9,45,61,1],[47,9,52,11,1],[53,9,53,77,1],[55,9,55,43,1],[56,9,56,62,1],[57,9,57,43,1],[58,9,58,56,1],[59,5,59,6,1],[64,5,64,6,1],[65,9,65,50,1],[66,9,66,118,1],[67,9,67,62,1],[69,9,69,59,1],[71,9,76,11,1],[77,9,77,77,1],[79,9,79,43,1],[80,9,80,62,1],[81,9,81,43,1],[82,9,82,56,1],[83,5,83,6,1],[88,5,88,6,1],[89,9,89,50,1],[91,9,91,118,1],[92,9,92,62,1],[94,9,98,11,1],[99,9,99,77,1],[101,9,101,43,1],[102,9,102,62,1],[103,9,103,43,1],[104,9,104,56,1],[105,5,105,6,1],[109,5,109,6,1],[110,9,110,50,1],[112,9,112,123,1],[113,9,113,122,1],[114,9,114,67,1],[115,9,115,66,1],[117,9,117,61,1],[118,9,118,59,1],[120,9,120,102,1],[121,9,121,65,1],[123,9,132,11,1],[133,9,141,11,1],[142,9,153,11,1],[154,9,156,70,1],[158,9,159,69,1],[161,9,162,69,1],[164,14,164,23,1],[164,25,164,56,1],[164,58,164,61,1],[165,9,165,10,1],[166,13,171,15,1],[172,13,172,62,1],[173,9,173,10,1],[175,9,175,16,1],[175,18,175,23,1],[175,24,175,26,1],[175,27,175,46,1],[176,9,176,10,1],[177,13,182,15,1],[183,13,183,62,1],[184,9,184,10,1],[186,9,186,16,1],[186,18,186,23,1],[186,24,186,26,1],[186,27,186,46,1],[187,9,187,10,1],[188,13,192,15,1],[193,13,193,62,1],[194,9,194,10,1],[196,9,196,106,1],[197,9,197,106,1],[199,9,199,51,1],[200,9,200,38,1],[201,9,201,94,1],[203,9,203,51,1],[204,9,204,98,1],[205,9,205,87,1],[207,9,207,101,1],[208,9,208,101,1],[210,9,210,47,1],[212,9,212,96,1],[213,9,213,107,1],[215,9,215,114,1],[216,9,216,114,1],[218,9,218,79,1],[219,9,219,79,1],[221,9,221,126,1],[222,9,222,126,1],[224,9,224,80,1],[225,9,225,89,1],[226,5,226,6,1]]);
+    </script>
+  </body>
+</html>

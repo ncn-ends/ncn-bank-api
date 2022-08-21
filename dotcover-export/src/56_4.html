@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <title>/home/one/code/bank-api/Tests/IntegrationTesting/DataAccess/SetupAccessTests.cs</title>
+    <script type="text/javascript" src="../js/dotcover.sourceview.js"></script>
+    <link rel="stylesheet" type="text/css" href="../css/dotcover.report.css" />
+  </head>
+  <body>
+    <pre id="content" class="source-code">
+using DataAccess;
+using Tests.Helpers;
+using Xunit;
+using Xunit.Abstractions;
+
+namespace Tests.IntegrationTesting.DataAccess;
+
+
+public class SetupAccessTests
+{
+    private readonly ITestOutputHelper _output;
+    private readonly ISqlDataAccess _sqlDataAccess;
+
+    public SetupAccessTests(ITestOutputHelper output)
+    {
+        _sqlDataAccess = new SqlDataAccess(TestingConfig.GetConfig());
+        _output = output;
+    }
+    
+    [Fact]
+    public static void EnsureInitialDataWasCreated()
+    {
+        
+    }
+}
+    </pre>
+    <script type="text/javascript">
+      highlightRanges([[14,5,14,54,0],[15,5,15,6,0],[16,9,16,71,0],[17,9,17,26,0],[18,5,18,6,0],[22,5,22,6,1],[24,5,24,6,1]]);
+    </script>
+  </body>
+</html>

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <title>/home/one/code/bank-api/DataAccess/Access/CheckAccess.cs</title>
+    <script type="text/javascript" src="../js/dotcover.sourceview.js"></script>
+    <link rel="stylesheet" type="text/css" href="../css/dotcover.report.css" />
+  </head>
+  <body>
+    <pre id="content" class="source-code">
+using DataAccess.Models;
+
+namespace DataAccess.Access;
+
+public interface ICheckAccess
+{
+    Task&lt;CheckBO?&gt; CreateOne(CheckCreationForm checkForm);
+    Task&lt;CheckBO?&gt; DeactivateOneById(Guid checkId);
+    Task&lt;CheckBO?&gt; GetRandomOne();
+    Task&lt;IEnumerable&lt;CheckBO&gt;&gt; GetAllByAccount(Guid accountId);
+    Task&lt;IEnumerable&lt;CheckBO&gt;&gt; GetAllByAccountHolder(Guid holderId);
+}
+
+public class CheckAccess : ICheckAccess
+{
+    private readonly ISqlDataAccess _dataAccess;
+
+    public CheckAccess(ISqlDataAccess dataAccess)
+    {
+        _dataAccess = dataAccess;
+    }
+
+    public async Task&lt;CheckBO?&gt; CreateOne(CheckCreationForm checkForm)
+    {
+        var createdCheck = await _dataAccess.CallUdf&lt;CheckBO, dynamic&gt;(&quot;SR_Checks_CreateOne&quot;, new
+        {
+            _account_id = checkForm.account_id
+        });
+
+        return createdCheck.FirstOrDefault();
+    }
+
+    public async Task&lt;CheckBO?&gt; DeactivateOneById(Guid checkId)
+    {
+        var deactivatedCheck = await _dataAccess.CallUdf&lt;CheckBO, dynamic&gt;(&quot;SR_Checks_DeactivateOneById&quot;,
+            new
+            {
+                _check_id = checkId
+            });
+
+        return deactivatedCheck.FirstOrDefault();
+    }
+
+    public async Task&lt;CheckBO?&gt; GetRandomOne()
+    {
+        var isDev = Environment.GetEnvironmentVariable(&quot;ASPNETCORE_ENVIRONMENT&quot;) == &quot;Development&quot;;
+        if (!isDev) throw new Exception(&quot;Method is only available in Development.&quot;);
+
+        var randomCheck = await _dataAccess.CallUdf&lt;CheckBO&gt;(&quot;SR_Checks_GetRandomOne&quot;);
+
+        return randomCheck.FirstOrDefault();
+    }
+    
+    
+    public async Task&lt;IEnumerable&lt;CheckBO&gt;&gt; GetAllByAccount(Guid accountId)
+    {
+        var allChecks = await _dataAccess.CallUdf&lt;CheckBO, dynamic&gt;(&quot;SR_Checks_GetAllByAccount&quot;, new
+        {
+            _account_id = accountId
+        });
+
+        return allChecks;
+    }
+
+    public async Task&lt;IEnumerable&lt;CheckBO&gt;&gt; GetAllByAccountHolder(Guid holderId)
+    {
+        var allChecks = await _dataAccess.CallUdf&lt;CheckBO, dynamic&gt;(&quot;SR_Checks_GetAllByAccountHolder&quot;, new
+        {
+            _account_holder_id = holderId
+        });
+        return allChecks;
+    }
+}
+    </pre>
+    <script type="text/javascript">
+      highlightRanges([[18,5,18,50,1],[19,5,19,6,1],[20,9,20,34,1],[21,5,21,6,1],[24,5,24,6,1],[25,9,28,12,1],[30,9,30,46,1],[31,5,31,6,1],[34,5,34,6,1],[35,9,39,16,1],[41,9,41,50,1],[42,5,42,6,1],[45,5,45,6,1],[46,9,46,99,1],[47,9,47,20,1],[47,21,47,85,0],[49,9,49,88,1],[51,9,51,45,1],[52,5,52,6,1],[56,5,56,6,1],[57,9,60,12,1],[62,9,62,26,1],[63,5,63,6,1],[66,5,66,6,1],[67,9,70,12,1],[71,9,71,26,1],[72,5,72,6,1]]);
+    </script>
+  </body>
+</html>

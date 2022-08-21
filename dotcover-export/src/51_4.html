@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <title>/home/one/code/bank-api/Tests/IntegrationTesting/DataAccess/AccountHolderDataAccessTests.cs</title>
+    <script type="text/javascript" src="../js/dotcover.sourceview.js"></script>
+    <link rel="stylesheet" type="text/css" href="../css/dotcover.report.css" />
+  </head>
+  <body>
+    <pre id="content" class="source-code">
+using System.Diagnostics;
+using System.Linq;
+using System.Threading.Tasks;
+using DataAccess.Access;
+using DataAccess.Models;
+using DataAccess.Setup;
+using FluentAssertions;
+using Microsoft.Extensions.DependencyInjection;
+using Tests.Helpers;
+using Xunit;
+
+namespace Tests.IntegrationTesting.DataAccess;
+
+[Collection(&quot;SequentialTesting&quot;)]
+public class AccountHolderDataAccessTests
+{
+    private readonly IAccountHolderAccess _accountHolderAccess;
+    private readonly ISetupAccess _setupAccess;
+    private readonly IAccountAccess _accountAccess;
+    private readonly IAddressAccess _addressAccess;
+
+    public AccountHolderDataAccessTests()
+    {
+        var waf = new CustomWAF&lt;Program&gt;();
+        using var scope = waf.Services.CreateScope();
+        _setupAccess = scope.ServiceProvider.GetRequiredService&lt;ISetupAccess&gt;();
+        _accountAccess = scope.ServiceProvider.GetRequiredService&lt;IAccountAccess&gt;();
+        _accountHolderAccess = scope.ServiceProvider.GetRequiredService&lt;IAccountHolderAccess&gt;();
+        _addressAccess = scope.ServiceProvider.GetRequiredService&lt;IAddressAccess&gt;();
+    }
+
+    [Fact]
+    public async Task AccountHolderCRUDTests()
+    {
+        await _setupAccess.EnsureDatabaseSetup();
+        
+        var sampleAccountHolderData = FakeInitialData.SampleAccountHolder1;
+        var holderInsertionGuid = await _accountHolderAccess.CreateOne(sampleAccountHolderData);
+        holderInsertionGuid.Should().NotBeNull();
+        holderInsertionGuid.Should().NotBeEmpty();
+
+        var holder = await _accountHolderAccess.GetOne(holderInsertionGuid.Value);
+        holder.Should().NotBeNull();
+        holder.birthdate.Should().Be(sampleAccountHolderData.birthdate);
+        holder.firstname.Should().Be(sampleAccountHolderData.firstname);
+        holder.middlename.Should().Be(sampleAccountHolderData.middlename);
+        holder.lastname.Should().Be(sampleAccountHolderData.lastname);
+        holder.phone_number.Should().Be(sampleAccountHolderData.phone_number);
+        holder.job_title.Should().Be(sampleAccountHolderData.job_title);
+        holder.expected_salary.Should().Be(sampleAccountHolderData.expected_salary);
+        
+        await AccountHolderDeactivationAndAssertion(holder);
+    }
+
+    [Fact]
+    public async Task AccountHolderGetRandomOneTests()
+    {
+        await _setupAccess.EnsureDatabaseSetup();
+        
+        var holder = await _accountHolderAccess.GetRandomOne();
+        holder.Should().NotBeNull();
+        holder.birthdate.Should();
+
+        holder.firstname.Should().BeOneOf(
+            FakeInitialData.SampleAccountHolder1.firstname,
+            FakeInitialData.SampleAccountHolder2.firstname
+            );
+        
+        holder.middlename.Should().BeOneOf(
+            FakeInitialData.SampleAccountHolder1.middlename,
+            FakeInitialData.SampleAccountHolder2.middlename);
+        
+        holder.lastname.Should().BeOneOf(
+            FakeInitialData.SampleAccountHolder1.lastname,
+            FakeInitialData.SampleAccountHolder2.lastname);
+        
+        holder.phone_number.Should().BeOneOf(
+            FakeInitialData.SampleAccountHolder1.phone_number,
+            FakeInitialData.SampleAccountHolder2.phone_number);
+        
+        holder.job_title.Should().BeOneOf(
+            FakeInitialData.SampleAccountHolder1.job_title,
+            FakeInitialData.SampleAccountHolder2.job_title);
+        
+        holder.expected_salary.Should().BeOneOf(
+            FakeInitialData.SampleAccountHolder1.expected_salary.Value,
+            FakeInitialData.SampleAccountHolder2.expected_salary.Value);
+    }
+    
+    
+    private async Task AccountHolderDeactivationAndAssertion(AccountHolderBO holder)
+    {
+        // assert that the addresses for the holder was deactivated
+
+        var createdAccount = await _accountAccess.CreateOne(new AccountFormDTO
+        {
+            account_holder_id = holder.account_holder_id,
+            account_type_key = &quot;sta_ca&quot;,
+            initial_deposit_amount = 10000
+        });
+
+        /* ensures account and addresses were created */
+        var foundAccount = await _accountAccess.GetOneById(createdAccount.account_id);
+        var addresses = await _addressAccess.GetAllByAccountHolder(holder.account_holder_id);
+
+        foundAccount.account_id.Should().Be(createdAccount.account_id);
+        addresses.Length().Should().Be(1);
+
+        /* ensures account holder was deactivated */
+        var deactivatedHolder = await _accountHolderAccess.DeactivateOneById(holder.account_holder_id);
+
+        deactivatedHolder.deactivated.Should().Be(holder.account_holder_id);
+
+        /*
+         * ensures account and addresses were
+         * deactivated after account holder was deactivated
+         */
+        var createdAccountAfterDeactivation = await _accountAccess.GetOneById(createdAccount.account_id);
+        var addressesAfterDeactivation = await _addressAccess.GetAllByAccountHolder(deactivatedHolder.deactivated.Value);
+        
+        createdAccountAfterDeactivation.Should().BeNull();
+        addressesAfterDeactivation.Length().Should().Be(0);
+    }
+}
+    </pre>
+    <script type="text/javascript">
+      highlightRanges([[22,5,22,42,1],[23,5,23,6,1],[24,9,24,44,1],[25,9,25,54,1],[26,9,26,81,1],[27,9,27,85,1],[28,9,28,97,1],[29,9,29,85,1],[30,5,30,6,1],[34,5,34,6,1],[35,9,35,50,1],[37,9,37,76,1],[38,9,38,97,1],[39,9,39,50,1],[40,9,40,51,1],[42,9,42,83,1],[43,9,43,37,1],[44,9,44,73,1],[45,9,45,73,1],[46,9,46,75,1],[47,9,47,71,1],[48,9,48,79,1],[49,9,49,73,1],[50,9,50,85,1],[52,9,52,61,1],[53,5,53,6,1],[57,5,57,6,1],[58,9,58,50,1],[60,9,60,64,1],[61,9,61,37,1],[62,9,62,35,1],[64,9,67,15,1],[69,9,71,62,1],[73,9,75,60,1],[77,9,79,64,1],[81,9,83,61,1],[85,9,87,73,1],[88,5,88,6,1],[92,5,92,6,1],[95,9,100,12,1],[103,9,103,87,1],[104,9,104,94,1],[106,9,106,72,1],[107,9,107,43,1],[110,9,110,104,1],[112,9,112,77,1],[118,9,118,106,1],[119,9,119,122,1],[121,9,121,59,1],[122,9,122,60,1],[123,5,123,6,1]]);
+    </script>
+  </body>
+</html>

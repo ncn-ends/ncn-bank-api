@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <title>/home/one/code/bank-api/DataAccess/Access/AccountTypeAccess.cs</title>
+    <script type="text/javascript" src="../js/dotcover.sourceview.js"></script>
+    <link rel="stylesheet" type="text/css" href="../css/dotcover.report.css" />
+  </head>
+  <body>
+    <pre id="content" class="source-code">
+using System.Data;
+using System.Diagnostics;
+using Dapper;
+using DataAccess.Models;
+using Microsoft.Extensions.Configuration;
+using Npgsql;
+
+namespace DataAccess.Access;
+
+public interface IAccountTypeAccess
+{
+    Task&lt;IEnumerable&lt;AccountTypeBO&gt;&gt; GetAllAccountTypes();
+}
+
+public class AccountTypeAccess : IAccountTypeAccess
+{
+    private readonly ISqlDataAccess _db;
+    private readonly string _connectionString;
+
+    public AccountTypeAccess(ISqlDataAccess db, IConfiguration config)
+    {
+        _connectionString = config[&quot;POSTGRESQLCONNSTR_Default&quot;]
+                            ?? config.GetConnectionString(&quot;Default&quot;);
+        _db = db;
+    }
+
+    public async Task&lt;IEnumerable&lt;AccountTypeBO&gt;&gt; GetAllAccountTypes()
+    {
+        using IDbConnection connection = new NpgsqlConnection(_connectionString);
+
+        var result = await connection.QueryAsync&lt;AccountTypeBO, TransferLimitBO, MonthlyFeeBO, AccountTypeBO&gt;(
+            &quot;SR_AccountTypes_GetAll&quot;,
+            commandType: CommandType.StoredProcedure,
+            splitOn: &quot;account_type_id,transfer_limit_id,monthly_fee_id&quot;,
+            map: (accountType, transferLimit, monthlyFee) =&gt;
+            {
+                accountType.monthly_fee = monthlyFee;
+                accountType.transfer_limit = transferLimit;
+                return accountType;
+            }
+        );
+
+        return result;
+    }
+}
+    </pre>
+    <script type="text/javascript">
+      highlightRanges([[20,5,20,71,1],[21,5,21,6,1],[22,9,23,70,1],[24,9,24,18,1],[25,5,25,6,1],[28,5,28,6,1],[29,9,29,82,1],[31,9,36,13,1],[36,13,36,14,1],[36,14,37,17,1],[37,17,37,54,1],[37,54,38,17,1],[38,17,38,60,1],[38,60,39,17,1],[39,17,39,36,1],[39,36,40,13,1],[40,13,40,14,1],[40,14,41,11,1],[43,9,43,23,1],[44,5,44,6,1]]);
+    </script>
+  </body>
+</html>

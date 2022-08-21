@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <title>/home/one/code/bank-api/DataAccess/Models/CheckModels.cs</title>
+    <script type="text/javascript" src="../js/dotcover.sourceview.js"></script>
+    <link rel="stylesheet" type="text/css" href="../css/dotcover.report.css" />
+  </head>
+  <body>
+    <pre id="content" class="source-code">
+using System.Security.AccessControl;
+
+namespace DataAccess.Models;
+
+public class CheckCreationForm
+{
+    public Guid account_id { get; set; } = Guid.Empty;
+}
+
+
+// check_id uuid,
+// account_number TEXT,
+// routing_number TEXT,
+// expiration TIMESTAMPTZ
+public class CheckBO
+{
+    public Guid check_id { get; set; }
+    public string? account_number { get; set; }
+    public string? routing_number { get; set; }
+    public DateTime? expiration { get; set; }
+    public Guid deactivated { get; set; }
+    public DateTime? created_at { get; set; }
+}
+    </pre>
+    <script type="text/javascript">
+      highlightRanges([[7,30,7,34,1],[7,35,7,39,1],[7,44,7,54,1],[17,28,17,32,1],[17,33,17,37,1],[18,37,18,41,1],[18,42,18,46,1],[19,37,19,41,1],[19,42,19,46,1],[20,35,20,39,1],[20,40,20,44,1],[21,31,21,35,1],[21,36,21,40,1],[22,35,22,39,1],[22,40,22,44,1]]);
+    </script>
+  </body>
+</html>

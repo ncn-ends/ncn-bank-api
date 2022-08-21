@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <title>/home/one/code/bank-api/Tests/IntegrationTesting/DataAccess/AddressDataAccessTests.cs</title>
+    <script type="text/javascript" src="../js/dotcover.sourceview.js"></script>
+    <link rel="stylesheet" type="text/css" href="../css/dotcover.report.css" />
+  </head>
+  <body>
+    <pre id="content" class="source-code">
+using System;
+using System.Diagnostics;
+using System.Linq;
+using System.Threading.Tasks;
+using Bogus;
+using DataAccess.Access;
+using DataAccess.Models;
+using DataAccess.Setup;
+using FluentAssertions;
+using Microsoft.Extensions.DependencyInjection;
+using Tests.Fixtures;
+using Tests.Helpers;
+using Xunit;
+
+namespace Tests.IntegrationTesting.DataAccess;
+
+[Collection(&quot;SequentialTesting&quot;)]
+public class AddressDataAccessTests
+{
+    [Theory]
+    [ClassData(typeof(AddressTestData))]
+    public async Task AddressCRUDTests(
+        string street, string zipcode, string city, string state,
+        string country, int unit_number, string address_type)
+    {
+        var waf = new CustomWAF&lt;Program&gt;();
+        using var scope = waf.Services.CreateScope();
+        var setupAccess = scope.ServiceProvider.GetRequiredService&lt;ISetupAccess&gt;();
+        var addressAccess = scope.ServiceProvider.GetRequiredService&lt;IAddressAccess&gt;();
+        var holderAccess = scope.ServiceProvider.GetRequiredService&lt;IAccountHolderAccess&gt;();
+
+        await setupAccess.EnsureDatabaseSetup();
+
+        
+        var randomHolder = await holderAccess.GetRandomOne();
+        var addresses = await addressAccess.GetAllByAccountHolder(randomHolder.account_holder_id);
+
+        addresses.Length().Should().Be(1);
+
+        var entry = new AddressInsertionForm
+        {
+            street = street,
+            zipcode = zipcode,
+            city = city,
+            state = state,
+            country = country,
+            unit_number = unit_number,
+            address_type = address_type,
+            account_holder_id = randomHolder.account_holder_id
+        };
+
+        await addressAccess.AddAddress(entry);
+        var addressesAfterInsertion = await addressAccess.GetAllByAccountHolder(randomHolder.account_holder_id);
+        
+        addressesAfterInsertion.Length().Should().Be(addresses.Length() + 1);
+
+        var firstEntry = addressesAfterInsertion.FirstOrDefault();
+        var lastEntry = addressesAfterInsertion.LastOrDefault();
+        
+        lastEntry.Should().BeEquivalentTo(entry);
+
+        var deactivatedAddress = await addressAccess.DeactivateOneById(lastEntry.address_id);
+        deactivatedAddress.Should().NotBe(lastEntry.address_id);
+
+        var addressesAfterDeactivated = await addressAccess.GetAllByAccountHolder(randomHolder.account_holder_id);
+        addressesAfterDeactivated.Length().Should().Be(1);
+        firstEntry.address_id.Should().Be(addressesAfterDeactivated.FirstOrDefault().address_id);
+    }
+}
+    </pre>
+    <script type="text/javascript">
+      highlightRanges([[25,5,25,6,1],[26,9,26,44,1],[27,9,27,54,1],[28,9,28,84,1],[29,9,29,88,1],[30,9,30,93,1],[32,9,32,49,1],[35,9,35,62,1],[36,9,36,99,1],[38,9,38,43,1],[40,9,50,11,1],[52,9,52,47,1],[53,9,53,113,1],[55,9,55,78,1],[57,9,57,67,1],[58,9,58,65,1],[60,9,60,50,1],[62,9,62,94,1],[63,9,63,65,1],[65,9,65,115,1],[66,9,66,59,1],[67,9,67,98,1],[68,5,68,6,1]]);
+    </script>
+  </body>
+</html>

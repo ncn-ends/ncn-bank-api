@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <title>/home/one/code/bank-api/DataAccess/Models/AccountHolderModels.cs</title>
+    <script type="text/javascript" src="../js/dotcover.sourceview.js"></script>
+    <link rel="stylesheet" type="text/css" href="../css/dotcover.report.css" />
+  </head>
+  <body>
+    <pre id="content" class="source-code">
+namespace DataAccess.Models;
+
+
+// account_holder_id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+// birthdate timestamptz NOT NULL,
+// firstname text not null,
+// middlename text,
+// lastname text not null,
+// phone_number VARCHAR(15) not null,
+// job_title VARCHAR(64) NOT NULL,
+// expected_salary MONEY NOT NULL
+public class AccountHolderBO
+{
+    public Guid account_holder_id { get; set; }
+    public DateTime birthdate { get; set; }
+    public string firstname { get; set; } = &quot;UNSET FIRST NAME&quot;;
+    public string middlename { get; set; } = &quot;UNSET MIDDLE NAME&quot;;
+    public string lastname { get; set; } = &quot;UNSET LAST NAME&quot;;
+    public string phone_number { get; set; } = &quot;UNSET PHONE NUMBER&quot;;
+    public string job_title { get; set; } = &quot;UNSET JOB TITLE&quot;;
+    public decimal expected_salary { get; set; } = -1;
+    public Guid? deactivated { get; set; }
+}
+
+public class AccountHolderWithAddressBO : AccountHolderBO
+{
+    public AddressBO Address { get; set; }
+}
+
+public class AccountHolderForm
+{
+    public DateTime birthdate { get; set; }
+    public string? firstname { get; set; }
+    public string? middlename { get; set; }
+    public string? lastname { get; set; }
+    public string? phone_number { get; set; }
+    public string? job_title { get; set; }
+    public decimal? expected_salary { get; set; }
+    public string street { get; set; }
+    public string zipcode { get; set; }
+    public string city { get; set; }
+    public string state { get; set; }
+    public string country { get; set; }
+    public int unit_number { get; set; }
+    public string address_type { get; set; }
+}
+
+public class AccountHolderInsertionResult
+{
+    public Guid account_holder_id { get; set; } = Guid.Empty;
+}
+    </pre>
+    <script type="text/javascript">
+      highlightRanges([[14,37,14,41,1],[14,42,14,46,1],[15,33,15,37,1],[15,38,15,42,1],[16,31,16,35,1],[16,36,16,40,1],[16,45,16,63,1],[17,32,17,36,1],[17,37,17,41,1],[17,46,17,65,1],[18,30,18,34,1],[18,35,18,39,1],[18,44,18,61,1],[19,34,19,38,1],[19,39,19,43,1],[19,48,19,68,1],[20,31,20,35,1],[20,36,20,40,1],[20,45,20,62,1],[21,38,21,42,1],[21,43,21,47,1],[21,52,21,54,1],[22,32,22,36,1],[22,37,22,41,1],[27,32,27,36,0],[27,37,27,41,0],[32,33,32,37,1],[32,38,32,42,1],[33,32,33,36,1],[33,37,33,41,1],[34,33,34,37,1],[34,38,34,42,1],[35,31,35,35,1],[35,36,35,40,1],[36,35,36,39,1],[36,40,36,44,1],[37,32,37,36,1],[37,37,37,41,1],[38,39,38,43,1],[38,44,38,48,1],[39,28,39,32,1],[39,33,39,37,1],[40,29,40,33,1],[40,34,40,38,1],[41,26,41,30,1],[41,31,41,35,1],[42,27,42,31,1],[42,32,42,36,1],[43,29,43,33,1],[43,34,43,38,1],[44,30,44,34,1],[44,35,44,39,1],[45,34,45,38,1],[45,39,45,43,1],[50,37,50,41,1],[50,42,50,46,1],[50,51,50,61,1]]);
+    </script>
+  </body>
+</html>

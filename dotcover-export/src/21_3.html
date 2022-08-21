@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <title>/home/one/code/bank-api/DataAccess/Access/CardAccess.cs</title>
+    <script type="text/javascript" src="../js/dotcover.sourceview.js"></script>
+    <link rel="stylesheet" type="text/css" href="../css/dotcover.report.css" />
+  </head>
+  <body>
+    <pre id="content" class="source-code">
+using DataAccess.Models;
+
+namespace DataAccess.Access;
+
+public interface ICardAccess
+{
+    Task&lt;CardBO?&gt; CreateOne(CardCreationForm cardForm);
+    Task&lt;CardBO?&gt; DeactivateOneById(Guid cardId);
+    Task&lt;CardBO?&gt; GetRandomOne();
+    Task&lt;IEnumerable&lt;CardBO&gt;&gt; GetAllByAccount(Guid accountId);
+    Task&lt;IEnumerable&lt;CardBO&gt;&gt; GetAllByAccountHolder(Guid holderId);
+}
+
+public class CardAccess : ICardAccess
+{
+    private readonly ISqlDataAccess _dataAccess;
+
+    public CardAccess(ISqlDataAccess dataAccess)
+    {
+        _dataAccess = dataAccess;
+    }
+
+    public async Task&lt;CardBO?&gt; CreateOne(CardCreationForm cardForm)
+    {
+        var createdCard = await _dataAccess.CallUdf&lt;CardBO, dynamic&gt;(&quot;SR_Cards_CreateOne&quot;, new
+        {
+            _account_id = cardForm.account_id,
+            _pin_number = cardForm.pin_number
+        });
+
+        return createdCard.FirstOrDefault();
+    }
+
+    public async Task&lt;CardBO?&gt; DeactivateOneById(Guid cardId)
+    {
+        var deactivatedCard = await _dataAccess.CallUdf&lt;CardBO, dynamic&gt;(&quot;SR_Cards_DeactivateOneById&quot;, new
+        {
+            _card_id = cardId
+        });
+
+        return deactivatedCard.FirstOrDefault();
+    }
+
+    public async Task&lt;CardBO?&gt; GetRandomOne()
+    {
+        var isDev = Environment.GetEnvironmentVariable(&quot;ASPNETCORE_ENVIRONMENT&quot;) == &quot;Development&quot;;
+        if (!isDev) throw new Exception(&quot;Method is only available in Development.&quot;);
+
+        var randomCard = await _dataAccess.CallUdf&lt;CardBO&gt;(&quot;SR_Cards_GetRandomOne&quot;);
+
+        return randomCard.FirstOrDefault();
+    }
+
+    public async Task&lt;IEnumerable&lt;CardBO&gt;&gt; GetAllByAccount(Guid accountId)
+    {
+        var cards = await _dataAccess.CallUdf&lt;CardBO, dynamic&gt;(&quot;SR_Cards_GetAllByAccount&quot;, new
+        {
+            _account_id = accountId
+        });
+
+        return cards;
+    }
+
+    public async Task&lt;IEnumerable&lt;CardBO&gt;&gt; GetAllByAccountHolder(Guid holderId)
+    {
+        var cards = await _dataAccess.CallUdf&lt;CardBO, dynamic&gt;(&quot;SR_Cards_GetAllByAccountHolder&quot;, new
+        {
+            _account_holder_id = holderId
+        });
+
+        return cards;
+    }
+}
+    </pre>
+    <script type="text/javascript">
+      highlightRanges([[18,5,18,49,1],[19,5,19,6,1],[20,9,20,34,1],[21,5,21,6,1],[24,5,24,6,1],[25,9,29,12,1],[31,9,31,45,1],[32,5,32,6,1],[35,5,35,6,1],[36,9,39,12,1],[41,9,41,49,1],[42,5,42,6,1],[45,5,45,6,1],[46,9,46,99,1],[47,9,47,20,1],[47,21,47,85,0],[49,9,49,85,1],[51,9,51,44,1],[52,5,52,6,1],[55,5,55,6,1],[56,9,59,12,1],[61,9,61,22,1],[62,5,62,6,1],[65,5,65,6,1],[66,9,69,12,1],[71,9,71,22,1],[72,5,72,6,1]]);
+    </script>
+  </body>
+</html>

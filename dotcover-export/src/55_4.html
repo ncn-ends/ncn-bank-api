@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <title>/home/one/code/bank-api/Tests/IntegrationTesting/DataAccess/CheckDataAccessTests.cs</title>
+    <script type="text/javascript" src="../js/dotcover.sourceview.js"></script>
+    <link rel="stylesheet" type="text/css" href="../css/dotcover.report.css" />
+  </head>
+  <body>
+    <pre id="content" class="source-code">
+using System;
+using System.Diagnostics;
+using System.Linq;
+using System.Threading.Tasks;
+using DataAccess.Access;
+using DataAccess.Models;
+using DataAccess.Setup;
+using FluentAssertions;
+using Microsoft.Extensions.DependencyInjection;
+using Tests.Helpers;
+using Xunit;
+
+namespace Tests.IntegrationTesting.DataAccess;
+
+[Collection(&quot;SequentialTesting&quot;)]
+public class CheckDataAccessTests
+{
+    private ISetupAccess _setupAccess;
+    private IAccountAccess _accountAccess;
+    private ICheckAccess _checkAccess;
+
+    public CheckDataAccessTests()
+    {
+        var waf = new CustomWAF&lt;Program&gt;();
+        using var scope = waf.Services.CreateScope();
+        _setupAccess = scope.ServiceProvider.GetRequiredService&lt;ISetupAccess&gt;();
+        _accountAccess = scope.ServiceProvider.GetRequiredService&lt;IAccountAccess&gt;();
+        _checkAccess = scope.ServiceProvider.GetRequiredService&lt;ICheckAccess&gt;();
+    }
+    
+    [Fact]
+    public async Task CheckCRUDTests()
+    {
+        
+        await _setupAccess.EnsureDatabaseSetup();
+        
+        var randomAccount = await _accountAccess.GetRandomOne();
+        if (randomAccount is null) throw new Exception(&quot;While testing card creation, random account returned null&quot;);
+
+        var createdCheck = await _checkAccess.CreateOne(new CheckCreationForm
+        {
+            account_id = randomAccount.account_id
+        });
+        
+        await AssertCheckIsValid(createdCheck);
+        
+        var targetExpiration = DateTime.Now.AddMonths(6);
+        var daysBetweenExpectedExpiration = (targetExpiration - createdCheck.expiration.Value).TotalDays;
+        daysBetweenExpectedExpiration.Should().BeInRange(-5, 5);
+
+        var allChecks = await _checkAccess.GetAllByAccount(randomAccount.account_id);
+        
+        allChecks.Should().NotBeNull();
+        allChecks.Length().Should().BeOneOf(1, 2);
+        
+        var lastCheckInAllChecks = allChecks.LastOrDefault();
+        lastCheckInAllChecks.Should().NotBeNull();
+        lastCheckInAllChecks.Should().BeEquivalentTo(createdCheck);
+
+        var deactivatedCheck = await _checkAccess.DeactivateOneById(createdCheck.check_id);
+
+        deactivatedCheck.Should().NotBeNull();
+        deactivatedCheck.deactivated.Should().NotBeEmpty();
+        deactivatedCheck.deactivated.Should().Be(createdCheck.check_id);
+        deactivatedCheck.account_number.Should().Be(createdCheck.account_number);
+        deactivatedCheck.check_id.Should().NotBe(createdCheck.check_id);
+        deactivatedCheck.routing_number.Should().NotBe(createdCheck.routing_number);
+    }
+
+    [Fact]
+    public async Task ChecksByAccountHolderTests()
+    {
+        await _setupAccess.EnsureDatabaseSetup();
+
+        var account = await _accountAccess.SearchByHolderName(FakeInitialData.SampleAccountHolder1.firstname);
+        var firstAccountFound = account.FirstOrDefault();
+        var checks = await _checkAccess.GetAllByAccountHolder(firstAccountFound.account_holder.account_holder_id);
+        
+        checks.Length().Should().Be(1);
+        
+        var firstCheck = checks.FirstOrDefault();
+        
+        await AssertCheckIsValid(firstCheck);
+
+    }
+
+    private async Task AssertCheckIsValid(CheckBO check)
+    {
+        check.Should().NotBeNull();
+        check.check_id.Should().NotBeEmpty();
+        check.account_number.Should().NotBeEmpty();
+        check.account_number.Should().NotBeNull();
+        check.routing_number.Should().NotBeNull();
+        check.routing_number.Length.Should().Be(9);
+    }
+}
+    </pre>
+    <script type="text/javascript">
+      highlightRanges([[22,5,22,34,1],[23,5,23,6,1],[24,9,24,44,1],[25,9,25,54,1],[26,9,26,81,1],[27,9,27,85,1],[28,9,28,81,1],[29,5,29,6,1],[33,5,33,6,1],[35,9,35,50,1],[37,9,37,65,1],[38,9,38,35,1],[38,36,38,117,0],[40,9,43,12,1],[45,9,45,48,1],[47,9,47,58,1],[48,9,48,106,1],[49,9,49,65,1],[51,9,51,86,1],[53,9,53,40,1],[54,9,54,51,1],[56,9,56,62,1],[57,9,57,51,1],[58,9,58,68,1],[60,9,60,92,1],[62,9,62,47,1],[63,9,63,60,1],[64,9,64,73,1],[65,9,65,82,1],[66,9,66,73,1],[67,9,67,85,1],[68,5,68,6,1],[72,5,72,6,1],[73,9,73,50,1],[75,9,75,111,1],[76,9,76,58,1],[77,9,77,115,1],[79,9,79,40,1],[81,9,81,50,1],[83,9,83,46,1],[85,5,85,6,1],[88,5,88,6,1],[89,9,89,36,1],[90,9,90,46,1],[91,9,91,52,1],[92,9,92,51,1],[93,9,93,51,1],[94,9,94,52,1],[95,5,95,6,1]]);
+    </script>
+  </body>
+</html>

@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <title>/home/one/code/bank-api/DataAccess/Access/TransferAccess.cs</title>
+    <script type="text/javascript" src="../js/dotcover.sourceview.js"></script>
+    <link rel="stylesheet" type="text/css" href="../css/dotcover.report.css" />
+  </head>
+  <body>
+    <pre id="content" class="source-code">
+using DataAccess.Models;
+
+namespace DataAccess.Access;
+
+public interface ITransferAccess
+{
+    Task&lt;TransferInsertionReturn?&gt; MakeTransfer(CheckTransferForm transferForm);
+    Task&lt;TransferInsertionReturn?&gt; MakeTransfer(CardTransferForm transferForm);
+    Task&lt;TransferInsertionReturn?&gt; MakeTransfer(CashTransferForm transferForm);
+    Task&lt;IEnumerable&lt;TransferInsertionReturn&gt;?&gt; GetAllByTargetAccount(Guid accountId);
+    Task&lt;IEnumerable&lt;TransferInsertionReturn&gt;?&gt; GetAllBySourceAccount(Guid accountId);
+    Task&lt;IEnumerable&lt;TransferInsertionReturn&gt;&gt; GetAllByAccountHolder(Guid holderId);
+}
+
+public class TransferAccess : ITransferAccess
+{
+    private readonly ISqlDataAccess _dataAccess;
+
+    public TransferAccess(ISqlDataAccess dataAccess)
+    {
+        _dataAccess = dataAccess;
+    }
+
+    public async Task&lt;TransferInsertionReturn?&gt; MakeTransfer(CheckTransferForm transferForm)
+    {
+        var transferMade = await _dataAccess.CallUdf&lt;TransferInsertionReturn, dynamic&gt;(&quot;SR_Transfers_MakeCheckTransfer&quot;, new
+        {
+            _amount = transferForm.amount, 
+            _routing_number = transferForm.routing_number, 
+            _transfer_target = transferForm.transfer_target, 
+            _memo = transferForm.memo
+        });
+
+        return transferMade.FirstOrDefault();
+    }
+
+    public async Task&lt;TransferInsertionReturn?&gt; MakeTransfer(CardTransferForm transferForm)
+    {
+        var transferMade = await _dataAccess.CallUdf&lt;TransferInsertionReturn, dynamic&gt;(&quot;SR_Transfers_MakeCardTransfer&quot;, new
+        {
+            _amount = transferForm.amount, 
+            _card_number = transferForm.card_number, 
+            _transfer_target = transferForm.transfer_target, 
+            _memo = transferForm.memo
+        });
+
+        return transferMade.FirstOrDefault();
+    }
+    
+    
+    public async Task&lt;TransferInsertionReturn?&gt; MakeTransfer(CashTransferForm transferForm)
+    {
+        var transferMade = await _dataAccess.CallUdf&lt;TransferInsertionReturn, dynamic&gt;(&quot;SR_Transfers_MakeCashTransfer&quot;, new
+        {
+            _amount = transferForm.amount, 
+            _transfer_target = transferForm.transfer_target, 
+            _memo = transferForm.memo
+        });
+
+        return transferMade.FirstOrDefault();
+    }
+    
+    public async Task&lt;IEnumerable&lt;TransferInsertionReturn&gt;?&gt; GetAllByTargetAccount(Guid accountId)
+    {
+        var udfName = &quot;SR_Transfers_GetAllByTargetAccount&quot;;
+        var udfParams = new
+        {
+            _account_id = accountId
+        };
+        
+        var transferMade = await _dataAccess.CallUdf&lt;TransferInsertionReturn, dynamic&gt;(udfName, udfParams);
+
+        return transferMade;
+    }
+    
+    public async Task&lt;IEnumerable&lt;TransferInsertionReturn&gt;?&gt; GetAllBySourceAccount(Guid accountId)
+    {
+        var udfName = &quot;SR_Transfers_GetAllBySourceAccount&quot;;
+        var udfParams = new
+        {
+            _account_id = accountId
+        };
+        
+        var transferMade = await _dataAccess.CallUdf&lt;TransferInsertionReturn, dynamic&gt;(udfName, udfParams);
+
+        return transferMade;
+    }
+
+    public async Task&lt;IEnumerable&lt;TransferInsertionReturn&gt;&gt; GetAllByAccountHolder(Guid holderId)
+    {
+        var udfName = &quot;SR_Transfers_GetAllByAccountHolder&quot;;
+        var udfParams = new
+        {
+            _account_holder_id = holderId
+        };
+
+        var transfers = await _dataAccess.CallUdf&lt;TransferInsertionReturn, dynamic&gt;(udfName, udfParams);
+
+        return transfers;
+    }
+}
+    </pre>
+    <script type="text/javascript">
+      highlightRanges([[19,5,19,53,1],[20,5,20,6,1],[21,9,21,34,1],[22,5,22,6,1],[25,5,25,6,1],[26,9,32,12,1],[34,9,34,46,1],[35,5,35,6,1],[38,5,38,6,1],[39,9,45,12,1],[47,9,47,46,1],[48,5,48,6,1],[52,5,52,6,1],[53,9,58,12,1],[60,9,60,46,1],[61,5,61,6,1],[64,5,64,6,1],[65,9,65,60,1],[66,9,69,11,1],[71,9,71,108,1],[73,9,73,29,1],[74,5,74,6,1],[77,5,77,6,1],[78,9,78,60,1],[79,9,82,11,1],[84,9,84,108,1],[86,9,86,29,1],[87,5,87,6,1],[90,5,90,6,1],[91,9,91,60,1],[92,9,95,11,1],[97,9,97,105,1],[99,9,99,26,1],[100,5,100,6,1]]);
+    </script>
+  </body>
+</html>

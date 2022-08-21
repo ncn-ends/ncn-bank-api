@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <title>/home/one/code/bank-api/Tests/IntegrationTesting/Endpoints/Single/CheckEndpointTests.cs</title>
+    <script type="text/javascript" src="../js/dotcover.sourceview.js"></script>
+    <link rel="stylesheet" type="text/css" href="../css/dotcover.report.css" />
+  </head>
+  <body>
+    <pre id="content" class="source-code">
+using System;
+using System.Diagnostics;
+using System.Threading.Tasks;
+using DataAccess.Access;
+using DataAccess.Models;
+using DataAccess.Setup;
+using FluentAssertions;
+using FluentAssertions.Extensions;
+using Microsoft.Extensions.DependencyInjection;
+using Tests.Helpers;
+using Xunit;
+
+namespace Tests.IntegrationTesting.Endpoints;
+
+[Collection(&quot;SequentialTesting&quot;)]
+public class CheckEndpointTests
+{
+    [Fact]
+    public async Task CheckCRUDEndpointTests()
+    {
+        var waf = new CustomWAF&lt;Program&gt;();
+        using var scope = waf.Services.CreateScope();
+        var setupAccess = scope.ServiceProvider.GetRequiredService&lt;ISetupAccess&gt;();
+        var accountAccess = scope.ServiceProvider.GetRequiredService&lt;IAccountAccess&gt;();
+        
+        await setupAccess.EnsureDatabaseSetup();
+        
+        var randomAccount = await accountAccess.GetRandomOne();
+        if (randomAccount is null) throw new Exception(&quot;Sample Account Holder wasn&#39;t created properly&quot;);
+
+        var client = new HttpClientBroker(&quot;/api/check&quot;, injectedClient: waf.CreateClient());
+
+        var sampleCheck = new CheckCreationForm
+        {
+            account_id = randomAccount.account_id
+        };
+        var postRes = await client.SendPost(sampleCheck);
+        postRes.EnsureSuccessStatusCode();
+
+        var postContent = await JsonMapper.MapHttpContentAs&lt;CheckBO&gt;(postRes);
+        
+        postContent.Should().NotBeNull();
+        postContent.check_id.Should().NotBeEmpty();
+        postContent.account_number.Should().NotBeEmpty();
+        postContent.account_number.Should().NotBeNull();
+        postContent.routing_number.Should().NotBeNull();
+        postContent.routing_number.Length.Should().Be(9);
+        
+        var targetExpiration = DateTime.Now.AddMonths(6);
+        var daysBetweenExpectedExpiration = (targetExpiration - postContent.expiration.Value).TotalDays;
+        daysBetweenExpectedExpiration.Should().BeInRange(-5, 5);
+    }
+}
+    </pre>
+    <script type="text/javascript">
+      highlightRanges([[20,5,20,6,1],[21,9,21,44,1],[22,9,22,54,1],[23,9,23,84,1],[24,9,24,88,1],[26,9,26,49,1],[28,9,28,64,1],[29,9,29,35,1],[29,36,29,105,0],[31,9,31,93,1],[33,9,36,11,1],[37,9,37,58,1],[38,9,38,43,1],[40,9,40,79,1],[42,9,42,42,1],[43,9,43,52,1],[44,9,44,58,1],[45,9,45,57,1],[46,9,46,57,1],[47,9,47,58,1],[49,9,49,58,1],[50,9,50,105,1],[51,9,51,65,1],[52,5,52,6,1]]);
+    </script>
+  </body>
+</html>

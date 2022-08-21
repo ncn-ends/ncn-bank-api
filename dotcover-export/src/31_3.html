@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <title>/home/one/code/bank-api/DataAccess/Models/MonthlyFeeModels.cs</title>
+    <script type="text/javascript" src="../js/dotcover.sourceview.js"></script>
+    <link rel="stylesheet" type="text/css" href="../css/dotcover.report.css" />
+  </head>
+  <body>
+    <pre id="content" class="source-code">
+namespace DataAccess.Models;
+
+// monthly_fee_id SERIAL NOT NULL PRIMARY KEY,
+// title_internal VARCHAR(10) NOT NULL UNIQUE,
+// title_public VARCHAR(50) NOT NULL,
+// description VARCHAR(250) NOT NULL DEFAULT &#39;&#39;,
+// amount_flat MONEY NOT NULL,
+// amount_perc NUMERIC(5,4) NOT NULL,
+// waived_on_balance_of MONEY
+
+public class MonthlyFeeBO
+{
+    public int monthly_fee_id { get; set; } = -1;
+    public string mf_title_internal { get; set; } = &quot;INTERNAL TITLE UNSET&quot;;
+    public string mf_title_public { get; set; } = &quot;PUBLIC UNSET TITLE&quot;;
+    public string mf_description { get; set; } = &quot;&quot;;
+    public decimal mf_amount_flat { get; set; } = -1;
+    public decimal mf_amount_perc { get; set; } = -1;
+    public decimal? mf_waved_on_balance_of { get; set; }
+}
+    </pre>
+    <script type="text/javascript">
+      highlightRanges([[13,33,13,37,1],[13,38,13,42,1],[13,47,13,49,1],[14,39,14,43,1],[14,44,14,48,1],[14,53,14,75,1],[15,37,15,41,1],[15,42,15,46,1],[15,51,15,71,1],[16,36,16,40,1],[16,41,16,45,1],[16,50,16,52,1],[17,37,17,41,1],[17,42,17,46,1],[17,51,17,53,1],[18,37,18,41,1],[18,42,18,46,1],[18,51,18,53,1],[19,46,19,50,1],[19,51,19,55,1]]);
+    </script>
+  </body>
+</html>

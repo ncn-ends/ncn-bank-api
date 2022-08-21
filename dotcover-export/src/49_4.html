@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <title>/home/one/code/bank-api/Tests/Helpers/TestingConfig.cs</title>
+    <script type="text/javascript" src="../js/dotcover.sourceview.js"></script>
+    <link rel="stylesheet" type="text/css" href="../css/dotcover.report.css" />
+  </head>
+  <body>
+    <pre id="content" class="source-code">
+using System.Reflection;
+using Microsoft.Extensions.Configuration;
+using IConfiguration = Castle.Core.Configuration.IConfiguration;
+
+namespace Tests.Helpers;
+
+static public class TestingConfig
+{
+    public static IConfigurationRoot GetConfig()
+    {
+        return new ConfigurationBuilder()
+            .AddUserSecrets(Assembly.GetExecutingAssembly())
+            .AddEnvironmentVariables()
+            .Build();
+    }  
+}
+    </pre>
+    <script type="text/javascript">
+      highlightRanges([[10,5,10,6,1],[11,9,14,22,1],[15,5,15,6,1]]);
+    </script>
+  </body>
+</html>

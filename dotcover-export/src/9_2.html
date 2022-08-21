@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <title>/home/one/code/bank-api/Api/Extensions/DataAccessOrganizerExtension.cs</title>
+    <script type="text/javascript" src="../js/dotcover.sourceview.js"></script>
+    <link rel="stylesheet" type="text/css" href="../css/dotcover.report.css" />
+  </head>
+  <body>
+    <pre id="content" class="source-code">
+using DataAccess;
+using DataAccess.Access;
+using DataAccess.Setup;
+
+namespace Api.Extensions;
+
+public static class DataAccessOrganizerExtension
+{
+    public static void AddDataAccess(this IServiceCollection services)
+    {
+        services.AddSingleton&lt;ISqlDataAccess, SqlDataAccess&gt;();
+        services.AddSingleton&lt;ISetupAccess, SetupAccess&gt;();
+        services.AddSingleton&lt;IPersonsAccess, PersonsAccess&gt;();
+        services.AddSingleton&lt;IAddressAccess, AddressAccess&gt;();
+        services.AddSingleton&lt;IAccountTypeAccess, AccountTypeAccess&gt;();
+        services.AddSingleton&lt;IAccountHolderAccess, AccountHolderAccess&gt;();
+        services.AddSingleton&lt;IAccountAccess, AccountAccess&gt;();
+        services.AddSingleton&lt;ICardAccess, CardAccess&gt;();
+        services.AddSingleton&lt;ICheckAccess, CheckAccess&gt;();
+        services.AddSingleton&lt;ITransferAccess, TransferAccess&gt;();
+    }
+}
+    </pre>
+    <script type="text/javascript">
+      highlightRanges([[10,5,10,6,1],[11,9,11,64,1],[12,9,12,60,1],[13,9,13,64,1],[14,9,14,64,1],[15,9,15,72,1],[16,9,16,76,1],[17,9,17,64,1],[18,9,18,58,1],[19,9,19,60,1],[20,9,20,66,1],[21,5,21,6,1]]);
+    </script>
+  </body>
+</html>

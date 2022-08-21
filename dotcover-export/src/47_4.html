@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <title>/home/one/code/bank-api/Tests/Helpers/HttpClientBroker.cs</title>
+    <script type="text/javascript" src="../js/dotcover.sourceview.js"></script>
+    <link rel="stylesheet" type="text/css" href="../css/dotcover.report.css" />
+  </head>
+  <body>
+    <pre id="content" class="source-code">
+using System;
+using System.Net.Http;
+using System.Net.Http.Headers;
+using System.Text;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc.Testing;
+using Newtonsoft.Json;
+
+namespace Tests.Helpers;
+
+public class HttpClientBroker
+{
+    private readonly HttpClient _client;
+    private readonly string _endpoint;
+    
+    public HttpClientBroker(string endpoint, HttpClient? injectedClient = null)
+    {
+        if (injectedClient is null)
+        {
+            var waf = new CustomWAF&lt;Program&gt;();
+            _client = waf.CreateClient();
+        }
+        else
+        {
+            _client = injectedClient;
+        }
+        
+        _endpoint = endpoint;
+        
+        _client.DefaultRequestHeaders
+            .Accept
+            .Add(new MediaTypeWithQualityHeaderValue(&quot;application/json&quot;));
+    }
+    
+    public async Task&lt;HttpResponseMessage&gt; SendPost&lt;T&gt;(T entry)
+    {
+        var serializedEntry = JsonConvert.SerializeObject(entry);
+        var body = new StringContent(serializedEntry, Encoding.UTF8, &quot;application/json&quot;);
+        
+        return await _client.PostAsync(_endpoint, body);
+    }
+    
+    public async Task&lt;HttpResponseMessage&gt; SendGet(string route = &quot;&quot;)
+    {
+        return await _client.GetAsync(_endpoint + route);
+    }
+}
+    </pre>
+    <script type="text/javascript">
+      highlightRanges([[16,5,16,80,1],[17,5,17,6,1],[18,9,18,36,1],[19,9,19,10,1],[20,13,20,48,1],[21,13,21,42,1],[22,9,22,10,1],[24,9,24,10,1],[25,13,25,38,1],[26,9,26,10,1],[28,9,28,30,1],[30,9,32,75,1],[33,5,33,6,1],[36,5,36,6,1],[37,9,37,66,1],[38,9,38,90,1],[40,9,40,57,1],[41,5,41,6,1],[44,5,44,6,1],[45,9,45,58,1],[46,5,46,6,1]]);
+    </script>
+  </body>
+</html>

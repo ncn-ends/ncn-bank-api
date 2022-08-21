@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <title>/home/one/code/bank-api/DataAccess/Access/AccountAccess.cs</title>
+    <script type="text/javascript" src="../js/dotcover.sourceview.js"></script>
+    <link rel="stylesheet" type="text/css" href="../css/dotcover.report.css" />
+  </head>
+  <body>
+    <pre id="content" class="source-code">
+using System.Data;
+using System.Diagnostics;
+using Dapper;
+using DataAccess.Models;
+using Microsoft.Extensions.Configuration;
+using Npgsql;
+
+namespace DataAccess.Access;
+
+public interface IAccountAccess
+{
+    Task&lt;AccountInsertionReturn?&gt; CreateOne(AccountFormDTO accountForm);
+    Task&lt;AccountDTO?&gt; GetOneById(Guid accountId);
+    Task&lt;AccountDTO?&gt; GetRandomOne();
+    Task&lt;IEnumerable&lt;AccountBO&gt;&gt; SearchByHolderName(string name);
+    Task&lt;AccountBalanceDTO?&gt; GetAccountBalance(Guid accountId);
+    Task&lt;AccountBO?&gt; DeactivateOneById(Guid accountId);
+}
+
+public class AccountAccess : IAccountAccess
+{
+    private readonly ISqlDataAccess _dataAccess;
+    private readonly string _connectionString;
+
+    public AccountAccess(ISqlDataAccess dataAccess, IConfiguration config)
+    {
+        _connectionString = config[&quot;POSTGRESQLCONNSTR_Default&quot;]
+                            ?? config.GetConnectionString(&quot;Default&quot;);
+        
+        _dataAccess = dataAccess;
+    }
+
+    public async Task&lt;AccountInsertionReturn?&gt; CreateOne(AccountFormDTO accountForm)
+    {
+        var createdAccount = await _dataAccess.CallUdf&lt;AccountInsertionReturn, dynamic&gt;(&quot;SR_Accounts_CreateOne&quot;, new
+        {
+            _account_holder_id = accountForm.account_holder_id,
+            _account_type_key = accountForm.account_type_key,
+            _initial_deposit_amount = accountForm.initial_deposit_amount
+        });
+        return createdAccount.FirstOrDefault();
+    }
+
+    public async Task&lt;AccountDTO?&gt; GetOneById(Guid accountId)
+    {
+        var fetchedAccount = await _dataAccess.CallUdf&lt;AccountDTO, dynamic&gt;(&quot;SR_Accounts_GetOne&quot;, new
+        {
+            _account_id = accountId
+        });
+
+        return fetchedAccount.FirstOrDefault();
+    }
+    
+    public async Task&lt;AccountDTO?&gt; GetRandomOne()
+    {
+        var fetchedAccount = await _dataAccess.CallUdf&lt;AccountDTO&gt;(&quot;SR_Accounts_GetRandomOne&quot;);
+
+        return fetchedAccount.FirstOrDefault();
+    }
+    
+    public async Task&lt;IEnumerable&lt;AccountBO&gt;&gt; SearchByHolderName(string name)
+    {
+        using IDbConnection connection = new NpgsqlConnection(_connectionString);
+
+        var result = await connection.QueryAsync&lt;AccountBO, AccountHolderBO, AccountBO&gt;(
+            &quot;SR_Accounts_SearchByHolderName&quot;,
+            commandType: CommandType.StoredProcedure,
+            splitOn: &quot;account_id,account_holder_id&quot;,
+            param: new
+            {
+                _name = name  
+            },
+            map: (account, accountHolder) =&gt;
+            {
+                account.account_holder = accountHolder;
+                return account;
+            }
+        );
+
+        return result;
+    }
+
+    public async Task&lt;AccountBalanceDTO?&gt; GetAccountBalance(Guid accountId)
+    {
+        var accountBalance = await _dataAccess.CallUdf&lt;AccountBalanceDTO, dynamic&gt;(&quot;SR_Accounts_GetAccountBalance&quot;, new
+        {
+            _account_id = accountId
+        });
+        
+        return accountBalance.FirstOrDefault();
+    }
+
+    public async Task&lt;AccountBO?&gt; DeactivateOneById(Guid accountId)
+    {
+        var udfName = &quot;SR_Accounts_DeactivateOneById&quot;;
+        var udfParams = new
+        {
+            _account_id = accountId
+        };
+        var deactivatedAccount = await _dataAccess.CallUdf&lt;AccountBO, dynamic&gt;(udfName, udfParams);
+        return deactivatedAccount.FirstOrDefault();
+    }
+}
+    </pre>
+    <script type="text/javascript">
+      highlightRanges([[25,5,25,75,1],[26,5,26,6,1],[27,9,28,70,1],[30,9,30,34,1],[31,5,31,6,1],[34,5,34,6,1],[35,9,40,12,1],[41,9,41,48,1],[42,5,42,6,1],[45,5,45,6,1],[46,9,49,12,1],[51,9,51,48,1],[52,5,52,6,1],[55,5,55,6,1],[56,9,56,96,1],[58,9,58,48,1],[59,5,59,6,1],[62,5,62,6,1],[63,9,63,82,1],[65,9,74,13,1],[74,13,74,14,1],[74,14,75,17,1],[75,17,75,56,1],[75,56,76,17,1],[76,17,76,32,1],[76,32,77,13,1],[77,13,77,14,1],[77,14,78,11,1],[80,9,80,23,1],[81,5,81,6,1],[84,5,84,6,1],[85,9,88,12,1],[90,9,90,48,1],[91,5,91,6,1],[94,5,94,6,1],[95,9,95,55,1],[96,9,99,11,1],[100,9,100,100,1],[101,9,101,52,1],[102,5,102,6,1]]);
+    </script>
+  </body>
+</html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <title>/home/one/code/bank-api/Api/Endpoints/AddressEndpoints.cs</title>
+    <script type="text/javascript" src="../js/dotcover.sourceview.js"></script>
+    <link rel="stylesheet" type="text/css" href="../css/dotcover.report.css" />
+  </head>
+  <body>
+    <pre id="content" class="source-code">
+using System.ComponentModel.DataAnnotations;
+using DataAccess.Access;
+using DataAccess.Models;
+using LanguageExt.Common;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
+
+namespace Api.Endpoints;
+
+public static class AddressEndpoints
+{
+    public static void MapAddressEndpoints(this WebApplication app)
+    {
+        app.MapPost(&quot;/api/address&quot;, AddAddress);
+    }
+
+    private static async Task&lt;IResult&gt; AddAddress(AddressInsertionForm address, IAddressAccess addressAccess)
+    {
+        var address_id = await addressAccess.AddAddress(address);
+        return Results.Ok(new {address_id});
+    }
+}
+    </pre>
+    <script type="text/javascript">
+      highlightRanges([[12,5,12,6,1],[13,9,13,49,1],[14,5,14,6,1],[17,5,17,6,0],[18,9,18,66,0],[19,9,19,45,0],[20,5,20,6,0]]);
+    </script>
+  </body>
+</html>

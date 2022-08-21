@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <title>/home/one/code/bank-api/Tests/Collections/RandomizerTestingCollection.cs</title>
+    <script type="text/javascript" src="../js/dotcover.sourceview.js"></script>
+    <link rel="stylesheet" type="text/css" href="../css/dotcover.report.css" />
+  </head>
+  <body>
+    <pre id="content" class="source-code">
+using Bogus;
+using DataAccess.Models;
+using Tests.Fixtures;
+using Xunit;
+
+namespace Tests.Collections;
+
+public class RandomizerData
+{
+    private readonly Faker _faker = new();
+    public readonly int number;
+
+    public RandomizerData()
+    {
+        number = _faker.Random.Number(1, 1000000);
+    }
+}
+
+[CollectionDefinition(&quot;RandomizerTesting&quot;, DisableParallelization = true)]
+public class RandomizerTestingCollection : ICollectionFixture&lt;RandomizerData&gt;
+{ }
+    </pre>
+    <script type="text/javascript">
+      highlightRanges([[10,5,10,43,1],[13,5,13,28,1],[14,5,14,6,1],[15,9,15,51,1],[16,5,16,6,1]]);
+    </script>
+  </body>
+</html>

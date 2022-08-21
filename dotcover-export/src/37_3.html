@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <title>/home/one/code/bank-api/DataAccess/Setup/SetupAccess.cs</title>
+    <script type="text/javascript" src="../js/dotcover.sourceview.js"></script>
+    <link rel="stylesheet" type="text/css" href="../css/dotcover.report.css" />
+  </head>
+  <body>
+    <pre id="content" class="source-code">
+using System.Diagnostics;
+using DataAccess.Access;
+using DataAccess.Models;
+using FileReaderLib;
+
+namespace DataAccess.Setup;
+
+public interface ISetupAccess
+{
+    Task EnsureDatabaseSetup();
+}
+
+public class SetupAccess: ISetupAccess
+{
+    private readonly ISqlDataAccess _dataAccess;
+    private readonly IAccountHolderAccess _accountHolderAccess;
+    private readonly IAccountAccess _accountAccess;
+    private readonly ICheckAccess _checkAccess;
+    private readonly ICardAccess _cardAccess;
+
+    public SetupAccess(ISqlDataAccess dataAccess, 
+        IAccountHolderAccess accountHolderAccess,
+        IAccountAccess accountAccess,
+        ICheckAccess checkAccess,
+        ICardAccess cardAccess)
+    {
+        _dataAccess = dataAccess;
+        _accountHolderAccess = accountHolderAccess;
+        _accountAccess = accountAccess;
+        _checkAccess = checkAccess;
+        _cardAccess = cardAccess;
+    }
+
+    public async Task EnsureDatabaseSetup()
+    {
+        var isDevEnv = Environment.GetEnvironmentVariable(&quot;ASPNETCORE_ENVIRONMENT&quot;) == &quot;Development&quot;;
+        // if (isDevEnv)
+        // {
+            await DatabaseDropAll();
+        // }
+        
+        await SetupCustomTypes();
+        await SetupUtilities();
+        await SetupTables();
+        await SetupViews();
+        await SetupSubroutines();
+        await SetupRequiredInitialData();
+
+        // if (isDevEnv)
+        // {
+            await SetupFakeInitialData();
+        // }
+    }
+    
+    private async Task DatabaseDropAll()
+    {
+        var dbResetScriptPath = &quot;Database/Setup/Reset.sql&quot;;
+        var resetScriptFileContents = FileReader.ReadFile(dbResetScriptPath);
+        await ExecuteFile(resetScriptFileContents);
+    }
+
+    private async Task SetupCustomTypes()
+    {
+        var dbTypesPath = &quot;Database/Types&quot;;
+        var files = FileReader.ReadDirectory(dbTypesPath);
+        await ExecuteFiles(files, delay: new[]
+        {
+            &quot;Addresses_StandardReturn&quot;
+        });
+    }
+
+    private async Task SetupUtilities()
+    {
+        var dbUtilitiesPath = &quot;Database/Utilities&quot;;
+        var files = FileReader.ReadDirectory(dbUtilitiesPath);
+        await ExecuteFiles(files);
+    }
+    
+    private async Task SetupSubroutines()
+    {
+        var dbSrPath = &quot;Database/Subroutines&quot;;
+        var files = FileReader.ReadDirectory(dbSrPath);
+        await ExecuteFiles(files);
+    }
+    
+    private async Task SetupTables()
+    {
+        var dbTablesPath = &quot;Database/Tables&quot;;
+        var executionOrder = new[]
+        {
+            &quot;transfer_limits&quot;,
+            &quot;monthly_fees&quot;,
+            &quot;account_types&quot;,
+            &quot;account_holders&quot;,
+            &quot;addresses&quot;,
+            &quot;accounts&quot;,
+            &quot;cards&quot;,
+            &quot;checks&quot;,
+            &quot;transfers&quot;,
+            &quot;account_links&quot;,
+            &quot;branches&quot;
+        };
+        
+        var files = FileReader.ReadDirectory(dbTablesPath);
+        
+        await ExecuteFiles(files, executionOrder: executionOrder);
+    }
+    
+    
+    private async Task SetupViews()
+    {
+        var dbViewsPath = &quot;Database/Views&quot;;
+        var files = FileReader.ReadDirectory(dbViewsPath);
+        await ExecuteFiles(files);
+    }
+
+    private async Task SetupRequiredInitialData()
+    {
+        var dbInitialDataPath = &quot;Database/Setup/CreateInitialData.sql&quot;;
+        var resetScriptFileContents = FileReader.ReadFile(dbInitialDataPath);
+        await ExecuteFile(resetScriptFileContents);
+    }
+    
+    private async Task SetupFakeInitialData()
+    {
+        var exceptionMsgTemplate = new Func&lt;string, object&gt;((model) =&gt;
+            throw new Exception($&quot;When creating fake initial data for {model}, it returned null&quot;));
+
+        var holderId = await _accountHolderAccess.CreateOne(FakeInitialData.SampleAccountHolder1);
+        if (holderId is null) exceptionMsgTemplate(&quot;account_holder&quot;);
+        
+        var fakeAccount = await _accountAccess.CreateOne(FakeInitialData.SampleAccount1(holderId.Value));
+        if (fakeAccount is null) exceptionMsgTemplate(&quot;account&quot;);
+
+        var fakeCheck = await _checkAccess.CreateOne(new CheckCreationForm
+        {
+            account_id = fakeAccount.account_id
+        });
+        if (fakeCheck is null) exceptionMsgTemplate(&quot;check&quot;);
+        
+        
+        var fakeCard = await _cardAccess.CreateOne(new CardCreationForm
+        {
+            account_id = fakeAccount.account_id,
+            pin_number = &quot;1234&quot;
+        });
+        if (fakeCard is null) exceptionMsgTemplate(&quot;card&quot;);
+
+        var extraFakeHolderId = await _accountHolderAccess.CreateOne(FakeInitialData.SampleAccountHolder2);
+        await _accountAccess.CreateOne(FakeInitialData.SampleAccount2(extraFakeHolderId.Value));
+    }
+
+
+    private async Task ExecuteFiles(
+        IEnumerable&lt;FileData&gt; files, 
+        string[] delay = null
+    )
+    {
+        files = files.ToArray();
+        List&lt;FileData&gt; delayedFiles = new List&lt;FileData&gt;();
+        
+        foreach (var file in files)
+        {
+            if (delay is not null)
+            {
+                var fileIsToBeDelayed = delay.Any(el =&gt; file.FileName.Contains(el));
+                if (fileIsToBeDelayed)
+                {
+                    delayedFiles.Add(file);
+                    continue;
+                }
+            }
+            
+            await ExecuteFileFromPath(file.FilePath);
+        }
+        
+        foreach (var delayedFile in delayedFiles)
+        {
+            await ExecuteFileFromPath(delayedFile.FilePath);
+        }
+    }
+
+    private async Task ExecuteFiles(IEnumerable&lt;FileData&gt; files, IEnumerable&lt;string&gt; executionOrder)
+    {
+        files = files.ToArray();
+        foreach (var key in executionOrder)
+        {
+            var matchedFile = files.Single&lt;FileData&gt;(el =&gt; el.FileName.Contains(key));
+            await ExecuteFileFromPath(matchedFile.FilePath);
+        }
+    }
+    
+    private async Task ExecuteFile(string fileContents) =&gt; await _dataAccess.ExecRawSql(fileContents);
+
+    private async Task ExecuteFileFromPath(string path)
+    {
+        var fileContents = File.ReadAllText(path);
+        await _dataAccess.ExecRawSql(fileContents);
+    }
+}
+    </pre>
+    <script type="text/javascript">
+      highlightRanges([[21,5,25,32,1],[26,5,26,6,1],[27,9,27,34,1],[28,9,28,52,1],[29,9,29,40,1],[30,9,30,36,1],[31,9,31,34,1],[32,5,32,6,1],[35,5,35,6,1],[36,9,36,102,1],[39,13,39,37,1],[42,9,42,34,1],[43,9,43,32,1],[44,9,44,29,1],[45,9,45,28,1],[46,9,46,34,1],[47,9,47,42,1],[51,13,51,42,1],[53,5,53,6,1],[56,5,56,6,1],[57,9,57,60,1],[58,9,58,78,1],[59,9,59,52,1],[60,5,60,6,1],[63,5,63,6,1],[64,9,64,44,1],[65,9,65,59,1],[66,9,69,12,1],[70,5,70,6,1],[73,5,73,6,1],[74,9,74,52,1],[75,9,75,63,1],[76,9,76,35,1],[77,5,77,6,1],[80,5,80,6,1],[81,9,81,47,1],[82,9,82,56,1],[83,9,83,35,1],[84,5,84,6,1],[87,5,87,6,1],[88,9,88,46,1],[89,9,102,11,1],[104,9,104,60,1],[106,9,106,67,1],[107,5,107,6,1],[111,5,111,6,1],[112,9,112,44,1],[113,9,113,59,1],[114,9,114,35,1],[115,5,115,6,1],[118,5,118,6,1],[119,9,119,72,1],[120,9,120,78,1],[121,9,121,52,1],[122,5,122,6,1],[125,5,125,6,1],[126,9,127,13,1],[127,13,127,98,0],[127,98,127,100,1],[129,9,129,99,1],[130,9,130,30,1],[130,31,130,70,0],[132,9,132,106,1],[133,9,133,33,1],[133,34,133,66,0],[135,9,138,12,1],[139,9,139,31,1],[139,32,139,62,0],[142,9,146,12,1],[147,9,147,30,1],[147,31,147,60,0],[149,9,149,108,1],[150,9,150,97,1],[151,5,151,6,1],[158,5,158,6,1],[159,9,159,33,1],[160,9,160,60,1],[162,9,162,16,1],[162,18,162,26,1],[162,27,162,29,1],[162,30,162,35,1],[163,9,163,10,1],[164,13,164,35,1],[165,13,165,14,1],[166,17,166,57,1],[166,57,166,83,1],[166,83,166,85,1],[167,17,167,39,1],[168,17,168,18,1],[169,21,169,44,1],[170,21,170,30,1],[172,13,172,14,1],[174,13,174,54,1],[175,9,175,10,1],[177,9,177,16,1],[177,18,177,33,1],[177,34,177,36,1],[177,37,177,49,1],[178,9,178,10,1],[179,13,179,61,1],[180,9,180,10,1],[181,5,181,6,1],[184,5,184,6,1],[185,9,185,33,1],[186,9,186,16,1],[186,18,186,25,1],[186,26,186,28,1],[186,29,186,43,1],[187,9,187,10,1],[188,13,188,60,1],[188,60,188,85,1],[188,85,188,87,1],[189,13,189,61,1],[190,9,190,10,1],[191,5,191,6,1],[193,60,193,102,1],[196,5,196,6,1],[197,9,197,51,1],[198,9,198,52,1],[199,5,199,6,1]]);
+    </script>
+  </body>
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <title>/home/one/code/bank-api/Api/Endpoints/AccountEndpoints.cs</title>
+    <script type="text/javascript" src="../js/dotcover.sourceview.js"></script>
+    <link rel="stylesheet" type="text/css" href="../css/dotcover.report.css" />
+  </head>
+  <body>
+    <pre id="content" class="source-code">
+using System.Diagnostics;
+using DataAccess.Access;
+using DataAccess.Models;
+using Microsoft.AspNetCore.Mvc;
+
+namespace Api.Endpoints;
+
+public static class AccountEndpoints
+{
+    public static void MapAccountEndpoints(this WebApplication app)
+    {
+        app.MapPost(&quot;/api/account&quot;, CreateNewAccount);
+        app.MapGet(&quot;/api/account/{accountId:guid}&quot;, GetAccountById);
+    }
+
+    private static async Task&lt;IResult&gt; CreateNewAccount(
+        IAccountAccess access,
+        [FromBody] AccountFormDTO accountInfoForm
+    )
+    {
+        var createdAccount = await access.CreateOne(accountInfoForm);
+        return createdAccount is null 
+            ? Results.BadRequest() 
+            : Results.Ok(createdAccount);
+    }
+    
+    private static async Task&lt;IResult&gt; GetAccountById(
+        Guid accountId,
+        IAccountAccess access
+    )
+    {
+        var fetchedAccount = await access.GetOneById(accountId);
+        if (fetchedAccount is null) return Results.BadRequest();
+        return Results.Ok(fetchedAccount);
+    }
+}
+    </pre>
+    <script type="text/javascript">
+      highlightRanges([[11,5,11,6,1],[12,9,12,55,1],[13,9,13,69,1],[14,5,14,6,1],[20,5,20,6,1],[21,9,21,70,1],[22,9,24,42,1],[25,5,25,6,1],[31,5,31,6,1],[32,9,32,65,1],[33,9,33,36,1],[33,37,33,65,0],[34,9,34,43,1],[35,5,35,6,1]]);
+    </script>
+  </body>
+</html>

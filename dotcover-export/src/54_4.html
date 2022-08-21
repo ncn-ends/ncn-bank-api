@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <title>/home/one/code/bank-api/Tests/IntegrationTesting/DataAccess/CardDataAccessTests.cs</title>
+    <script type="text/javascript" src="../js/dotcover.sourceview.js"></script>
+    <link rel="stylesheet" type="text/css" href="../css/dotcover.report.css" />
+  </head>
+  <body>
+    <pre id="content" class="source-code">
+using System;
+using System.Diagnostics;
+using System.Linq;
+using System.Threading.Tasks;
+using DataAccess.Access;
+using DataAccess.Models;
+using DataAccess.Setup;
+using FluentAssertions;
+using Microsoft.Extensions.DependencyInjection;
+using Tests.Helpers;
+using Xunit;
+
+namespace Tests.IntegrationTesting.DataAccess;
+
+[Collection(&quot;SequentialTesting&quot;)]
+public class CardDataAccessTests
+{
+    private readonly ISetupAccess _setupAccess;
+    private readonly IAccountAccess _accountAccess;
+    private readonly ICardAccess _cardAccess;
+
+    public CardDataAccessTests()
+    {
+        var waf = new CustomWAF&lt;Program&gt;();
+        using var scope = waf.Services.CreateScope();
+        
+        _setupAccess = scope.ServiceProvider.GetRequiredService&lt;ISetupAccess&gt;();
+        _accountAccess = scope.ServiceProvider.GetRequiredService&lt;IAccountAccess&gt;();
+        _cardAccess = scope.ServiceProvider.GetRequiredService&lt;ICardAccess&gt;();
+    }
+    [Fact]
+    public async Task CardCRUDTests()
+    {
+        await _setupAccess.EnsureDatabaseSetup();
+        
+        var randomAccount = await _accountAccess.GetRandomOne();
+
+        var sampleCard = FakeInitialData.SampleCard1(randomAccount.account_id);
+        var createdCard = await _cardAccess.CreateOne(sampleCard);
+
+        await AssertCardIsValid(createdCard);
+        createdCard.pin_number.Should().Be(sampleCard.pin_number);
+        
+        var targetExpiration = DateTime.Now.AddMonths(54);
+        var daysBetweenExpectedExpiration = (targetExpiration - createdCard.expiration).TotalDays;
+        daysBetweenExpectedExpiration.Should().BeInRange(-15, 15);
+
+        var allCards = await _cardAccess.GetAllByAccount(randomAccount.account_id);
+        
+        allCards.Length().Should().BeOneOf(1, 2);
+
+        var lastCardInAllCards = allCards.LastOrDefault();
+        
+        lastCardInAllCards.Should().NotBeNull();
+        lastCardInAllCards.Should().BeEquivalentTo(createdCard);
+
+        var deactivatedCard = await _cardAccess.DeactivateOneById(createdCard.card_id);
+        
+        deactivatedCard.Should().NotBeNull();
+        deactivatedCard.deactivated.Should().NotBeEmpty();
+        deactivatedCard.deactivated.Should().Be(createdCard.card_id);
+        deactivatedCard.card_id.Should().NotBeEmpty();
+        deactivatedCard.card_number.Length.Should().Be(16);
+        deactivatedCard.csv.Length.Should().Be(3);
+        deactivatedCard.pin_number.Should().Be(createdCard.pin_number);
+    }
+    
+
+    [Fact]
+    public async Task CardsByAccountHolderTests()
+    {
+        await _setupAccess.EnsureDatabaseSetup();
+
+        var account = await _accountAccess.SearchByHolderName(FakeInitialData.SampleAccountHolder1.firstname);
+        var firstAccountFound = account.FirstOrDefault();
+        var cards = await _cardAccess.GetAllByAccountHolder(firstAccountFound.account_holder.account_holder_id);
+        
+        cards.Length().Should().Be(1);
+        
+        var firstCheck = cards.FirstOrDefault();
+        
+        await AssertCardIsValid(firstCheck);
+
+    }
+
+    private async Task AssertCardIsValid(CardBO card)
+    {
+        
+        card.Should().NotBeNull();
+        card.card_id.Should().NotBeEmpty();
+        card.card_number.Length.Should().Be(16);
+        card.csv.Length.Should().Be(3);
+    }
+}
+    </pre>
+    <script type="text/javascript">
+      highlightRanges([[22,5,22,33,1],[23,5,23,6,1],[24,9,24,44,1],[25,9,25,54,1],[27,9,27,81,1],[28,9,28,85,1],[29,9,29,79,1],[30,5,30,6,1],[33,5,33,6,1],[34,9,34,50,1],[36,9,36,65,1],[38,9,38,80,1],[39,9,39,67,1],[41,9,41,46,1],[42,9,42,67,1],[44,9,44,59,1],[45,9,45,99,1],[46,9,46,67,1],[48,9,48,84,1],[50,9,50,50,1],[52,9,52,59,1],[54,9,54,49,1],[55,9,55,65,1],[57,9,57,88,1],[59,9,59,46,1],[60,9,60,59,1],[61,9,61,70,1],[62,9,62,55,1],[63,9,63,60,1],[64,9,64,51,1],[65,9,65,72,1],[66,5,66,6,1],[71,5,71,6,1],[72,9,72,50,1],[74,9,74,111,1],[75,9,75,58,1],[76,9,76,113,1],[78,9,78,39,1],[80,9,80,49,1],[82,9,82,45,1],[84,5,84,6,1],[87,5,87,6,1],[89,9,89,35,1],[90,9,90,44,1],[91,9,91,49,1],[92,9,92,40,1],[93,5,93,6,1]]);
+    </script>
+  </body>
+</html>

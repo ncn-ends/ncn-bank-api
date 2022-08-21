@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <title>/home/one/code/bank-api/Tests/UnitTesting/FileReader/FileReaderTests.cs</title>
+    <script type="text/javascript" src="../js/dotcover.sourceview.js"></script>
+    <link rel="stylesheet" type="text/css" href="../css/dotcover.report.css" />
+  </head>
+  <body>
+    <pre id="content" class="source-code">
+using System.IO;
+using System.Linq;
+using System.Threading.Tasks;
+using DataAccess;
+using FluentAssertions;
+using Tests.Helpers;
+using Xunit;
+using static FileReaderLib.FileReader;
+
+namespace Tests.UnitTesting;
+
+public class FileReaderTests
+{
+    private readonly ISqlDataAccess _dataAccess;
+
+    public FileReaderTests()
+    {
+        _dataAccess = new SqlDataAccess(TestingConfig.GetConfig());
+    }
+    
+    [Fact]
+    public async Task ReadDirectoryAndGetContent()
+    {
+        var files = ReadDirectory(&quot;Tests/Fixtures/ArbitrarySampleDirOfSqlFiles&quot;);
+
+        files.Should().HaveCount(2);
+        
+        foreach (var file in files)
+        {
+            var fileContents = File.ReadAllText(file.FilePath);
+            
+            fileContents.Should().Contain(&quot;SELECT&quot;);
+            
+            var res = await _dataAccess.ExecRawSql&lt;TestSqlDto&gt;(fileContents);
+            
+            res.Should().HaveCount(1);
+            res.FirstOrDefault().Should().NotBeNull();
+            res.FirstOrDefault().msg.Should().BeOneOf(new[] {&quot;hello&quot;, &quot;world&quot;});
+
+        }
+    }
+}
+
+class TestSqlDto
+{
+    public string msg { get; set; } = &quot;UNSET MSG&quot;;
+}
+
+    </pre>
+    <script type="text/javascript">
+      highlightRanges([[16,5,16,29,1],[17,5,17,6,1],[18,9,18,68,1],[19,5,19,6,1],[23,5,23,6,1],[24,9,24,82,1],[26,9,26,37,1],[28,9,28,16,1],[28,18,28,26,1],[28,27,28,29,1],[28,30,28,35,1],[29,9,29,10,1],[30,13,30,64,1],[32,13,32,53,1],[34,13,34,78,1],[36,13,36,39,1],[37,13,37,55,1],[38,13,38,81,1],[40,9,40,10,1],[41,5,41,6,1],[46,25,46,29,1],[46,30,46,34,1],[46,39,46,50,1]]);
+    </script>
+  </body>
+</html>

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <title>/home/one/code/bank-api/Api/Helpers/CustomErrorHandlerHelper.cs</title>
+    <script type="text/javascript" src="../js/dotcover.sourceview.js"></script>
+    <link rel="stylesheet" type="text/css" href="../css/dotcover.report.css" />
+  </head>
+  <body>
+    <pre id="content" class="source-code">
+using System.Diagnostics;
+using System.Net;
+using System.Net.Mime;
+using System.Security;
+using System.Security.Authentication;
+using System.Text.Json;
+using FluentValidation;
+using Microsoft.AspNetCore.Diagnostics;
+using Microsoft.AspNetCore.Mvc;
+
+namespace Api.Helpers;
+
+public static class CustomErrorHandlerHelper
+{
+    public static void UseCustomExceptionHandler(this WebApplication app)
+    {
+        app.UseExceptionHandler(exceptionHandler =&gt;
+        {
+            exceptionHandler.Run(async context =&gt;
+            {
+                if (app.Environment.IsDevelopment()) await WriteResponse(context, includeDetails: true);
+                else await WriteResponse(context, includeDetails: false);
+            });
+        });
+    }
+
+    private static async Task WriteResponse(HttpContext context, bool includeDetails)
+    {
+        /* Try to retrieve error from ExceptionHandler middleware */
+        var exceptionDetails = context.Features.Get&lt;IExceptionHandlerFeature&gt;();
+        var err = exceptionDetails?.Error;
+
+        if (err is null) return;
+
+        var title = includeDetails ? &quot;An error occured: &quot; + err.Message : &quot;An error occured&quot;;
+        var details = includeDetails ? err.ToString() : null;
+        var status = err switch
+        {
+            ValidationException =&gt; 400,
+            ArgumentException =&gt; 404,
+            _ =&gt; 500
+        };
+
+        var problem = new ProblemDetails
+        {
+            Status = status,
+            Title = title,
+            Detail = details
+        };
+
+        var traceId = Activity.Current?.Id ?? context?.TraceIdentifier;
+        if (traceId != null)
+        {
+            problem.Extensions[&quot;tradeId&quot;] = traceId;
+        }
+        
+        if (context is null) return;
+        
+        /* ProblemDetails has it&#39;s own content type */
+        context.Response.ContentType = &quot;application/problem+json&quot;;
+        context.Response.StatusCode = status;
+        
+        await context.Response.WriteAsJsonAsync(problem);
+    }
+}
+    </pre>
+    <script type="text/javascript">
+      highlightRanges([[16,5,16,6,1],[17,9,18,9,1],[18,9,18,10,1],[18,10,19,13,1],[19,13,20,13,1],[20,13,20,14,1],[20,14,21,17,1],[21,17,21,53,1],[21,53,21,54,1],[21,54,21,105,1],[21,105,22,22,1],[22,22,22,74,0],[22,74,23,13,1],[23,13,23,14,1],[23,14,23,16,1],[23,16,24,9,1],[24,9,24,10,1],[24,10,24,12,1],[25,5,25,6,1],[28,5,28,6,1],[30,9,30,81,1],[31,9,31,43,1],[33,9,33,25,1],[33,26,33,33,0],[35,9,35,94,1],[36,9,36,62,1],[37,9,39,36,1],[39,36,39,39,0],[39,39,40,34,1],[40,34,40,37,0],[40,37,41,18,1],[41,18,41,21,1],[41,21,42,11,1],[44,9,49,11,1],[51,9,51,72,1],[52,9,52,29,1],[53,9,53,10,1],[54,13,54,53,1],[55,9,55,10,1],[57,9,57,29,1],[57,30,57,37,0],[60,9,60,67,1],[61,9,61,46,1],[63,9,63,58,1],[64,5,64,6,1]]);
+    </script>
+  </body>
+</html>

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <title>/home/one/code/bank-api/Tests/IntegrationTesting/Endpoints/Single/CardEndpointTests.cs</title>
+    <script type="text/javascript" src="../js/dotcover.sourceview.js"></script>
+    <link rel="stylesheet" type="text/css" href="../css/dotcover.report.css" />
+  </head>
+  <body>
+    <pre id="content" class="source-code">
+using System;
+using System.Diagnostics;
+using System.Threading.Tasks;
+using DataAccess.Access;
+using DataAccess.Models;
+using DataAccess.Setup;
+using FluentAssertions;
+using FluentAssertions.Extensions;
+using Microsoft.Extensions.DependencyInjection;
+using Tests.Helpers;
+using Xunit;
+
+namespace Tests.IntegrationTesting.Endpoints;
+
+[Collection(&quot;SequentialTesting&quot;)]
+public class CardEndpointTests
+{
+    [Fact]
+    public async Task CardCRUDEndpointTests()
+    {
+        var waf = new CustomWAF&lt;Program&gt;();
+        using var scope = waf.Services.CreateScope();
+        var setupAccess = scope.ServiceProvider.GetRequiredService&lt;ISetupAccess&gt;();
+        var accountAccess = scope.ServiceProvider.GetRequiredService&lt;IAccountAccess&gt;();
+        
+        await setupAccess.EnsureDatabaseSetup();
+        
+        var randomAccount = await accountAccess.GetRandomOne();
+        if (randomAccount is null) throw new Exception(&quot;Sample Account Holder wasn&#39;t created properly&quot;);
+
+        var client = new HttpClientBroker(&quot;/api/card&quot;, injectedClient: waf.CreateClient());
+
+        var sampleCard = FakeInitialData.SampleCard1(randomAccount.account_id);
+        var postRes = await client.SendPost(sampleCard);
+        postRes.EnsureSuccessStatusCode();
+
+        var postContent = await JsonMapper.MapHttpContentAs&lt;CardBO&gt;(postRes);
+
+        postContent.Should().NotBeNull();
+        postContent.card_id.Should().NotBeEmpty();
+        postContent.card_number.Length.Should().Be(16);
+        postContent.csv.Length.Should().Be(3);
+        postContent.expiration.Should().BeAfter(1.January(2027));
+        postContent.pin_number.Should().Be(sampleCard.pin_number);
+    }
+}
+    </pre>
+    <script type="text/javascript">
+      highlightRanges([[20,5,20,6,1],[21,9,21,44,1],[22,9,22,54,1],[23,9,23,84,1],[24,9,24,88,1],[26,9,26,49,1],[28,9,28,64,1],[29,9,29,35,1],[29,36,29,105,0],[31,9,31,92,1],[33,9,33,80,1],[34,9,34,57,1],[35,9,35,43,1],[37,9,37,78,1],[39,9,39,42,1],[40,9,40,51,1],[41,9,41,56,1],[42,9,42,47,1],[43,9,43,66,1],[44,9,44,67,1],[45,5,45,6,1]]);
+    </script>
+  </body>
+</html>
