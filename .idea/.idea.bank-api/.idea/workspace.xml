@@ -6,7 +6,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="da88e022-a72c-429b-b2d2-ab358463d5d5" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.bank-api/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.bank-api/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -135,7 +135,7 @@
       <workItem from="1659753009863" duration="18081000" />
       <workItem from="1660041182628" duration="9063000" />
       <workItem from="1660309791160" duration="3196000" />
-      <workItem from="1660966722968" duration="11393000" />
+      <workItem from="1660966722968" duration="11703000" />
     </task>
     <servers />
   </component>
@@ -143,15 +143,14 @@
     <option name="version" value="3" />
   </component>
   <component name="UnitTestsCoverage.Settings">
-    <option name="coveragePercentColumnWidth" value="188" />
-    <option name="sortOrder" value="DESCENDING" />
-    <option name="sortedColumn" value="1" />
-    <option name="symbolColumnWidth" value="641" />
+    <option name="coveragePercentColumnWidth" value="127" />
+    <option name="sortOrder" value="ASCENDING" />
+    <option name="symbolColumnWidth" value="198" />
     <coverage-tree-state>
       <expand>
         <path>
           <item name="rootNode" type="c53c71d1:RiderDotCoverCoverageTreeModel$RootNode" />
-          <item name="Total 91% 137/1517" type="8b8fad3a:RiderDotCoverCoverageTreeNode" />
+          <item name="Total 86% 210/1517" type="8b8fad3a:RiderDotCoverCoverageTreeNode" />
         </path>
       </expand>
       <select />

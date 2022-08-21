@@ -51,6 +51,15 @@ If interested you can view my unstructured notes as I built the project [here](.
    - If in production, set the same connection string as an environment variable called `POSTGRESQLCONNSTR_Default`
 4) Run the application in `Api`
 
+### Tests
+
+<img src="https://github.com/ncn-ends/ncn-bank-api/blob/master/coverage.png?raw=true" alt="Testing coverage">  
+  
+- Tests are located in the `Tests` directory
+- You can view detailed information about testing coverage [here](https://ncn-ends.github.io/ncn-bank-api/dotcover-export.html). 
+  - Generated with dotCover
+
+
 ## Authors
 
 - [@ncn-ends](https://www.github.com/ncn-ends)
